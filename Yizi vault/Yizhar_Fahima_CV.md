@@ -1,4 +1,4 @@
-# Yizhar fahima
+# Yizhar Fahima
 
 **Phone:** 050-886-9990 | **Email:** yizharf9@gmail.com | **GitHub:** [github.com/yizharf9/coding](https://github.com/yizharf9/coding)
 

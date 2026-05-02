@@ -11,10 +11,14 @@
             "id": "496f28a6a823ac9d",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Yizhar_Fahima_CV.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Yizhar_Fahima_CV"
             }
           }
         ]
@@ -180,14 +184,21 @@
       "obsidian-importer:Open Importer": false
     }
   },
-  "active": "12fd8df3267caa85",
+  "active": "496f28a6a823ac9d",
   "lastOpenFiles": [
-    "distributed algorithms - lecture 4.md",
-    "Welcome.md",
-    "Pasted image 20260423110902.png",
+    "Working Tree.base",
+    "graph example.md",
+    "Pasted image 20260423103144.png",
     "Pasted image 20260423110852.png",
+    "Pasted image 20260423110902.png",
     "Pasted image 20260423104716.png",
     "Pasted image 20260423103631.png",
-    "Pasted image 20260423103144.png"
+    "school/Project/Literature Comparison.md",
+    "school/Estimation Theory/Lectures/Desmos example.md",
+    "school/Distributed Algorithms/lectures/lecture 4.md",
+    "school/Estimation Theory/Lectures/example file.md",
+    "school/Distributed Algorithms/lectures/lecture 3.md",
+    "Yizhar_Fahima_CV.md",
+    "Welcome.md"
   ]
 }
