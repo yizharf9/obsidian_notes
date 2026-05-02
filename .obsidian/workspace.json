@@ -1,14 +1,14 @@
 {
   "main": {
-    "id": "ee827da5f4e09142",
+    "id": "98d3bfbd32113aaf",
     "type": "split",
     "children": [
       {
-        "id": "e1574e654137b948",
+        "id": "0a5ea6f50af0b31d",
         "type": "tabs",
         "children": [
           {
-            "id": "496f28a6a823ac9d",
+            "id": "eeea0c15ac3f33c9",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -23,15 +23,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "9edd2031b2f9a760",
+    "id": "87d8f6943b32938b",
     "type": "split",
     "children": [
       {
-        "id": "663d48edd7dbb9eb",
+        "id": "2ac8c64a46c0789e",
         "type": "tabs",
         "children": [
           {
-            "id": "12fd8df3267caa85",
+            "id": "6aa60a224265271c",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -44,7 +44,7 @@
             }
           },
           {
-            "id": "1f709a329c16386f",
+            "id": "b6d4898cccf244ba",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -61,7 +61,7 @@
             }
           },
           {
-            "id": "036d57c0c554534b",
+            "id": "fc3c9e778cca67aa",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -77,20 +77,19 @@
     "width": 300
   },
   "right": {
-    "id": "1013379baf342340",
+    "id": "b6d4e53cef1cf0ad",
     "type": "split",
     "children": [
       {
-        "id": "197f08e23c02e524",
+        "id": "e0ff0802182ea203",
         "type": "tabs",
         "children": [
           {
-            "id": "1f66b20fb28302a5",
+            "id": "95368bb0b0e07c45",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "distributed algorithms - lecture 4.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,25 +99,24 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for distributed algorithms - lecture 4"
+              "title": "Backlinks"
             }
           },
           {
-            "id": "ce1a56379d222d1f",
+            "id": "45fb1c6f63a9e1b3",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "distributed algorithms - lecture 4.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from distributed algorithms - lecture 4"
+              "title": "Outgoing links"
             }
           },
           {
-            "id": "fa4e9eb084d178ac",
+            "id": "0dc4d5768109a8aa",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -133,7 +131,7 @@
             }
           },
           {
-            "id": "2f8da454f99a6d4c",
+            "id": "edf443ce7e4bd294",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -147,18 +145,17 @@
             }
           },
           {
-            "id": "e13db9c7f7e74d29",
+            "id": "c6d5f136c3977749",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "distributed algorithms - lecture 4.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of distributed algorithms - lecture 4"
+              "title": "Outline"
             }
           }
         ]
@@ -176,21 +173,9 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false,
-      "obsidian-importer:Open Importer": false
+      "bases:Create new base": false
     }
   },
-  "active": "496f28a6a823ac9d",
-  "lastOpenFiles": [
-    "school/Estimation Theory/Lectures/Desmos example.md",
-    "school/Distributed Algorithms/lectures/lecture 4.md",
-    "Yizhar_Fahima_CV.md",
-    "distributed algorithms - lecture 4.md",
-    "Welcome.md",
-    "Pasted image 20260423110902.png",
-    "Pasted image 20260423110852.png",
-    "Pasted image 20260423104716.png",
-    "Pasted image 20260423103631.png",
-    "Pasted image 20260423103144.png"
-  ]
+  "active": "eeea0c15ac3f33c9",
+  "lastOpenFiles": []
 }
