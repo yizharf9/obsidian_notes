@@ -1,7 +1,7 @@
 
 #### graph example using mermaid
 ```mermaid
-graph TD;
+graph LR;
 id1((2)) --> id2((7));
 id1((2)) --> id3((5));
 id2((7)) --> id4((2));
@@ -96,4 +96,7 @@ int i = 0 ;
 	}
 }
 ```
+
+>[!info]
+>[[lecture 5#Building the _ELG_ tree]]
 

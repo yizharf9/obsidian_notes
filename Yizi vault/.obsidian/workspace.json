@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "e1574e654137b948",
+        "id": "2d4e2c7e4a2a0aa4",
         "type": "tabs",
         "children": [
           {
-            "id": "496f28a6a823ac9d",
+            "id": "c7e56ead399f0e99",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "school/Distributed Algorithms/lectures/Lecture 5.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Lecture 5"
             }
           }
         ]
@@ -180,10 +184,21 @@
       "obsidian-importer:Open Importer": false
     }
   },
-  "active": "496f28a6a823ac9d",
+  "active": "c7e56ead399f0e99",
   "lastOpenFiles": [
-    "school/Estimation Theory/Lectures/Desmos example.md",
+    "graph example.md",
+    "school/Distributed Algorithms/lectures/Lecture 5.md",
     "school/Distributed Algorithms/lectures/lecture 4.md",
+    "school/CPU Architecture/Lecture 4.md",
+    "school/Control/Lectures/Lecture 5.md",
+    "school/CPU Architecture/Untitled",
+    "school/CPU Architecture",
+    "school/Graph Theory & Algorithms/Recitations/Recitation 4.md",
+    "school/Graph Theory & Algorithms/Recitations",
+    "school/Graph Theory & Algorithms",
+    "school/Control/Lectures",
+    "school/Control",
+    "school/Estimation Theory/Lectures/Desmos example.md",
     "Yizhar_Fahima_CV.md",
     "distributed algorithms - lecture 4.md",
     "Welcome.md",
