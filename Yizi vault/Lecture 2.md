@@ -135,9 +135,110 @@ $$
  - We substitute back in the values for $K,K_0$ :
 $$
 \begin{cases}
-K^T \cdot R \cdot K  = (H^TWH) \\ 
-K^T_0 \cdot R \cdot K \\
-K^T \cdot R \cdot K_0 \\
-K^T_0 \cdot R \cdot K_0 =\dots
+K^T_0 \cdot R \cdot K = (H^TWH)^{-1}H^TW \cdot R R^{-1} \cdot H (H^TR^{-1}H)^{-1} = (H^TR^{-1}H)^{-1}   \\ 
+K^T \cdot R \cdot K_0 = (H^TR^{-1}H)^{-1}   \\ 
+K^T_0 \cdot R \cdot K_0 = (H^TR^{-1}H)^{-1}   \\ 
 \end{cases}
 $$
+- After subtracting from both sides :
+$$
+ \implies K^T \cdot R \cdot K  - K^T_0 \cdot R \cdot K_0 = A \succeq 0
+$$
+$$
+K^T \cdot R \cdot K \succeq K_0^T \cdot R \cdot K_0  \ : \ \forall W 
+$$
+$$
+\implies 
+Cov(\hat{\underline{\theta}}_{WLS}(W = R^{-1})) \le 
+Cov(\hat{\underline{\theta}}_{WLS}(W)) \ : \ \forall W 
+$$
+
+> [!info] Meaning...
+> If we choose $W = R^{-1}$ we get that the Cov. is smaller or equal always, for every choice of $W$ (notice that we didn't put any requirements on the matrix...).
+> Therefore, the minimum is achieved with this choice of $W$.
+
+> [!warning] Notice... 
+> $W$ is not necessarily the only minimum!
+
+
+> [!Example]-
+> 
+> $\underline{x} = \mathbb{1} \cdot \theta + \underline{v}$ 
+> $\mathbb{E}[\underline{v}] = 0$
+> $\mathbb{E}[\underline{v} \cdot \underline{v}^T] = 0$ 
+> Every data sample with large variance that will be added will yield large $Var(\hat{\underline{\theta}}_{LS})$ : $$\hat{\underline{\theta}}_{LS} = \frac{1}{N}\sum_{n=1}^{N}{x_n}$$
+>$$\implies Var(\hat{\underline{\theta}}_{LS}) = \frac{1}{N^2}\sum_{n=1}^{N}{\sigma_n^2}$$
+> In contrast to the WLS estimator, that will not affect the variance as much : $$
+\implies Var(\hat{\underline{\theta}}_{LS}) = 
+(\mathbb{1}^T \cdot R^{-1} \cdot \mathbb{1})^{-1} = 
+\frac{1}{\sum_{n=1}^{N}{\frac{1}{\sigma_n^2}}}$$
+>For the case in which the variance of all samples is equal $\sigma_1^2 = \dots = \sigma_n^2 = \sigma^2$  we get : $$
+Var(\hat{\underline{\theta}}_{LS}) = \frac{1}{N} \cdot N \cdot \sigma^2 = \frac{\sigma^2}{N}$$
+>$$ Var(\hat{\underline{\theta}}_{WLS}) = \frac{1}{N \cdot \frac{1}{\sigma^2} } = \frac{\sigma^2}{N}$$
+>
+>> [!info] Meaning...
+> The WLS estimator uses the weights to weight out any exceptionally high variance of a data sample.
+> $\implies$ If all data samples are statistically equivalent, the WLS estimator looses all advantage over the LS estimator.
+>
+>The estimator in the example : $$\hat{\theta}_{WLS} = (H^TR^{-1}H)H^TR^{-1}\underline{x} = (\mathbb{1}^T\cdot R^{-1} \cdot \mathbb{1})\cdot \mathbb{1}^T \cdot R^{-1} \cdot \underline{x}$$ 
+>$$\implies \hat{\theta}_{WLS} = \frac{\sum_{n=1}^{N}{\frac{x_n}{\sigma^2}}}{\sum_{n=1}^{N}{\frac{1}{\sigma^2}}}$$
+
+
+## WLS estimator in Non-Linear Problems
+
+-  Model that is not necessarily Linear :
+$$
+\underline{x} = \underline{h}(\underline{\theta}) + \underline{v} \ : \ 
+\underline{h} : \mathbb{R}^M \to \mathbb{R}^N
+$$
+- The matching estimation criterion will be :
+$$
+Q(\underline{\theta}) = ||\underline{x} - \underline{h}(\underline{\theta})||^2 = (\underline{x} - \underline{h}(\underline{\theta'}))^T \cdot W \cdot (\underline{x} - \underline{h}(\underline{\theta'}))
+$$
+$$
+\implies \hat{\underline{\theta}}_{LS} = \underset{\underline{\theta'}\in \mathbb{R}^{M}}{argmin}\{ Q(\underline{\theta'})\}
+$$
+
+> [!danger] Problem
+>The problem right now is that this task might be a lot more difficult...
+
+
+> [!Example] 
+> This is an example of when the measurements are continuous and not discrete as it has been so far...
+> $x(t) = s(t,\underline{\theta}) + v(t) \ : \ \forall t \in [0,T]$
+>We sample the signal in time intervals with length $t_n = n\cdot T_s \ : \ T_s \to 0$  :
+>$$x(t_n) = s(t_n,\underline{\theta}) + v(t_n) \ : \ \forall t \in [0,T]$$
+>We take $N$ samples such that :
+>$$\underline{x} = \underline{s}(\underline{\theta}) + \underline{v} \ : \ \underline{x} \in \mathbb{R}^N$$
+>$$
+>Q(\theta) = ||\underline{x}||^2 - 
+>2 \underline{s}(\underline{\theta})^T \underline{x} +
+>||\underline{s}(\underline{\theta})||^2
+>\underset{\underline{\theta}}{\longrightarrow} min
+>$$
+>$$
+>\underline{s}(\underline{\theta})^T \underline{x} =  
+>\frac{1}{T_s}\sum_{n=1}^{N}s(t_n,\underline{\theta})x_nT_s \
+>\underset{T_s \to 0 }{\longrightarrow} \
+>\frac{1}{T_s} \int_{0}^{T}{s(t,\underline{\theta})x_ndt}
+>$$
+>$$
+>\underline{s}(\underline{\theta})^T \underline{s}(\underline{\theta}) 
+>\underset{T_s \to 0 }{=} \
+>\frac{1}{T_s} \int_{0}^{T}{s(t,\underline{\theta})^2dt}
+>$$
+>And therefore, the LS estimator will be derived :
+>$$
+>\hat{\theta}_{LS} = \underset{\underline{\theta'}\in \mathbb{R}^{M}}{argmax}
+>\frac{1}{T_s} 
+>\{
+> 2\int_{0}^{T}{s(t,\underline{\theta})dt} - \int_{0}^{T}{s(t,\underline{\theta})^2dt}
+>\}
+>$$
+>> [!info]
+>> $T_s$ is independent of $\underline{\theta}$
+> >
+
+
+
+
