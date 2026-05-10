@@ -5,7 +5,7 @@ Let $G = (V,E)$ a graph with capacities $w : E \to \mathbb{R}$ .
 Find the max bottleneck in the graph.
 
 **Solution** : 
-We will use a variation of dijkstra's algorithm for finding max. bottleneck.
+We will use a variation of dijkstra's algorithm for finding max. bottleneck. ^7c1d4a
 
 #### The algorithm
 
@@ -22,7 +22,7 @@ $Bottleneck(G=(V,E),w : E \to \mathbb{R},s\in V)$
 **Correctness** :
 
  - We denote $B(s,v)$ as the max bottleneck between $s$ and $v$. $$B(s,v) = \underset{P\in E}{max}\{ \underset{e\in P }{min\{ w(e)\}}\}$$
- - We want that $\forall v \in V$ in the end of the run of the algorithm we get : 
+ - We want that $\forall v \in V$ in the end of the run of the algorithm we get :  ^dee36c
 	 1. After dequeuing a vertex from the queue, $\lambda(v)$ does not change.
 	 2. $\lambda (v) \le B(s,v)$ , we assume by contradiction that  $\lambda (v) \gt B(s,v)$ ...
 
@@ -56,7 +56,7 @@ $$\implies \lambda(u) \le B(s,u) \implies \lambda = B(s,u)$$
 	$$
 	$$\implies B(s,u) \gt \lambda(u) \implies \lambda(v_i) \gt \lambda(u)$$
 >[!danger]
->**Contradiction** : To the fact that the order of dequeuing from the queue is by current max. bottleneck $\implies v_i$ should have been dequeued from the queue before $u$ 
+>[[Recitation 5#^dee36c | Contradiction]] : To the fact that the order of dequeuing from the queue is by current max. bottleneck $\implies v_i$ should have been dequeued from the queue before $u$ 
 
 ## Exercise 2
 
@@ -64,19 +64,20 @@ Given a graph $G = (V,E)$ find an algorithm for finding all shortest paths from 
 
 **Solution** :
 
+
+### The algorithm
+
+- We initialize the dictionaries as follows :
 $$
 path[v] = \begin{cases}
 1 : v = s \\ 
 0 :v\ne s
-\end{cases}
-$$
-$$dist[v] = \begin{cases}
+\end{cases} \ , \ dist[v] = \begin{cases}
 0 : v = s \\ 
 \infty :v\ne s
-\end{cases}$$
-
-### The algorithm
-
+\end{cases}
+$$
+- Then run the algorithm
 $ShortestPath(G=(V,E),s\in V,t\in V)$
 1. $Q.enqueue(s)$
 2. while $Q \ne \emptyset$ do :

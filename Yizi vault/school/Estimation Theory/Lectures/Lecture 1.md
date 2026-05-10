@@ -206,7 +206,6 @@ $$Q(\underline{\theta}) = \parallel \underline{x} - H \cdot \underline{\theta} \
 - We will remind that we forced that $rank(H) = M$ therefore , $H$ is invertible: 
 $$
 HH^T\underline{\hat{\theta}}_{LS} = H^T\underline{x} \implies \ \hat{\underline{\theta}}_{LS} = (H^TH)^{-1}H^T \cdot \underline{x}
-\label{eq:LS estimator}
 $$
 
 >[!info] 
@@ -230,12 +229,60 @@ $$
 ### LS estimator performance
 
 #### Bias
-
 $$
 \mathbb{E}[\hat{\theta}_{LS} - \theta] =
 \mathbb{E}[(H^TH)^{-1}H^T\cdot \underline{x} - \theta] =
-(H^TH)^{-1}(H^T H) \underline{\theta}
+(H^TH)^{-1}(H^T H)\mathbb{E}[\underline{x}] -\underline{\theta}  = \dots$$
 $$
+ = 
+\{\dots \mathbb{E}[\underline{x}] = \dots  H \underline{\theta} + \mathbb{E}[\underline{v}] =  
+H \underline{\theta} \dots \}{=} 0
+$$
+>[!info]
+>Meaning that the LS estimator is **Unbiased** as long as the noise is white $\mathbb{E}[\underline{v}] = 0$
 
+#### Squared Error
 
+We assume :
+1. $\mathbb{E}[\underline{v}] = 0$
+2. $\mathbb{E}[\underline{v}\underline{v}^T] = Cov(\underline{v}) = \underline{\underline{R}}$
 
+>[!info]+ reminder
+>$Cov(A\underline{x}) = A Cov(\underline{x}) A^T : A \in \mathbb{R}^{N\times N}$
+
+$$Cov(\hat{\theta}_{LS}) = 
+Cov( (H^TH)^{-1}H^T \underline{x} ) =
+(H^TH)^{-1}H^T \cdot Cov(\underline{x} ) \cdot ((H^TH)^{-1}H^T ) ^T = \dots
+$$ $$
+\dots = (H^TH)^{-1}H^T \cdot \underline{\underline{R}} \cdot ((H^TH)^{-1}H^T )^T
+$$
+> [!info]+ Notice
+> $Cov(\hat{\theta}_{LS})$ is linear with the **covariance** of the data samples
+
+> [!Example]+
+> $x_n = \theta + v_n : n \in 1\dots n$
+> $\underline{x} = \mathbb{1} \cdot \theta + \underline{v}$
+> 
+> $\implies\hat{\theta}_{LS}(\underline{x}) = (H^TH)^{-1}H^T \underline{x} = (\mathbb{1} ^ T \mathbb{1})^{-1} \mathbb{1}^T \underline{x} = \frac{1}{N}\sum_{n=1}^{N}{x_n}$
+> 
+> $\implies\hat{\theta}_{LS}(\underline{x}) = \frac{1}{N}\sum_{n=1}^{N}{x_n}$
+>  
+>  We denote the **Estimation error** as : $\underline{\varepsilon}_{LS} = \underline{\hat{\theta}_{LS}} - \underline{\theta}$
+>$$Cov(\hat{\theta}_{LS}) \underset{M \gt 1}{=} Var(\hat{\theta}_{LS}) = (\mathbb{1}^T\mathbb{1})^{-1}\mathbb{1}^T \cdot \underline{\underline{R}} \cdot ((\mathbb{1}^T\mathbb{1})^{-1}\mathbb{1}^T ) ^ T = \frac{1}{N^2} \mathbb{1}^T \cdot  \underline{\underline{R}} \cdot \mathbb{1} $$
+>Now, we assume that $\underline{\underline{R}}$ is diagonal, meaning that the data samples $\underline{x}$ are uncorrelated : 
+>$\implies Cov(\hat{\theta}_{LS}) = \frac{1}{N^2}\sum_{n=1}^{N}{\sigma_n^2}$
+
+We notice that if we have a data sample $x_i$ that is added a lot of noise $\sigma_i^2 >> 1$, we might consider weighing it differently with respect to other samples to have a lower estimation error. for that 
+
+## Weighted Least Squares (WLS) estimator
+
+- We denote the WLS solution as : $$\hat{\theta}_{WLS} = \underset{\underline{\theta} \in \mathbb{R}^M}{argmin}\{ (\underline{X} - H \underline{\theta}) \cdot \underline{\underline{W}} \cdot (\underline{X} - H \underline{\theta}) \}$$
+- When $W$ is a weight matrix. 
+- We assume $W \succ 0 \ , \ W = W^T \ , \ \exists W^{1/2} \in \mathbb{R}^{N\times N} \ : \ W = W^{1/2} \cdot W^{1/2}$
+$$Q(\underline{\theta}) = [W^{1/2}(\underline{x} - H \underline{\theta})] \cdot [W^{1/2}(\underline{x} - H \underline{\theta})] ^T = \dots  $$
+- We denote as follows :
+$$\tilde{\underline{x}} := W^{1/2}\underline{x} \ , \ \tilde{H} := W^{1/2} H \underline{\theta}$$
+- Overall we get an estimator that is linear with respect to the data samples as well :
+$$\hat{\underline{\theta}}_{WLS}(\tilde{\underline{x}}) = (\tilde{H}^T\tilde{H})^T \tilde{H}^T \cdot \tilde{\underline{x}} $$
+$$\dots = (H^TWH)^{-1}H^TW \cdot \underline{x} $$
+[[Lecture 2 | link to next lecture]]
