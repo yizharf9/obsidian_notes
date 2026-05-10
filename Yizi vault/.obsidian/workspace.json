@@ -13,16 +13,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "school/Estimation Theory/Lectures/Lecture 1.md",
+                "file": "school/Graph Theory & Algorithms/Recitations/Recitation 5.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Lecture 1"
+              "title": "Recitation 5"
             }
           },
           {
-            "id": "9a41c2797eec398a",
+            "id": "454b34790688734e",
             "type": "leaf",
             "state": {
               "type": "pdf",
@@ -200,6 +200,8 @@
   "active": "ba7be4723493bdcc",
   "lastOpenFiles": [
     "latexsheet.pdf",
+    "school/Graph Theory & Algorithms/Recitations/Recitation 5.md",
+    "graph example.md",
     "school/Estimation Theory/Lectures/Lecture 1.md",
     "Unconfirmed 196814.crdownload",
     "Unconfirmed 978659.crdownload",
@@ -208,7 +210,6 @@
     "school/Estimation Theory/Assignments/Assignment 1.md",
     "Pasted image 20260507184131.png",
     "school/Distributed Algorithms/lectures/Lecture 5.md",
-    "graph example.md",
     "school/Distributed Algorithms/lectures/lecture 4.md",
     "school/CPU Architecture/Lecture 4.md",
     "school/Control/Lectures/Lecture 5.md",
