@@ -47,6 +47,19 @@
         "type": "tabs",
         "children": [
           {
+            "id": "12fd8df3267caa85",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
             "id": "1f709a329c16386f",
             "type": "leaf",
             "state": {
@@ -72,19 +85,6 @@
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
             }
-          },
-          {
-            "id": "5a66f765c27a4b6f",
-            "type": "leaf",
-            "state": {
-              "type": "file-explorer",
-              "state": {
-                "sortOrder": "alphabetical",
-                "autoReveal": false
-              },
-              "icon": "lucide-folder-closed",
-              "title": "Files"
-            }
           }
         ]
       }
@@ -107,7 +107,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "school/Estimation Theory/Lectures/Lecture 1.md",
+                "file": "distributed algorithms - lecture 4.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -117,7 +117,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Lecture 1"
+              "title": "Backlinks for distributed algorithms - lecture 4"
             }
           },
           {
@@ -213,27 +213,24 @@
     "Untitled.canvas",
     "school/Distributed Algorithms/Recitations/Recitation 4.md",
     "school/Distributed Algorithms/Recitations",
-    "Unconfirmed 196814.crdownload",
-    "Unconfirmed 978659.crdownload",
+    "school/Control/Lectures/Lecture 5.md",
+    "school/Control/Lectures",
+    "school/Control",
+    "school/CPU Architecture/Lecture 4.md",
+    "school/CPU Architecture",
+    "Pasted image 20260510191851.png",
     "Pasted image 20260509154435.png",
     "Pasted image 20260509151937.png",
     "Pasted image 20260507184131.png",
-    "school/Distributed Algorithms/lectures/Lecture 5.md",
-    "school/Distributed Algorithms/lectures/lecture 4.md",
-    "school/CPU Architecture/Lecture 4.md",
-    "school/Control/Lectures/Lecture 5.md",
-    "school/CPU Architecture/Untitled",
-    "school/CPU Architecture",
-    "school/Graph Theory & Algorithms/Recitations",
-    "school/Graph Theory & Algorithms",
-    "school/Estimation Theory/Lectures/Desmos example.md",
-    "Yizhar_Fahima_CV.md",
-    "distributed algorithms - lecture 4.md",
-    "Welcome.md",
-    "Pasted image 20260423110902.png",
+    "Working Tree.base",
+    "Pasted image 20260423103144.png",
     "Pasted image 20260423110852.png",
+    "Pasted image 20260423110902.png",
     "Pasted image 20260423104716.png",
     "Pasted image 20260423103631.png",
-    "Pasted image 20260423103144.png"
+    "school/Project/Literature Comparison.md",
+    "school/Estimation Theory/Lectures/Desmos example.md",
+    "school/Estimation Theory/Lectures/example file.md",
+    "Welcome.md"
   ]
 }
