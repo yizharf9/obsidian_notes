@@ -259,4 +259,4 @@ $$
 - In this case it is easy to derive the maximization problem - we will find a maximum to the system as a function of $\tau$.
 - this is a specific case in which, despite the non-linearity of the system we may still estimate under the assumption of a specific model of the system.
 
-[[Lecture 3 | link to next lecture...]]
+[[school/Estimation Theory/Lectures/Lecture 3| link to next lecture...]]
