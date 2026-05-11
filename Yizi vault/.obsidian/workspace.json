@@ -4,51 +4,70 @@
     "type": "split",
     "children": [
       {
-        "id": "e05da2c08043992d",
+        "id": "e1574e654137b948",
         "type": "tabs",
         "children": [
           {
-            "id": "44a2817695e2ace6",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "latexsheet.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "latexsheet"
-            }
-          },
-          {
-            "id": "6b0007f2413cda1f",
+            "id": "496f28a6a823ac9d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "graph example.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "graph example"
-            }
-          },
-          {
-            "id": "b2d810772490539d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Lecture 2.md",
+                "file": "school/Estimation Theory/Lectures/Lecture 2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
               "title": "Lecture 2"
             }
+          },
+          {
+            "id": "f10bb8a7fd22451c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Lecture 3.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Lecture 3"
+            }
+          },
+          {
+            "id": "2d16b20121e750ad",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "TDE system.canvas",
+                "viewState": {
+                  "x": 0,
+                  "y": 0,
+                  "zoom": 0
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "TDE system"
+            }
+          },
+          {
+            "id": "ba797d2520684e5f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Lecture 3.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Lecture 3"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -61,6 +80,19 @@
         "id": "663d48edd7dbb9eb",
         "type": "tabs",
         "children": [
+          {
+            "id": "12fd8df3267caa85",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
           {
             "id": "1f709a329c16386f",
             "type": "leaf",
@@ -87,22 +119,8 @@
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
             }
-          },
-          {
-            "id": "5a66f765c27a4b6f",
-            "type": "leaf",
-            "state": {
-              "type": "file-explorer",
-              "state": {
-                "sortOrder": "alphabetical",
-                "autoReveal": false
-              },
-              "icon": "lucide-folder-closed",
-              "title": "Files"
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
@@ -122,7 +140,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "school/Estimation Theory/Lectures/Lecture 1.md",
+                "file": "distributed algorithms - lecture 4.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -132,7 +150,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Lecture 1"
+              "title": "Backlinks for distributed algorithms - lecture 4"
             }
           },
           {
@@ -212,43 +230,45 @@
       "obsidian-importer:Open Importer": false
     }
   },
-  "active": "b2d810772490539d",
+  "active": "f10bb8a7fd22451c",
   "lastOpenFiles": [
+    "school/Estimation Theory/Lectures/Lecture 2.md",
+    "TDE system.canvas",
+    "Lecture 3.md",
+    "school/Distributed Algorithms/lectures/lecture 3.md",
+    "school/Distributed Algorithms/lectures/lecture 4.md",
+    "Song.md",
     "graph example.md",
     "latexsheet.pdf",
-    "Lecture 2.md",
-    "school/Graph Theory & Algorithms/Recitations/Recitation 5.md",
-    "Song.md",
-    "Working Tree.base",
-    "Equations.base",
-    "Pasted image 20260510191851.png",
-    "school/Graph Theory & Algorithms/Recitations/Recitation 4.md",
     "school/Estimation Theory/Lectures/Lecture 1.md",
-    "Untitled.canvas",
+    "Yizhar_Fahima_CV.md",
+    "school/Graph Theory & Algorithms/Recitations/Recitation 5.md",
+    "school/Graph Theory & Algorithms/Recitations/Recitation 4.md",
+    "school/Graph Theory & Algorithms/Recitations",
+    "school/Graph Theory & Algorithms",
     "school/Estimation Theory/Assignments/Assignment 1.md",
+    "school/Estimation Theory/Assignments",
+    "school/Distributed Algorithms/lectures/Lecture 5.md",
     "school/Distributed Algorithms/Recitations/Recitation 4.md",
     "school/Distributed Algorithms/Recitations",
-    "Unconfirmed 196814.crdownload",
-    "Unconfirmed 978659.crdownload",
+    "school/Control/Lectures/Lecture 5.md",
+    "school/Control/Lectures",
+    "school/Control",
+    "school/CPU Architecture/Lecture 4.md",
+    "school/CPU Architecture",
+    "Pasted image 20260510191851.png",
     "Pasted image 20260509154435.png",
     "Pasted image 20260509151937.png",
     "Pasted image 20260507184131.png",
-    "school/Distributed Algorithms/lectures/Lecture 5.md",
-    "school/Distributed Algorithms/lectures/lecture 4.md",
-    "school/CPU Architecture/Lecture 4.md",
-    "school/Control/Lectures/Lecture 5.md",
-    "school/CPU Architecture/Untitled",
-    "school/CPU Architecture",
-    "school/Graph Theory & Algorithms/Recitations",
-    "school/Graph Theory & Algorithms",
-    "school/Estimation Theory/Lectures/Desmos example.md",
-    "Yizhar_Fahima_CV.md",
-    "distributed algorithms - lecture 4.md",
-    "Welcome.md",
-    "Pasted image 20260423110902.png",
+    "Working Tree.base",
+    "Pasted image 20260423103144.png",
     "Pasted image 20260423110852.png",
+    "Pasted image 20260423110902.png",
     "Pasted image 20260423104716.png",
     "Pasted image 20260423103631.png",
-    "Pasted image 20260423103144.png"
+    "school/Project/Literature Comparison.md",
+    "school/Estimation Theory/Lectures/Desmos example.md",
+    "school/Estimation Theory/Lectures/example file.md",
+    "Welcome.md"
   ]
 }

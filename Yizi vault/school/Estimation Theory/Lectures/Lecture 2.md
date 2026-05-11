@@ -203,7 +203,7 @@ $$
 >The problem right now is that this task might be a lot more difficult...
 
 
-> [!Example] 
+> [!Example]+
 > This is an example of when the measurements are continuous and not discrete as it has been so far...
 > $x(t) = s(t,\underline{\theta}) + v(t) \ : \ \forall t \in [0,T]$
 >We sample the signal in time intervals with length $t_n = n\cdot T_s \ : \ T_s \to 0$  :
@@ -232,13 +232,31 @@ $$
 >\hat{\theta}_{LS} = \underset{\underline{\theta'}\in \mathbb{R}^{M}}{argmax}
 >\frac{1}{T_s} 
 >\{
-> 2\int_{0}^{T}{s(t,\underline{\theta})dt} - \int_{0}^{T}{s(t,\underline{\theta})^2dt}
+> 2\int_{0}^{T}{s(t,\underline{\theta})dt} - 
+> \int_{0}^{T}{s(t,\underline{\theta})^2dt}
 >\}
 >$$
 >> [!info]
->> $T_s$ is independent of $\underline{\theta}$
+>> $T_s$ is independent of $\underline{\theta}$, and therefore in this maximization problem with respect to $\underline{\theta}$ this parameter can be omitted.
+>> $\implies$ the performance of the estimator does not depend on the sample rate!
 > >
 
 
 
+### Time Delay estimation (TDE) Problem
 
+- In many problems such as this, the entire expression : 
+$$
+\dots \int_{0}^{T}{s(t,\underline{\theta})^2dt} = Const.
+$$
+- since the energy of the signal does not change when we perform a delay/phase shift...
+- And since a constant does not depend on $\underline{\theta}$ we get the equivalent optimization problem :
+$$
+\hat{\theta}_{LS} = \underset{\tau\in \mathbb{R}}{argmax}
+	\int_{0}^{T}{s(t- \tau)x(t)dt}
+$$
+![[TDE system.canvas | visual TDE system]]
+- In this case it is easy to derive the maximization problem - we will find a maximum to the system as a function of $\tau$.
+- this is a specific case in which, despite the non-linearity of the system we may still estimate under the assumption of a specific model of the system.
+
+[[Lecture 3 | link to next lecture...]]

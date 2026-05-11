@@ -40,7 +40,7 @@ Innovative Electrical and Computer Engineering $4^{th}$ year student at **Ben Gu
 - Developed a novel alternative to traditional rendering algorithms like Gaussian Splatting to enforce strict 3D awareness and object identity consistency.
     
 
-**Digital Signal Processing (DSP) Applications** | _Academic Lab_ | [link for DSP lab content](https://github.com/yizharf9/coding/bgu/dsp_lab)
+**Digital Signal Processing (DSP) Applications** | _Academic Lab_ | [link for DSP lab content]([https://github.com/yizharf9/coding/bgu/dsp_lab](https://github.com/yizharf9/coding/tree/972eabb0bc7abfc72bcb1b7f8f954b5b88a48f2d/bgu/dsp_lab))
 
 - Designed and simulated DSP algorithms utilizing MATLAB to analyze and visualize complex frequency responses.
     
