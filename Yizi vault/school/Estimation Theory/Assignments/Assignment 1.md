@@ -391,3 +391,43 @@ We will re-examine the estimators :
 
 ![[Pasted image 20260512203214.png]]
 
+### a) Find MMSE Estimator
+
+```desmos-graph
+top = 1
+bottom = -0.2
+left = -0.2
+right = 5
+---
+L = 1
+y = L*e^{-L*x} \{0 < x\} 
+```
+
+- We will find the MMSE estimator based on definition :
+$$
+\hat{\theta}_{MMSE}(N) = \mathbb{E}[\theta|N]
+$$
+
+- We will expand the expected value term by definition :
+$$
+\mathbb{E}[\theta|N] = \sum_{\theta}{\theta}\cdot \mathbb{P}(\theta|N=k)
+$$
+- We are given the distribution of $\theta$ by :
+$$
+\theta \sim exp(\lambda)
+$$
+- We want to find the distribution of the R.V. $\theta|N$, so we will use Bayes theorem :
+$$
+f_{\theta}(\alpha | N = k) = \frac{\mathbb{P}(N|\theta=\alpha) \cdot f_{\theta}(\alpha)}{\mathbb{P}(N=k)}
+$$
+- Since we know all terms in the RHS but $\mathbb{P}(N)$  , we will find that term to substitute back in :
+$$
+
+$$
+
+
+
+
+$$
+f(\theta | N = k) = \frac{\alpha^k}{k!}e^{-\alpha} \cdot \frac{\lambda e^{-\lambda\alpha}}{\mathbb{P}(N)}
+$$
