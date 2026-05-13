@@ -43,7 +43,7 @@ f_{\underline{\theta} | \underline{x}}(\underline{\varphi} | \underline{x})
 }d\underline{\varphi}
 $$
 - usually finding the joint PDF is near impossible if not very hard!
-- Therefore, we can simplify the PDF using Bayes theorem giving us a much more managable expression to work with in most cases : 
+- Therefore, we can simplify the PDF using Bayes theorem giving us a much more manageable expression to work with in most cases : 
 $$
 f_{\underline{\theta} | \underline{x}}(\underline{\varphi} | \underline{x}) = 
 \frac{f_{ \underline{x}| \underline{\theta}} \cdot f_{\underline{\theta}}}

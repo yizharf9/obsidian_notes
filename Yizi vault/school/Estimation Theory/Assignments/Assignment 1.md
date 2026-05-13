@@ -1,5 +1,6 @@
 
 ## Question 1 :
+
 ![[Pasted image 20260507184131.png]]
 
 First we examine the statistical model of the observation model : ^81944c
@@ -393,16 +394,6 @@ We will re-examine the estimators :
 
 ### a) Find MMSE Estimator
 
-```desmos-graph
-top = 1
-bottom = -0.2
-left = -0.2
-right = 5
----
-L = 1
-y = L*e^{-L*x} \{0 < x\} 
-```
-
 - We will find the MMSE estimator based on definition :
 $$
 \hat{\theta}_{MMSE}(N) = \mathbb{E}[\theta|N]
@@ -410,7 +401,7 @@ $$
 
 - We will expand the expected value term by definition :
 $$
-\mathbb{E}[\theta|N] = \sum_{\theta}{\theta}\cdot \mathbb{P}(\theta|N=k)
+\mathbb{E}[\theta|N] = \int_{0}^{\infty}{\alpha}\cdot f_{\theta|N=k}(\alpha)d\alpha
 $$
 - We are given the distribution of $\theta$ by :
 $$
@@ -418,16 +409,216 @@ $$
 $$
 - We want to find the distribution of the R.V. $\theta|N$, so we will use Bayes theorem :
 $$
-f_{\theta}(\alpha | N = k) = \frac{\mathbb{P}(N|\theta=\alpha) \cdot f_{\theta}(\alpha)}{\mathbb{P}(N=k)}
+f_{\theta}(\alpha | N = k) = 
+\frac{
+	\overbrace{\mathbb{P}(N = k|\theta=\alpha)}^{\sim Poi(\alpha)}
+	\cdot
+	\overbrace{f_{\theta}(\alpha)}^{\sim exp(\lambda)}
+}{
+\mathbb{P}(N=k)
+}
 $$
-- Since we know all terms in the RHS but $\mathbb{P}(N)$  , we will find that term to substitute back in :
+- Since we know all terms in the RHS but $\mathbb{P}(N)$, we will find that term to substitute back in :
+	We will use the **Law of Total Probability** to express the term in question :
+	$$
+	\mathbb{P}(N = k) = 
+	\int_0^{\infty}{
+		\mathbb{P}(N = k|\theta = \alpha) \cdot
+		f_{\theta}(\alpha)d\alpha
+	}=
+	\int_0^{\infty}{
+		\frac{\alpha^k}{k!}e^{-\alpha} \cdot
+		\lambda e^{-\lambda\alpha}d\alpha
+	}=
+	\int_0^{\infty}{
+		\lambda \cdot \frac{\alpha^k}{k!} \cdot
+		 e^{-\alpha (\lambda+1) }d\alpha
+	}=\dots
+	$$
+	- We will use the identity we were given for the following integral :
+	$$
+	\dots =
+	\frac{\lambda}{k!} \cdot
+	 \int_0^{\infty}{
+		 \alpha^k \cdot
+		 e^{-\alpha (\lambda+1) }d\alpha
+	}=\frac{\lambda}{k!} \cdot
+	 \underbrace{\int_0^{\infty}{
+		 \alpha^k \cdot
+		 e^{-\alpha (\lambda+1) }d\alpha
+	}}_{identity}=\frac{\lambda}{\not{k!}} \cdot \frac{\not{k!}}{(\lambda+1)^{k+1}}=
+	\frac{\lambda}{(\lambda+1)^{k+1}}
+	$$ ^46194c
+- Now we have all terms so we can substitute them in :
+$$
+f_{\theta}(\theta = \alpha | N = k) = 
+\frac{
+	\frac{\alpha^k}{k!}e^{-\alpha} \cdot 
+	\not{\lambda} e^{-\lambda\alpha}
+}
+{
+	\frac{\not{\lambda}}{(\lambda+1)^{k+1}}
+}=
+\frac{(\lambda+1)^{k+1} \cdot \alpha^k}{k!} \cdot e^{-\alpha(\lambda+1)}
+$$ ^6b0cb7
+- We can now calculate the expected value in question :
+$$
+\mathbb{E}[\theta|N] = \int_{0}^{\infty}{
+	\alpha^{k+1} \cdot \frac{(\lambda+1)^{k+1}}{k!} \cdot 
+	e^{-\alpha(\lambda+1)} d\alpha
+}=
+ \frac{(\lambda+1)^{k+1}}{k!} \cdot 
+\underbrace{\int_{0}^{\infty}{
+	\alpha^{k+1} \cdot e^{-\alpha(\lambda+1)} d\alpha
+}}_{
+	m = k + 1 \ , \ \alpha' = (\lambda + 1)
+}=\dots 
+$$
+$$
+\dots=
+\frac{
+	{m!}
+}{\alpha^{m+1}} =
+\frac{
+(\lambda+1)^{\overbrace{\cancel{k+1}}^{-1}}
+}{\cancel{k!}} \cdot 
+\frac{
+	\overbrace{\cancel{(k+1)!}}^{k+1}
+}{(\cancel{\lambda+1)^{k+2}}} =
+\frac{k+1}{\lambda + 1}
 $$
 
+> [!success] result
+> We get the derivation of the MMSE estimator :
+> $$\implies \hat\theta_{MMSE} (N) =  \mathbb{E}[\theta|N=k] = \frac{k+1}{\lambda + 1}$$
+
+### b) Find MAP estimator
+
+We will derive the MAP estimator based on the definition :
+$$
+\hat\theta_{MAP}(N) = 
+\underset{\alpha \in \mathbb{R}}{argmax}\{
+	f_{\theta|N}(\alpha)
+\}
+$$
+- Since we have already derived the conditional PDF in a) :
+$$
+f_{\theta}(\theta = \alpha | N = k) = 
+\frac{(\lambda+1)^{k+1} \cdot \alpha^k}{k!} \cdot e^{-\alpha(\lambda+1)}
+$$
+- We can take the derivative with respect to $\alpha$ and compare to 0 :
+$$
+\frac{df_{\theta}(\theta = \alpha | N = k)}
+{d\alpha} =
+\frac{(\lambda+1)^{k+1}}{k!}\cdot
+\begin{bmatrix}
+k\alpha^{k-1}\cdot e^{-\alpha(\lambda+1)} -
+(\lambda + 1)\alpha^{k}\cdot e^{-\alpha(\lambda+1)}
+\end{bmatrix}=\dots
+$$
+$$
+\frac{(\lambda+1)^{k+1}}{k!} \cdot
+e^{-\alpha(\lambda+1)} \cdot 
+\alpha^{k-1}\cdot
+\begin{bmatrix}
+k  -
+\alpha\cdot (\lambda + 1) 
+\end{bmatrix}= 
+\begin{cases}
+\alpha = 0 \\
+\alpha = \frac{k}{\lambda +1}
+\end{cases}
+\implies
+$$
+- We notice that in the value $\alpha = 0$ the PDF value is 0, so it must be a minimum...
+- Which means that $\alpha = \frac{k}{\lambda+1}$ is the only possible maximum and therefore :
+
+
+> [!success] result
+> We get the final derivation of the MAP estimator
+> $$\hat\theta_{MAP}(N) = \underset{\alpha \in \mathbb{R}}{argmax}\{f_{\theta|N}(\alpha)\} = \frac{k}{\lambda +1}$$
+
+```desmos-graph
+top = 2
+bottom = -0.2
+left = -0.2
+right = 3
+---
+l = 5
+k = 5
+
+y = (l+1)^{k+1}  x^k  e^{ -x*(l+1) } / k! \{ 0 < x \}
+
+x = (k+1)/(l+1) | black | dashed
+( (k+1)/(l+1) , 0 ) | Label: MMSE
+
+x = k/(l+1) | red | dashed
+( (k)/(l+1) , 0 ) | red | Label: MAP
+
+x = 0 | blue | dashed
+```
+
+> [!Warning] Notice...
+> The two estimators are not identical!
+>That is because the MAP estimator is showing the **Mode** of the posterior distribution  
+>while the MMSE estimator is showing the **Mean** of the posterior distribution.
+>These two are not identical since the distribution is **not symmetric**!
+
+
+## Question 3
+
+![[Pasted image 20260513203611.png]]
+![[Pasted image 20260513203630.png]]
+
+- Distribution of $\theta$ :
+$$
+\theta \sim U[a,b] \implies
+f_{\theta}(\alpha) = \begin{cases}
+\frac{1}{b-a} \quad : \alpha \in [a,b] \\
+0 \quad : else \\
+\end{cases}
+$$
+- Conditional distribution of $y_n | \theta$ :
+
+$$
+y_n | \theta \sim U[0,\theta] \implies
+f_{y_n|\theta}(z) = \begin{cases}
+\frac{1}{\theta} \quad : z \in [0,\theta] \\
+0 \quad : else \\
+\end{cases}
+$$
+### a) Find MAP estimator
+
+For finding the MAP estimator  we need to find the term :
+$$
+\hat\theta(\underline{y}) = 
+\underset{z \in \mathbb{R} }{argmax}\{
+f_{\underline{y}|\theta=\alpha}(z)
+\}
+\ : \ \underline{y} := \begin{pmatrix}
+y_1 \\
+\vdots \\
+y_n
+\end{pmatrix}
 $$
 
-
-
-
+-  First we need to find the conditional PDF of the vector $\underline{y}$ :
 $$
-f(\theta | N = k) = \frac{\alpha^k}{k!}e^{-\alpha} \cdot \frac{\lambda e^{-\lambda\alpha}}{\mathbb{P}(N)}
+\underline{y}|\theta=\alpha \sim U[0, \mathbb{1} \cdot \theta] \ : \ 
+\mathbb{1} := \begin{pmatrix}
+1 \\
+\vdots \\
+1
+\end{pmatrix}
 $$
+$$\implies
+[f_{\underline{y}|\theta=\alpha}(\underline{z})]_i = 
+\begin{cases}
+\frac{1}{\alpha} \quad : \ : z_i \in  [0,\alpha] \\
+0 \quad : else \\
+\end{cases}
+\quad : \ \forall i \in \{1...N\}
+$$
+- Now we need to find that the PDF is valued highest when  $\theta$ receives the lowest value possible.
+- That way $\theta$ spreads the least and has a higher peak...
+- 

@@ -22,21 +22,19 @@
             }
           },
           {
-            "id": "5f463d3019b87513",
+            "id": "1c3439ef8ccd1a4d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "Lecture 4.md",
-                "mode": "source",
-                "source": false
+                "file": "latexsheet.pdf"
               },
-              "icon": "lucide-file",
-              "title": "Lecture 4"
+              "icon": "lucide-file-text",
+              "title": "latexsheet"
             }
           },
           {
-            "id": "4f045e59f755db85",
+            "id": "077b75188fdadfaf",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -49,8 +47,7 @@
               "title": "Lecture 1"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -214,24 +211,26 @@
       "obsidian-importer:Open Importer": false
     }
   },
-  "active": "5f463d3019b87513",
+  "active": "2acb10dea9b7225b",
   "lastOpenFiles": [
+    "latexsheet.pdf",
     "school/Estimation Theory/Lectures/Lecture 1.md",
-    "Lecture 4.md",
     "school/Estimation Theory/Assignments/Assignment 1.md",
+    "Pasted image 20260513203630.png",
+    "Pasted image 20260513203611.png",
+    "school/Estimation Theory/Lectures/Lecture 3.md",
+    "school/Estimation Theory/Lectures/Lecture 2.md",
+    "Lecture 4.md",
     "Pasted image 20260512203214.png",
     "Yizhar_Fahima_CV.md",
-    "school/Estimation Theory/Lectures/Lecture 2.md",
     "graph example.md",
     "school/Estimation Theory/Lectures/Desmos example.md",
-    "latexsheet.pdf",
     "Pasted image 20260423103144.png",
     "Pasted image 20260423103631.png",
     "Pasted image 20260423110902.png",
     "Pasted image 20260507184131.png",
     "rwservlet.pdf",
     "Unconfirmed 204520.crdownload",
-    "school/Estimation Theory/Lectures/Lecture 3.md",
     "school/CPU Architecture/Lecture 4.md",
     "Lecture 2.md",
     "school/Graph Theory & Algorithms/Recitations/Recitation 5.md",
@@ -249,9 +248,7 @@
     "school/CPU Architecture",
     "Pasted image 20260510191851.png",
     "Pasted image 20260509154435.png",
-    "Pasted image 20260509151937.png",
     "Working Tree.base",
-    "Pasted image 20260423110852.png",
     "school/Project/Literature Comparison.md",
     "school/Estimation Theory/Lectures/example file.md",
     "Welcome.md"
