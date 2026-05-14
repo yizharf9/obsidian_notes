@@ -211,7 +211,7 @@ P_e(\hat{\theta}) =
 $$
 #### MAP decision rule
 
-![[Assignment 1#^e8993c | derived expression for MAP desision rule]]
+![[Assignment 2#^e8993c| derived expression for MAP desision rule]]
 
 We will examine in which values of $x$ the estimator has an error.
 We notice that the cases in which that is possible are the overlapping domains :
@@ -592,8 +592,8 @@ $$
 For finding the MAP estimator  we need to find the term :
 $$
 \hat\theta(\underline{y}) = 
-\underset{z \in \mathbb{R} }{argmax}\{
-f_{\underline{y}|\theta=\alpha}(z)
+\underset{\alpha \in [a,b] }{argmax}\{
+f_{\underline{y}|\theta=\alpha}(z) \cdot f_\theta(\alpha)
 \}
 \ : \ \underline{y} := \begin{pmatrix}
 y_1 \\
@@ -602,23 +602,108 @@ y_n
 \end{pmatrix}
 $$
 
--  First we need to find the conditional PDF of the vector $\underline{y}$ :
+- We notice that $f_\theta(\alpha)$ is constant so we can omit it from the argument.
+- We examine the conditional distribution that to maximize the value of the PDF we would like to choose the value of $\theta$ as smallest as possible. For that , we need to determine what is the smallest legitimate value of $\theta$ we can choose based on the data samples $\{y_n\}_{n=1}^N$. 
+- We denoted the max value of the data samples : $Y_{max}=max\{y_n\}_{n=1}^N$ 
+- We examine each case separately :
+	1. If $Y_{max} \le a$ :
+		That means that we can choose the smallest possible value for $\theta$ which is the lower bound of its uniform distribution. $$\implies \hat\theta_{MAP}(\underline{y}) = a$$
+	2. If $Y_{max} \gt a$ :
+		That means the new value is the best possible candidate for $\theta$. Choosing any lower value is like stating that the maximum value of the data samples is lower than the new sample we just got which is a contradiction. Choosing any value higher will yield a lower value of the PDF which serves us no purpose.$$\implies \hat\theta_{MAP}(\underline{y}) = Y_{max}$$
+
+> [!success] Result
+> Overall, we get the final MAP estimator :
+>$$
+>\hat\theta_{MAP}(\underline{y}) = max\{a,\underset{1\le n \le N}{max}\{y_n\}\}
+>$$
+>
+
+- To derive the bias of the estimator we first define the distribution of the estimator. For that we will take the derivative of the CDF of the estimator by the definition :
 $$
-\underline{y}|\theta=\alpha \sim U[0, \mathbb{1} \cdot \theta] \ : \ 
-\mathbb{1} := \begin{pmatrix}
-1 \\
-\vdots \\
-1
-\end{pmatrix}
+F_{\hat\theta_{MAP}}(t) = 
+\mathbb{P}(\hat\theta_{MAP} \le t) = 
+\mathbb{P}(max\{a,Y_{max}\} \le t) = \dots
 $$
-$$\implies
-[f_{\underline{y}|\theta=\alpha}(\underline{z})]_i = 
-\begin{cases}
-\frac{1}{\alpha} \quad : \ : z_i \in  [0,\alpha] \\
-0 \quad : else \\
-\end{cases}
-\quad : \ \forall i \in \{1...N\}
 $$
-- Now we need to find that the PDF is valued highest when  $\theta$ receives the lowest value possible.
-- That way $\theta$ spreads the least and has a higher peak...
-- 
+max\{a,Y_{max}\} \le t \implies (y_1\le t)\land \dots \land (y_N\le t)\land (a \le t)
+$$
+- We separate to 2 different cases :
+	1. $t \le a$  : 
+		In this case, the estimator will choose the value $a$ anyway so the probability it will land below it is 0 and we have a spike in the value $t = a$ in which the accumulated probability of all lower values of $t$ are packed in that value :
+$$
+F_{\hat\theta_{MAP}}(t) = 
+\mathbb{P}(max\{a,Y_{max}\} \le t) =
+\mathbb{1}_{a \le t}(t) \cdot \mathbb{P}(Y_{max} \le t) =
+\mathbb{1}_{a \le t}(t) \cdot \prod_{n=1}^N{ \mathbb{P}(y_n \le t) } =
+$$
+$$
+\dots = \mathbb{1}_{a \le t}(t) \cdot \prod_{n=1}^N{\int_0^a{\frac{1}{\theta}} dt} = 
+\mathbb{1}_{a \le t}(t) \cdot \prod_{n=1}^N{\frac{a}{\theta}} = 
+\mathbb{1}_{a \le t}(t) \cdot (\frac{a}{\theta})^N  
+$$
+$$
+\overset{\frac{d}{dt}}{\implies} f_{\hat\theta_{MAP}}(t) = 
+\delta(t-a)\cdot(\frac{a}{\theta})^N 
+\ : \ t \le a
+$$
+	2. $a \lt t$ :
+		In this case the estimator will choose the max value between the data samples :
+$$
+F_{\hat\theta_{MAP}}(t) = 
+\mathbb{P}(max\{a,Y_{max}\} \le t) =
+\mathbb{P}(a \le Y_{max} \le t) =
+\prod_{n=1}^N{\mathbb{P}(a \le y_n \le t)} =
+\prod_{n=1}^N{ \int_a^t{ \frac{1}{\theta} dt} } = \dots
+$$
+$$
+\dots = \prod_{n=1}^N{ \int_a^t{ \frac{1}{\theta} dt} } = 
+\prod_{n=1}^N{ \frac{t-a}{\theta} } = 
+(\frac{t-a}{\theta})^{N}
+$$
+$$
+\overset{\frac{d}{dt}}{\implies} f_{\hat\theta_{MAP}}(t) = 
+N \cdot (\frac{t-a}{\theta})^{N-1}
+\ : \ a \lt t
+$$
+
+- Now we have the PDF of the distribution so we can derive the bias :
+$$
+b(\hat\theta_{MAP}) = \mathbb{E}[\hat\theta_{MAP} - \theta] = \mathbb{E}[\hat\theta_{MAP}] - \frac{a+b}{2}
+$$
+$$
+\mathbb{E}[\hat\theta_{MAP}] = 
+\int_\mathbb{R}{t\cdot f_{\hat\theta_{MAP}}(t)dt} =
+\int_0^a{t \cdot \delta(t-a)\cdot (\frac{a}{\theta})^N dt} +
+\int_a^\theta{t \cdot \frac{t^{N-1}}{\theta^N} \cdot Ndt} = \dots
+$$
+$$
+\dots = \frac{a^{N+1}}{\theta^N} +
+\frac{N}{\theta^N} \cdot \left. \frac{t^{N+1}}{N+1}\right|_a^\theta =
+\frac{a^{N+1}}{\theta^N} +
+\frac{N}{N+1} \cdot(\frac{\theta^{\cancel{N+1}}}{\cancel{\theta^N}} - 
+\frac{a^{N+1}}{\theta^N})= \dots
+$$
+$$
+\dots =
+\overbrace{
+	\cancel{\frac{1}{N+1} \cdot \frac{a^{N+1}}{\theta^N}}
+}^{N \to \infty} +
+\overbrace{
+	{\frac{N}{N+1}}
+}^{\underset{N \to \infty}{\longrightarrow}1}
+\cdot \theta
+\underset{N\to \infty}{\longrightarrow} \theta
+$$
+$$
+\implies \lim_{N\to \infty }{b(\hat\theta_{MAP})} = \theta - \theta = 0
+$$
+
+> [!success] Result
+> We find that the estimator is **asymptotically unbiased** : $b(\hat\theta_{MAP})\overset{a}{\approx} 0$
+
+### b) Find MED estimator
+
+We want to find the median estimator :
+$$
+\hat\theta_{MED}(\underline{y}) = \underset{\theta}{median}\{ f_{\theta|\underline{y}}(\theta|x) \}
+$$
