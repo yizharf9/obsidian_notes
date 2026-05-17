@@ -538,6 +538,8 @@ $$
 > We get the final derivation of the MAP estimator
 > $$\hat\theta_{MAP}(N) = \underset{\alpha \in \mathbb{R}}{argmax}\{f_{\theta|N}(\alpha)\} = \frac{k}{\lambda +1}$$
 
+^40fce9
+
 ```desmos-graph
 top = 2
 bottom = -0.2
@@ -567,6 +569,7 @@ x = 0 | blue | dashed
 
 ## Question 3
 
+
 ![[Pasted image 20260513203611.png]]
 ![[Pasted image 20260513203630.png]]
 
@@ -579,7 +582,7 @@ f_{\theta}(\alpha) = \begin{cases}
 \end{cases}
 $$
 - Conditional distribution of $y_n | \theta$ :
-
+^743bd2
 $$
 y_n | \theta \sim U[0,\theta] \implies
 f_{y_n|\theta}(z) = \begin{cases}
@@ -611,7 +614,7 @@ $$
 	2. If $Y_{max} \gt a$ :
 		That means the new value is the best possible candidate for $\theta$. Choosing any lower value is like stating that the maximum value of the data samples is lower than the new sample we just got which is a contradiction. Choosing any value higher will yield a lower value of the PDF which serves us no purpose.$$\implies \hat\theta_{MAP}(\underline{y}) = Y_{max}$$
 
-> [!success] Result
+> [!success] Result 
 > Overall, we get the final MAP estimator :
 >$$
 >\hat\theta_{MAP}(\underline{y}) = max\{a,\underset{1\le n \le N}{max}\{y_n\}\}
@@ -705,5 +708,257 @@ $$
 
 We want to find the median estimator :
 $$
-\hat\theta_{MED}(\underline{y}) = \underset{\theta}{median}\{ f_{\theta|\underline{y}}(\theta|x) \}
+\hat\theta_{MED}(\underline{y}) = \underset{\theta}{median}\{ f_{\theta|\underline{y}}(\theta|\underline y) \}
 $$
+- We will use Bayes Theorem to derive the expression for the conditional PDF :
+$$
+f_{\theta | \underline y}(\alpha | \underline y) = 
+\frac{
+	f_{\underline y | \alpha }(\underline \beta | \alpha ) \cdot 
+	f_{\theta} (\alpha) 
+}{
+	f_{\underline y}(\underline \beta)
+}
+$$
+- Since $f_{\underline y }(\underline \beta)$ is independent of $\alpha$, we can assume that for a given sample vector $\underline y$ , it is a constant and therefore :
+$$
+f_{\theta | \underline y}(\alpha | \underline y) = 
+c \cdot 
+[f_{\underline y | \alpha }(\underline \beta | \alpha ) \cdot 
+f_{\theta} (\alpha) ] 
+\ : \ c \in \mathbb{R}
+$$
+- We can calculate $c$ using the definition of the marginal distribution and the PDFs we already know :
+$$
+\int_{\mathbb{R}}f_{\theta | \underline y}(\alpha | \underline \beta) {d}\alpha = 
+c \cdot \int_{\mathbb{R}} f_{\underline y | \theta}(\underline\beta | \alpha) \cdot 
+f_{\theta}(\alpha) d\alpha = 
+c \cdot \int_{L}^{b} \frac{1}{\alpha^N} \cdot 
+\frac{1}{b-a} d\alpha = 
+$$
+$$
+\dots = \frac{c}{b-a} \cdot \left. \frac{\alpha^{-N+1}}{-N+1} \right|_{L}^{b} = 1
+: L := max\{a,Y_{max}\} 
+$$
+$$
+\implies \frac{c}{b-a} \cdot
+\left[
+\frac{b^{-N+1}}{-N+1} - 
+\frac{L^{-N+1}}{-N+1}
+\right] = 1 \implies
+c = (b-a) \cdot 
+\left[
+\frac{b^{-N+1}}{-N+1} - 
+\frac{L^{-N+1}}{-N+1}
+\right]^{-1}
+$$
+$$
+\implies f_{\theta | \underline y } (\alpha | \underline \beta) = 
+c \cdot 
+\frac{1}{\alpha ^ N} \cdot \frac{1}{b-a} =
+\left[
+\frac{b^{-N+1}}{-N+1} - 
+\frac{L^{-N+1}}{-N+1}
+\right]^{-1}
+\cdot \frac{1}{\alpha^N} \implies f_{\theta | \underline y } (\alpha | \underline \beta) =  K \cdot \alpha^{-N}
+$$
+- Now we want to find the median estimator based on the definition :
+$$
+\int_L^{\hat\theta_{MED}}{
+	f_{\theta|\underline y} (\alpha | \underline \beta) d\alpha = 0.5
+}
+\implies 
+K \cdot \int_L^{\hat\theta_{MED}}{
+	\alpha ^ {-N} d\alpha = 0.5
+}
+\implies 
+K \cdot \left. \frac{\alpha ^ {-N+1}}{-N+1} \right|_{L}^{\hat\theta_{MED}} = 0.5
+$$
+$$
+\implies
+\frac{(\hat\theta_{MED})^{-N+1}}{-N+1} =
+\frac{0.5}{K} + 
+\frac{L^{-N+1}}{-N+1} 
+\implies
+(\hat\theta_{MED})^{-N+1} =
+\frac{0.5(-N+1)}{K} + 
+L^{-N+1}
+$$
+$$
+\implies
+\hat\theta_{MED} =
+\left(\frac{0.5(-N+1)}{K} + 
+L^{-N+1}\right)^{\frac{1}{-N+1}}
+\implies
+\hat\theta_{MED} =\left(
+	\frac{b^{-N+1} + L^{-N+1}}{2}
+\right)^{\frac{1}{-N+1}}
+$$
+
+> [!success] Result
+> We get the expression for the MED estimator :
+> $$
+> \hat\theta_{MED} =\left(\frac{b^{-N+1} + L^{-N+1}}{2}\right)^{\frac{1}{-N+1}}
+> : L := max\{a,Y_{max}\}
+> $$
+
+### c) conclusion
+
+From derivations and proofs performed in class, we know that the optimal estimator in terms of the Minimum Average Error $MAE(\hat\theta,\theta) := |\theta - \hat\theta| = C(\hat\theta , \theta)$ is the median estimator and therefore the second estimator yields a smaller cost respectively :
+
+
+> [!success] Conclusion
+> $$
+> \mathbb{E}[C(\hat\theta_{MED},\theta)] \le \mathbb{E}[C(\hat\theta_{MAP},\theta)]
+> $$
+
+
+## Question 4
+
+![[Pasted image 20260517161523.png]]
+
+- Statistical model :
+$$
+\underline{x} = \underline {\underline H} \cdot \underline \theta + \underline v
+$$
+$$
+H \in \mathbb{R}^{N \times M} : Rank(HCH^T + \sigma_v^2 \cdot I_N)  = N
+$$
+$$
+\underline v \in \mathbb{R}^{N} \sim \mathcal{N}(0,\sigma_v^2 \cdot I)
+$$
+$$
+\underline\theta \in \mathbb{R}^{M} \sim \mathcal{N}(\underline\mu,C)
+$$
+### a) Find MMSE estimator
+
+Since the parameter vector $\underline \theta$ is non-deterministic and holds a prior, known statistical model, we want to use a joint-gaussian model of the parameters and the data samples.
+
+- We will denote $\varepsilon_\theta$ as the error of the estimation of the parameters $\theta$.
+- We would like to have a statistical model that estimates some deterministic vector $\tilde\theta$ so we denote :
+$$
+\underline\mu = \underline\theta + \underbrace{(\underline\mu-\underline\theta)}_{\underline{\varepsilon}_\theta} 
+$$
+- We quickly notice that :
+$$
+\mathbb{E}[\underline{\varepsilon}_{\theta}] = 0 , \ : \ Cov(\underline{\varepsilon}_{\theta}) = Cov(\underline\theta) = C
+$$
+- We build the following equation based on the definition of $\underline{\varepsilon}_\theta$ and the prior statistical model of the data samples $\underline x$  to get :
+$$
+\underbrace{
+	\begin{pmatrix}
+	\underline x \\
+	\underline \mu \\
+	\end{pmatrix}
+}_{\underline{\tilde{x}}\in \mathbb{R}^{N+M}}
+=
+\underbrace{
+	\begin{pmatrix}
+	H \\
+	\mathbb{I}_M \\
+	\end{pmatrix}
+}_{\tilde{H} \in \mathbb{R}^{(N+M)\times M} } \cdot \underline \theta 
++
+\underbrace{
+	\begin{pmatrix}
+	\underline v \\
+	\underline{\varepsilon_\theta} \\
+	\end{pmatrix}
+}_{\underline{\tilde{v}} \in \mathbb{R}^{N+M}}
+$$
+- We get a new statistical model for the data samples vector :
+$$
+\implies 
+\underline{\tilde x} = \tilde H \cdot \underline\theta + \underline{\tilde v}
+$$
+- Now, since the prior of the parameters $\underline\theta$  are taken in consideration in the new model, we can use the WLS solution for the MMSE estimator :
+$$
+\hat\theta_{WLS}(\tilde{\underline x}) = 
+(\tilde H^TW \tilde H)^{-1}
+\tilde H^TW \cdot \tilde{\underline x} 
+$$
+- Since we have already proven in class that $W^* = \tilde R ^{-1}$ we need to find the correlation matrix of the newly constructed noise vector $\tilde{\underline v}$ :
+$$
+\tilde R = 
+\mathbb{E}[\tilde{\underline v} \cdot \tilde{\underline v}^T] = 
+\left\{ 
+	\tilde{\underline{v}} := 
+	\begin{pmatrix}
+		\underline v \\
+		\underline{\underline \varepsilon} \\
+	\end{pmatrix}
+\right\} =
+\begin{pmatrix}
+		\sigma_v^2 \cdot \mathbb{I}_N \quad  \ \mathbb{0} \\
+		\mathbb{0} \quad\quad\quad   \  C \\
+\end{pmatrix}
+$$
+$$
+\implies \tilde R^{-1} =
+\begin{pmatrix}
+		\frac{1}{\sigma_v^2} \cdot \mathbb{I}_N \quad  \ \mathbb{0} \\
+		\mathbb{0} \quad\quad\quad   \  C^{-1} \\
+\end{pmatrix}
+$$
+- We plug in the result for said correlation matrix to the definition of the WLS solution :
+$$
+\hat\theta_{WLS}(\tilde{\underline x}) = 
+(\begin{pmatrix}
+	H^T \ , \
+	\mathbb{I}_M \\
+	\end{pmatrix}
+\begin{pmatrix}
+		\frac{1}{\sigma_v^2} \cdot \mathbb{I}_N \quad  \ \mathbb{0} \\
+		\mathbb{0} \quad\quad\quad   \  C^{-1} \\
+\end{pmatrix}
+\begin{pmatrix}
+	H \\
+	\mathbb{I}_M \\
+	\end{pmatrix})^{-1}
+\begin{pmatrix}
+	H^T \ , \
+	\mathbb{I}_M \\
+	\end{pmatrix}
+\begin{pmatrix}
+		\frac{1}{\sigma_v^2} \cdot \mathbb{I}_N \quad  \ \mathbb{0} \\
+		\mathbb{0} \quad\quad\quad   \  C^{-1} \\
+\end{pmatrix}
+\cdot \tilde{\underline x} 
+$$
+$$
+\implies \hat\theta_{WLS}(\tilde{\underline x}) = 
+(\begin{pmatrix}
+	H^T \ , \
+	\mathbb{I}_M \\
+	\end{pmatrix}
+\begin{pmatrix}
+	\frac{1}{\sigma_v^2} H \\
+	C^{-1}
+	\end{pmatrix})^{-1}
+\begin{pmatrix}
+	H^T \ , \
+	\mathbb{I}_M \\
+	\end{pmatrix}
+\begin{pmatrix}
+		\frac{1}{\sigma_v^2} \cdot \mathbb{I}_N \quad  \ \mathbb{0} \\
+		\mathbb{0} \quad\quad\quad   \  C^{-1} \\
+\end{pmatrix}
+\cdot \tilde{\underline x} = 
+$$
+$$
+= (H^T \frac{1}{\sigma_v^2} H  + C^{-1})^{-1} \cdot (\frac{1}{\sigma_v^2}H^T , C^{-1}) \cdot \tilde{\underline{x}} = 
+$$
+
+
+> [!success] Result
+> Overall, we get the final MMSE estimator :
+> $$
+> \hat\theta_{WLS}(\tilde{\underline x}) = 
+> (\tilde H^T \tilde R^{-1} \tilde H)^{-1}
+> \tilde H^T\tilde R^{-1} \cdot \tilde{\underline x} 
+> $$
+> When we denoted : 
+> $$\tilde R = \begin{pmatrix}\sigma_v^2 \cdot \mathbb{I}_N \quad  \ \mathbb{0} \\\mathbb{0} \quad\quad\quad   \  C \\\end{pmatrix}$$
+> $$\tilde H = \begin{pmatrix} H \\ \mathbb{I}_N \end{pmatrix},\tilde{\underline x} = \begin{pmatrix} \underline x \\ \underline \mu \end{pmatrix} $$
+
+
