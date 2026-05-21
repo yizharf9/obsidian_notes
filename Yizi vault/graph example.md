@@ -98,7 +98,7 @@ int i = 0 ;
 ```
 
 >[!info]
->[[lecture 5#Building the _ELG_ tree]]
+>[[school/Control/Lectures/Lecture 5#Building the _ELG_ tree]]
 
 
 ## Story time... (By eyal the _Gay_)

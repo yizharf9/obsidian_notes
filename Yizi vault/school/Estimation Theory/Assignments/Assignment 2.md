@@ -946,19 +946,74 @@ $$
 \cdot \tilde{\underline x} = 
 $$
 $$
-= (H^T \frac{1}{\sigma_v^2} H  + C^{-1})^{-1} \cdot (\frac{1}{\sigma_v^2}H^T , C^{-1}) \cdot \tilde{\underline{x}} = 
+= (H^T \frac{1}{\sigma_v^2} H  + C^{-1})^{-1} \cdot 
+(H^T , \mathbb{I}_M) \cdot (\frac{1}{\sigma_v^2}\underline{x} ,C^{-1}\underline\mu)^T = (H^T \frac{1}{\sigma_v^2} H  + C^{-1})^{-1} \cdot 
+(\frac{1}{\sigma_v^2} \cdot H^T \cdot \underline x + C^{-1}\underline\mu)
 $$
 
 
 > [!success] Result
 > Overall, we get the final MMSE estimator :
-> $$
-> \hat\theta_{WLS}(\tilde{\underline x}) = 
-> (\tilde H^T \tilde R^{-1} \tilde H)^{-1}
-> \tilde H^T\tilde R^{-1} \cdot \tilde{\underline x} 
-> $$
-> When we denoted : 
-> $$\tilde R = \begin{pmatrix}\sigma_v^2 \cdot \mathbb{I}_N \quad  \ \mathbb{0} \\\mathbb{0} \quad\quad\quad   \  C \\\end{pmatrix}$$
-> $$\tilde H = \begin{pmatrix} H \\ \mathbb{I}_N \end{pmatrix},\tilde{\underline x} = \begin{pmatrix} \underline x \\ \underline \mu \end{pmatrix} $$
+> $$\hat\theta_{WLS}(\underline x , \underline \mu ) = (H^T \frac{1}{\sigma_v^2} H  + C^{-1})^{-1} \cdot 
+(\frac{1}{\sigma_v^2} \cdot H^T \cdot \underline x + C^{-1}\underline\mu)$$
 
+
+### b) Estimate Of $\varphi = h_0^T \cdot \theta$ 
+
+Now, we are required to estimate a function of the linear combination of the parameters.
+
+- First we look at the target expression that we want to derive :
+$$
+\hat{(\varphi^2)}_{MMSE}(\tilde x) = \mathbb{E}[\varphi^2 | \tilde x]
+$$
+- We Manipulate the definition of the Variance of the R.V. $\varphi^2|x$ :
+$$
+Var(\varphi^2 | x ) = \mathbb{E}[\varphi^2 | x ] - \mathbb{E}[\varphi|x]^2
+\implies
+\mathbb{E}[\varphi^2 | x ] = Var(\varphi^2 | x ) +  \mathbb{E}[\varphi|x]^2 =
+\hat{(\varphi^2)}_{MMSE}(\tilde x)
+$$
+- Now we separately calculate each of the terms :
+ $$
+\mathbb{E}[\varphi|x] = 
+\mathbb{E}[h_0^T \cdot \theta |x] = 
+h_0^T \cdot \mathbb{E}[\theta |x] =
+h_0^T \cdot \underbrace{\hat\theta_{MMSE}(x)}_{\text{previously calculated...}}
+$$$$
+\implies \mathbb{E}[\varphi|x]^2 = 
+(h_0^T \cdot (H^T \frac{1}{\sigma_v^2} H  + C^{-1})^{-1} \cdot 
+(\frac{1}{\sigma_v^2} \cdot H^T \cdot \underline x + C^{-1}\underline\mu))^2
+$$
+  
+$$
+Var(\varphi^2 | x )  = 
+\mathbb{E}[h_0^T \cdot \theta \cdot \theta^T \cdot h_0 |x] =
+h_0^T \cdot \mathbb{E}[ \theta \cdot \theta^T  |x] \cdot h_0 = 
+h_0^T \cdot \mathbb{E}[ \hat\theta(x) \cdot \hat\theta^T(x) ] \cdot h_0 = \dots
+$$
+
+- For the second term we notice that the term $\mathbb{E}[ \hat\theta(x) \cdot \hat\theta^T(x)]$  is the Covariance matrix of the estimator we found previously $C_{\theta| x}$. So all that is left to do is calculate this matrix:
+$$
+\mathbb{E}[ \hat\theta(x) \cdot \hat\theta^T(x) ] = 
+Cov(\theta|x)
+$$
+- Since the statistical model of the data samples is a **Linear Gaussian Model**, we know that the covariance of the posterior distribution is the inverse of the of the posterior distribution:
+$$
+C_{\theta|x} = (\frac{1}{\sigma_v^2} H^T H + C^{-1})
+$$
+- We substitute this matrix back in our original expression to get the variance of $\varphi^2|x$ :
+$$
+Var(\varphi|x) = 
+h_0^T \cdot C_{\theta|x} \cdot h_0 = 
+h_0^T \cdot (\frac{1}{\sigma_v^2} H^T H + C^{-1}) \cdot h_0 
+$$
+
+> [!success] Result
+> And now we get the final expression for the estimator :
+> $$\hat(\varphi^2) = \left(h_0^T \cdot (H^T \frac{1}{\sigma_v^2} H  + C^{-1})^{-1} \cdot 
+(\frac{1}{\sigma_v^2} \cdot H^T \cdot \underline x + C^{-1}\underline\mu)\right)^2 + h_0^T \cdot (\frac{1}{\sigma_v^2} H^T H + C^{-1})^{-1} \cdot h_0 $$
+
+## Question 5
+
+![[Pasted image 20260520164810.png]]
 
