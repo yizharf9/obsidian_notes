@@ -1389,3 +1389,84 @@ For a gaussian posterior, this gives us the advantage to use a theorem we proved
 > $$\hat \theta_{MMSE}(x) = x$$
 
 
+## Question 9
+
+![[Pasted image 20260521220634.png]]
+
+### a) Find MAP Estimator 
+
+We will find that MAP estimator by definition :
+
+$$
+\hat a_{MAP}(x) = \underset{a\in \mathbb{R}}{argmax}
+\left\{
+f_{a | x} (a | x)
+\right\} =
+\underset{a\in \mathbb{R}}{argmax}
+\left\{
+f_{x | a} (x | a) \cdot f_{a} (a)
+\right\} 
+$$
+- We can instead look at an equivalent statement :
+$$
+\hat a_{MAP}(x) = 
+\underset{a\in \mathbb{R}}{argmin}
+\left\{
+-\ln(f_{x | a} (x | a) \cdot f_{a} (a))
+\right\} 
+$$
+- We can derive the distribution of $x|a$ under the assumption of independent gaussian distributions of all R.V. .
+- Since that for a fixed value of a, $x$ is a linear combination of independent gaussian R.V. s it is a gaussian R.V. We will find it's first and second moments :
+$$
+\mathbb{E}[x|a] = 
+\mathbb{E}[ab+n|a] = 
+a \cdot \mathbb{E}[b|a] + \mathbb{E}[n|a] = 0
+$$
+$$
+Var(x|a) = 
+\mathbb{E}[x^2|a] = 
+\mathbb{E}[(ab+n)^2|a] = 
+a^2 + \mathbb{E}[(b)^2|a] +
+\cancel{2 a \mathbb{E}[abn|a]} +
+\mathbb{E}[n^2|a] =
+a^2 \cdot \sigma_b^2 + \sigma^2_n
+$$
+$$\implies x|a \sim \mathcal{N}(0, a^2\sigma_b^2 + \sigma_n^2)$$
+- We will can  use bayes theorem to justify the following relationship :
+$$
+f(a|x) \propto f_{x | a} (x | a) \cdot f_{a} (a) = \left[ 
+\frac{1}{\sqrt{2\pi(a^2\sigma_b^2 + \sigma_n^2)}} 
+\exp\left(-\frac{x^2}{2(a^2\sigma_b^2 + \sigma_n^2)}\right) 
+\right] 
+\left[ 
+\frac{1}{\sqrt{2\pi\sigma_a^2}} 
+\exp\left(-\frac{a^2}{2\sigma_a^2}\right) 
+\right]
+$$$$
+\implies f(a|x) \propto \left[ 
+\exp\left(-\frac{x^2}{2(a^2\sigma_b^2 + \sigma_n^2)}\right) 
+\right] 
+\left[ 
+\exp\left(-\frac{a^2}{2\sigma_a^2}\right) 
+\right]
+$$
+- We take the minus of the logarithm to find the argument that minimizes both sides :
+$$
+\overset{-\ln(\cdot)}{\longrightarrow} \quad \frac{1}{2}\ln(a^2\sigma_b^2 + \sigma_n^2) + \frac{x^2}{2(a^2\sigma_b^2 + \sigma_n^2)} + \frac{a^2}{2\sigma_a^2}$$
+- We take the derivative with respect to the parameter $a$ and compare to 0 :
+$$
+\overset{\frac{d}{da}}{\longrightarrow} \quad 
+\frac{a\sigma_b^2}{a^2\sigma_b^2 + 
+\sigma_n^2} - \frac{x^2 a\sigma_b^2}{(a^2\sigma_b^2 + \sigma_n^2)^2} + \frac{a}{\sigma_a^2} = 0
+$$$$
+\implies 
+a \left[
+\frac{\sigma_b^2}{a^2\sigma_b^2 + 
+\sigma_n^2} - \frac{x^2 \sigma_b^2}{(a^2\sigma_b^2 + \sigma_n^2)^2} + \frac{1}{\sigma_a^2} 
+\right]
+= 0 \implies 
+\begin{cases}
+a = 0 \\
+a = \pm \sqrt{ \frac{\sigma_a^2}{2} \left[ -1 + \sqrt{1 + \frac{4x^2}{\sigma_a^2\sigma_b^2}} \right] - \frac{\sigma_n^2}{\sigma_b^2} } \\
+\end{cases}
+$$
