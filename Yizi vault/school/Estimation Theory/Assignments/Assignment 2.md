@@ -1066,4 +1066,326 @@ $$
 
 ## Question 6
 
+![[Pasted image 20260521150527.png]]
+
+### Find MMSE estimator
+
+We want to find the estimator $\hat {(y_{N+k})}\left(\{y_n \}_{n=1}^N\right)$ of the AR process. For that we need to find the the explicit expression for that data sample.
+
+- We derive the estimator according to the target expected value by definition.
+- First, we find an explicit expression for the ${(N+k)}^{th}$ sample :
+$$
+y_{_{N+k}} = a \cdot y_{_{N+k-1}} + u_{_{N+k}} =
+a \cdot \left[ a \cdot y_{_{N+k-2}} + u_{_{N+k-1}} \right] + u_{_{N+k}} =
+a^2 \cdot y_{_{N+k-2}} + a \cdot u_{_{N+k-1}} + u_{_{N+k}} = \dots 
+$$
+- We can notice that since We are given the sample $y_{_{N}}$ ,we can stop deriving at that point and ignore the $N^{th}$ noise sample since it is contain in that data sample :
+$$
+= a^k \cdot y_{_{N}} + 
+\left[u_{_{N+k}} + a \cdot u_{_{N+k-1}} + \dots + a^{k-1} \cdot u_{_{N+1}}\right]  = 
+a^k \cdot y_{_{N}} + 
+\sum_{m=1}^k{a^{k-m} \cdot u_{_{N+m}}} 
+$$
+- Finally, we substitute the expression in the conditional expected value to find the MMSE estimator :
+$$
+\implies \mathbb{E}[y_{_{N+k}} | y_0 ... y_N] 
+\underbrace{=}_{\text{independent of :} y_0 ... y_N}
+\mathbb{E}[y_{_{N+k}} | y_N] = 
+\mathbb{E}[
+	a^k \cdot y_{_{N}} + 
+	\sum_{m=1}^k{a^{k-m} \cdot u_{_{N+m}}} 
+]
+$$
+$$
+= a^k \cdot y_{_{N}} +
+\sum_{m=1}^k{
+	a^{k-m} \cdot 
+	\underbrace{
+		\cancel{
+		\mathbb{E}[	
+		 u_{_{N+m}}
+		]
+		}
+	}_{\dots = 0}
+} =  a^k \cdot y_{_{N}}
+$$
+
+> [!success] Result
+> We get the final expression for the estimator :
+> $$ \hat y_{_{N+k}}(\mathbf y) = \mathbb{E}[y_{_{N+k}} | y_0 ... y_N] = a^k \cdot y_{_{N}}$$
+
+### Find Bias of the estimator
+
+We will find the Bias of the estimator according to the definition.
+
+$$
+b(\hat y_{_{N+k}}) = 
+\mathbb{E}[\hat y_{_{N+k}} - y_{_{N+k}} | \mathbf{y}] = ...
+$$
+- Based on the same logic used to derive the expression for the estimator previously, we will derive the expression for the $n^{th}$  data sample :
+$$
+\implies y_n = \underbrace{a^n \cdot y_0}_{\dots = 0 } + \sum_{k=1}^n {a^{k-n} \cdot u_{n+k}} \implies 
+y_n = \sum_{k=1}^n {a^{n-k} \cdot u_{n+k}}
+$$
+- We substitute terms of both the estimator and the derivation of the $n^{th}$ sample :
+$$
+\dots = \mathbb{E}[a^k \cdot y_{_N}| \mathbf{y}] - 
+\mathbb{E}\left[
+	\left.
+	\sum_{m=1}^n {a^{n-m} \cdot u_{m}} 
+	\right | \mathbf{y}
+\right] = 
+a^k \cdot y_{_N} - 
+\mathbb{E}\left[
+	\left.
+	\sum_{m=1}^n {a^{n-m} \cdot u_{m}} 
+	\right | \mathbf{y}
+\right]  = 
+$$
+- We notice that since the $N^{th}$ sample is given, the following data samples are statistically dependent on that sample and the noise added in the next $k$ samples :
+$$
+= a^k \cdot y_{_N} - 
+\sum_{m=1}^n {a^{n-m} \cdot 
+\mathbb{E}\left[
+	u_{m} | \mathbf{y}
+\right]} =
+a^k \cdot y_{_N} - 
+\sum_{m=1}^n {a^{n-m} \cdot 
+\mathbb{E}\left[
+	u_{m} | \mathbf{y}
+\right]} =
+$$
+$$
+= a^k \cdot y_{_N} - 
+a^k \cdot y_{_N}  -
+\sum_{m=N+1}^{N+k} {
+	a^{N+1-m} \cdot 
+	\underbrace{\mathbb{E}[u_{m}|\mathbf{y}]}_{u_{_{N+k}} \perp \! \perp y_n : \forall n \le N }
+}
+= 0 
+$$
+
+> [!success] Result
+> We find that the estimator is **strict sense unbiased**  :
+> $$b(\hat y_{_N+k}) = 0$$ 
+
+### MSE of the estimator
+
+We will calculate the MSE by definition.
+
+- Using the same logic as the last transition we made while calculating the bias we get :
+$$
+MSE(\hat y_{_N+k}) = 
+\mathbb{E}[(\hat y_{_N+k} - y_{_N+k})^2] =
+\mathbb{E}\left[
+\left(\sum_{m=1}^{k} {a^{N-m} \cdot u_{_{N+m}}}\right)^2
+\right] = 
+\sum_{n,m}^{k} {a^{k-m + (k-n)} \cdot 
+\mathbb{E}\left[
+	u_{_{N+m}} \cdot u_{_{N+m}} 
+\right]} = 
+$$$$
+\dots = \left\{
+u_m \perp \! \perp u_n : \forall n\ne m
+\right\} = 
+\sum_{m = 1}^k (a^2)^{k-m} \sigma^2 =
+\sigma^2 \cdot \frac{a^{2k} - 1}{a-1}
+$$
+
+> [!success] Result
+> We get the final expression for the MSE of the estimator :
+> $$ MSE(\hat y_{_N+k}) =  \sigma^2 \cdot \frac{a^{2k} - 1}{a-1} = \mathcal{O}(a^k)$$
+> Meaning that the MSE grow exponentially with respect to how far to the future we are trying to estimate.
+
+## Question 7
+
+![[Pasted image 20260521195742.png]]
+![[Pasted image 20260521195754.png]]
+
+### a) Find optimal estimator
+
+We want to find the optimal estimator in the sense of the cost function defined as :
+$$
+C(\hat\theta, \theta) =  e^{\alpha(\hat\theta - \theta)} - \alpha(\hat\theta - \theta) - 1
+: \alpha \in \mathbb{R}
+$$
+Which is called the **LINEX** cost function (linear exponential cost function).
+
+- We will find the estimator based on the definition :
+$$
+\hat\theta_{opt}(\underline x) = 
+\underset{\theta\in \mathbb{R}}{argmin}
+\left\{
+\mathbb{E}[C(\theta,\hat\theta) | \underline x]
+\right\}
+$$
+- We expand the expected cost and evaluate each term separately :
+$$
+\mathbb{E}[C(\theta,\hat\theta) | \underline x] = 
+\mathbb{E}[e^{\alpha \hat\theta}| \underline x]\cdot 
+\mathbb{E}[e^{-\alpha\theta}| \underline x] -
+\alpha\ \cdot \mathbb{E}[\hat\theta| \underline x] +
+\alpha\ \cdot \mathbb{E}[\theta| \underline x] - 1 = 
+$$
+- $\hat \theta | \underline{x}$ is deterministic so we plug that in :
+$$
+\mathbb{E}[C(\theta,\hat\theta) | \underline x] = 
+e^{\alpha \hat\theta} \cdot 
+\mathbb{E}[e^{-\alpha\theta}| \underline x] -
+\alpha\ \cdot \hat\theta + 
+\alpha\ \cdot \mathbb{E}[\theta| \underline x] - 1
+$$
+- To find the argument that minimizes the cost we differentiate :
+$$
+\overset{\frac{d}{d\hat\theta}}{\longrightarrow} 
+\alpha \cdot e^{\alpha \hat\theta} \cdot 
+\mathbb{E}[e^{-\alpha\theta}| \underline x] -
+\alpha\ + 
+\cancel{\alpha\ \cdot \mathbb{E}[\theta| \underline x]} - \cancel{1} = 
+\alpha \cdot e^{\alpha \hat\theta} - \alpha\
+$$
+- We equate to 0 and find the argument :
+$$
+\alpha \cdot e^{\alpha \hat\theta} \cdot \mathbb{E}[e^{-\alpha\theta}| \underline x] - \alpha = 0
+\implies 
+e^{\alpha \hat\theta} = \frac{1}{\mathbb{E}[e^{-\alpha\theta}| \underline x]}
+$$$$
+\implies 
+\hat\theta \cdot \alpha  = \ln
+\left(
+\frac{1}{\mathbb{E}[e^{-\alpha\theta}| \underline x]}
+\right)
+= -\ln
+\left(
+\mathbb{E}[e^{-\alpha\theta}| \underline x]
+\right) 
+$$
+
+> [!success] Result
+> We get the final expression for the optimal estimator
+> $$ \hat \theta_{opt}(\underline x) = - \frac{1}{\alpha}\ln\left(\mathbb{E}[e^{-\alpha\theta}| \underline x]\right)$$
+
+### b) Find MMSE estimator for a single data sample 
+
+We are given the posterior distribution of the parameter given a data sample :
+$$
+\theta | x \sim \mathcal{N}(x,1)
+$$
+We will derive both the MMSE estimator and the optimal estimator and compare the 2.
+
+#### MMSE Estimator
+
+- We will find the MMSE estimator according to definition :
+$$
+\hat \theta_{MMSE}(x) = \mathbb{E}[\theta|x]
+$$
+ - Since we know the posterior distribution, this is pretty straight forward :
+$$
+\theta | x \sim \mathcal{N}(x,1) \implies 
+\hat \theta_{MMSE}(x) = x
+$$
+
+#### Optimal Estimator
+
+- We will use the former expression derived for the optimal estimator in the LINEX sense :
+$$ 
+\hat \theta_{opt}(x) = - \frac{1}{\alpha}\ln\left(\mathbb{E}[e^{-\alpha\theta}| x]\right)
+$$
+- We will first find the target expected value term to later substitute it back into the expression for the estimator.
+- To evaluate this term we will use the moment generating function of the posterior distribution defined as :
+$$
+M_X(t) = \mathbb{E}[e^{Xt}]
+$$
+- We will use the derivation for the moment generating function of a gaussian R.V. :
+$$
+X \sim \mathcal{N}(\mu,\sigma^2) \implies M_X(t) = 
+\mathbb{E}[e^{Xt}] = 
+\exp({\mu \cdot t + \frac{1}{2} \sigma^2\cdot t^2})
+$$
+- Since the posterior distribution of the parameter is gaussian, we can safely state that the target expected value is equivalent to evaluating the moment generating function of the posterior  at $t = -\alpha$ : 
+$$
+\left. M_{\theta|x}(t) \right|_{t = -\alpha} = 
+\mathbb{E}[e^{-\alpha\theta}| x] = 
+\exp({x \cdot (-\alpha) + \frac{1}{2} \cdot 1 \cdot (-\alpha)^2})
+$$
+- We substitute this expression back in the optimal LINEX estimator expression :
+$$
+\hat\theta_{opt}(x) = -\frac{1}{\alpha} \cdot \ln(\exp({-\alpha x + \frac{1}{2} \alpha^2})) =
+-\frac{1}{\alpha} \cdot [-\alpha x + \frac{1}{2}\alpha^2] =
+x - \frac{\alpha}{2}
+$$
+
+- We get the final term for the optimal estimator in the sense of the LINEX cost :
+$$
+\implies \hat \theta_{opt}(x) = x - \frac{\alpha}{2}
+$$
+
+> [!abstract] Comparison
+> We notice that the LINEX optimal estimator has a linear relationship with the MMSE estimator:
+> $$\implies \hat \theta_{opt}(x) = \hat\theta_{MMSE}(x) - \frac{\alpha}{2}$$
+> The LINEX estimator has a relative bias with respect to the MMSE estimator.
+> 
+> That makes sense since the LINEX cost punishes over estimation more than under estimation do to the exponential term in the cost function !
+
+### c) Repeating a) for new cost function
+
+We are presented with a new cost function :
+$$
+C(\hat\theta, \theta) =  e^{\alpha|\hat\theta - \theta|} - \alpha|\hat\theta - \theta| - 1
+: \alpha \in \mathbb{R}
+$$
+We cannot use the moment generating function for this part since it does not answer the definition. We will have to define the optimal estimator by explicitly stating the integral accordingly.
+- We first write the expression for the expected cost :
+$$
+\mathbb{E}[C(\hat\theta,\theta)] = 
+\int_{\mathbb{R}} \left( e^{\alpha|\hat{\theta} - \theta|} - \alpha|\hat{\theta} - \theta| - 1 \right) f(\theta | \mathbf{x}) \, d\theta
+$$
+- We separate the integral to greater than and lower than $\hat\theta$ values to handle the absolute value :
+$$
+\dots = \int_{-\infty}^{\hat{\theta}} \left( e^{\alpha(\hat{\theta} - \theta)} - \alpha(\hat{\theta} - \theta) - 1 \right) f(\theta | \mathbf{x}) \, d\theta \quad + \int_{\hat{\theta}}^{\infty} \left( e^{\alpha(\theta - \hat{\theta})} - \alpha(\theta - \hat{\theta}) - 1 \right) f(\theta | \mathbf{x}) \, d\theta
+$$
+- As of before, we take the derivative with respect to $\hat\theta$  and evaluate the integral at the boundries according to the **leibniz's rule of integration**:
+$$
+\overset{\frac{d}{d\hat\theta}}{\longrightarrow} 
+\int_{-\infty}^{\hat{\theta}} \frac{d}{d\hat\theta}\left( e^{\alpha(\hat{\theta} - \theta)} - \alpha(\hat{\theta} - \theta) - 1 \right) f(\theta | \mathbf{x}) \, d\theta \quad + 
+\int_{\hat{\theta}}^{\infty} \frac{d}{d\hat\theta}\left( e^{\alpha(\theta - \hat{\theta})} - \alpha(\theta - \hat{\theta}) - 1 \right) f(\theta | \mathbf{x}) \, d\theta =
+$$
+$$
+\dots = \int_{-\infty}^{\hat{\theta}} \alpha\left( e^{\alpha(\hat{\theta} - \theta)} - 1 \right) f(\theta | \mathbf{x}) \, d\theta + 
+\int_{\hat{\theta}}^{\infty} \alpha\left( -e^{\alpha(\theta - \hat{\theta})} + 1 \right) f(\theta | \mathbf{x}) \, d\theta = 0 
+$$
+- We compare to 0 to find the minimum argument. We notice that we can't find a closed form for that argument without previously knowing the distribution of the posterior :
+$$
+\implies 
+\hat\theta_{opt}(x) = \hat\theta : 
+\int_{-\infty}^{\hat{\theta}} \alpha\left( e^{\alpha(\hat{\theta} - \theta)} - 1 \right) f(\theta | \mathbf{x}) \, d\theta =
+\int_{\hat{\theta}}^{\infty} \alpha\left( -e^{\alpha(\theta - \hat{\theta})} + 1 \right) f(\theta | \mathbf{x}) \, d\theta
+$$
+> [!info] Comment 
+> We can define a function of the difference between the 2 integrals.
+> Suppose that the expected value in question converges, we can define a function of the difference between the integrals.
+> Such a function will be valued some constant at infinity and minus that constant at -infinity so we can assume that it is zero somewhere on the real number line. 
+> That value will be our estimator!
+
+### d) Finding optimal estimator for new cost function 
+
+In contrast to previous subsection, this cost function is **Symmetric**! 
+For a gaussian posterior, this gives us the advantage to use a theorem we proved in class.
+
+- We want to use the following Theorem we proved in class :
+	_If the posterior PDF is symmetric around the conditional expected value 
+	$\implies \hat{\theta}_{MMSE}$  minimizes every expected value of a symmetric and convex cost function._
+
+- To use it we need to meet the following requirements : 
+	1. Symmetric posterior : $f_{\underline{\theta}|\underline{x}}(\underline{\varphi}|\underline{x}) = f_{\underline{\theta}|\underline{x}}(\underline{-\varphi}|\underline{x})$ $\implies$ gaussian
+	2. Symmetric cost function :  $\bar{C}(\underline{\varepsilon}) = \bar{C}(-\underline{\varepsilon})$ $\implies$ contains absolute value
+	3. Convex Cost function : $\bar{C}(\cdot) -$ convex $\implies$ sum of a exp. , linear and constant terms is a convex term
+
+- Since we meet all the requirements, we can safely claim that the MMSE estimator is the estimator that minimizes the new cost function.
+
+
+> [!success] Result
+> We get the final expression for the optimal estimator :
+> $$\hat \theta_{MMSE}(x) = x$$
+
 

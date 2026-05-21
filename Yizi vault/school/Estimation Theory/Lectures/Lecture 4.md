@@ -108,8 +108,8 @@ $$
 
 #### #Theorem :
 
- If the a-posteriori PDF is symmetric around the conditional expected value
- $\implies \hat{\theta}_{MS}$ minimizes every expected value of a symmetric and convex function.
+ If the a-posterior PDF is symmetric around the conditional expected value
+ $\implies \hat{\theta}_{MMSE}$ minimizes every expected value of a symmetric and convex cost function.
 
 **proof** : 
 
@@ -121,9 +121,9 @@ f_{\underline{\theta}|\underline{x}}(\underline{\varphi}|\underline{x}) =
 f_{\underline{\theta}|\underline{x}}(\underline{-\varphi}|\underline{x}) 
 $$
 The Theorem assumes the following :
-1. Symmetric
-2. $\bar{C}(\underline{\varepsilon}) = \bar{C}(-\underline{\varepsilon})$ 
-3. $\bar{C}(\cdot)$ - Convex 
+1. Symmetric posterior : $f_{\underline{\theta}|\underline{x}}(\underline{\varphi}|\underline{x}) = f_{\underline{\theta}|\underline{x}}(\underline{-\varphi}|\underline{x})$
+2. Symmetric cost function :  $\bar{C}(\underline{\varepsilon}) = \bar{C}(-\underline{\varepsilon})$ 
+3. Convex Cost function : $\bar{C}(\cdot) -$ convex  
 
 **Aux. claim** :
 $$
@@ -171,7 +171,7 @@ $$
 $$
 
 > [!Example] Usecase
-> In tests, we might be asked to evaluate the minimum of a function of the style :
+> In tests, we might be asked to evaluate the minimum of a cost function of the style :
 > $$
 > \mathbb{E}[ \ e^{|\hat{\theta}-\theta|} + |\hat{\theta}-\theta|^4 \ ]
 > $$
