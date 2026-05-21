@@ -211,7 +211,7 @@ P_e(\hat{\theta}) =
 $$
 #### MAP decision rule
 
-![[Assignment 2#^e8993c| derived expression for MAP desision rule]]
+![[school/Estimation Theory/Assignments/Assignment 2#^e8993c| derived expression for MAP desision rule]]
 
 We will examine in which values of $x$ the estimator has an error.
 We notice that the cases in which that is possible are the overlapping domains :
@@ -979,11 +979,9 @@ $$
 \mathbb{E}[h_0^T \cdot \theta |x] = 
 h_0^T \cdot \mathbb{E}[\theta |x] =
 h_0^T \cdot \underbrace{\hat\theta_{MMSE}(x)}_{\text{previously calculated...}}
-$$$$
-\implies \mathbb{E}[\varphi|x]^2 = 
+$$$$\implies \mathbb{E}[\varphi|x]^2 = 
 (h_0^T \cdot (H^T \frac{1}{\sigma_v^2} H  + C^{-1})^{-1} \cdot 
-(\frac{1}{\sigma_v^2} \cdot H^T \cdot \underline x + C^{-1}\underline\mu))^2
-$$
+(\frac{1}{\sigma_v^2} \cdot H^T \cdot \underline x + C^{-1}\underline\mu))^2$$
   
 $$
 Var(\varphi^2 | x )  = 
