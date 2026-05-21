@@ -1017,3 +1017,53 @@ $$
 
 ![[Pasted image 20260520164810.png]]
 
+We want to prove that :
+$$
+\exists \hat\theta_2 \ne \hat\theta_1 : MSE(\hat\theta_2) \lt MSE(\hat\theta_1)
+$$
+For that we will give an example for such an estimator.
+
+- We define $\hat\theta_{2,c}$ to a family of estimators as follows :
+$$
+\hat\theta_{2,c}(\mathbf{y}) = \hat\theta_1(\mathbf{y}) + c \cdot g(\mathbf{y}) :c\in \mathbb{R}
+$$
+- We derive the expression for the MSE of said estimator :
+$$
+MSE(\hat\theta_{2,c}(\mathbf{y})) = 
+\mathbb{E}\left[(
+	\hat\theta_{2,c}(\mathbf{y}) - \theta
+)^2\right] = 
+\mathbb{E}\left[(
+	\hat\theta_{1}(\mathbf{y}) + c\cdot g(\mathbf{y}) - \theta
+)^2\right] = 
+$$$$
+ = \mathbb{E}[(\hat\theta_{1}(\mathbf{y}) - \theta)^2] + 
+2 \cdot c \cdot \mathbb{E}[(\hat\theta_{1}(\mathbf{y}) - \theta) \cdot g(\mathbf{y})] + 
+c^2 \cdot \mathbb{E}[g(\mathbf{y})^2] =
+MSE(\hat\theta_1) + 2 c \rho + c^2 \sigma^2
+$$
+- We get  an expression for the MSE  of the new estimator as a function of the free parameter $c$.
+- To find the global minimum of the function (parabolic function is convex...) we take the derivative with respect to the parameter $c$ , equate to 0 and observe the new MSE of the argmin of the function :
+$$
+\overset{\frac{d(MSE(\hat\theta_1))}{dc}}{\longrightarrow} 
+2 \rho + 2c \sigma^2 = 0\implies
+c_{min} = - \frac{\rho}{\sigma^2}
+$$
+$$
+\left. MSE(\hat\theta_{2,c}(\mathbf{y})) \right|_{c_{min}} = 
+MSE(\hat\theta_1) + 2 (- \frac{\rho}{\sigma^2}) \rho + (- \frac{\rho}{\sigma^2})^2 \sigma^2 =
+MSE(\hat\theta_1) -  2 \frac{\rho^2}{\sigma^2} + \frac{\rho^2}{\sigma^2} = 
+MSE(\hat\theta_1) - \frac{\rho^2}{\sigma^2}
+$$
+- We define the estimator $\hat\theta_2$ to be the estimator in the family for the $c_{min}$ value we found.
+
+
+
+> [!success] Done!
+> We can see that the new estimator's MSE is strictly lower than the original one's and so we have found an estimator that satisfies the target property :
+>$$\forall \rho , \sigma \in \mathbb{R} : \frac{\rho^2}{\sigma^2} \gt 0 \implies MSE(\hat\theta_2) < MSE(\hat\theta_1)$$
+
+
+## Question 6
+
+
