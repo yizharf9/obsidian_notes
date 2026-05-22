@@ -42,14 +42,12 @@ Planned and adapted weekly training schedules according to instructional goals a
  
  The project is about a system of ground-to-satellite communication. My main focus was the atmospheric channel of the lasers used as the signals. I researched methods to solve the biggest hurdle of using the channel - attenuation and atmospheric turbulence that stem from the constant random changes in the pressure and temperature. The project revolved around the communication and physical implications of dealing with the FSOC channel.
 
-This project focuses on ground-to-satellite free-space optical communication (FSOC), specifically the atmospheric channel used for laser-based optical signal transmission. My work examined methods for mitigating key channel impairments, including attenuation and atmospheric turbulence which is by random fluctuations in atmospheric conditions such as pressure and temperature. The project analyzed both the physical and communication-related implications of operating over an FSOC channel.
-
 - Evaluated the performance of Adaptive Optics and Data Modulations and their direct effects on the Bit Error Rate (BER) across an FSOC channel.
     
 - Conducted detailed research and analysis on the signal fidelity of single-mode versus multi-mode fiber for atmospheric communication links.
     
 
-**Generative Models in 3D Artificial Intelligence** | _Academic Project_ | 
+**Generative Models in 3D Artificial Intelligence** | _Academic Project_ | [link for project content](https://github.com/yizharf9/coding/tree/master/bgu/gen_models/orthogonal_diff)
 
 Modern generative models still have a limited understanding of spatial structure and physical-world constraints. In this project, I explored approaches for addressing these limitations in the context of 3D image generation.
 
