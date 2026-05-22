@@ -15,7 +15,13 @@ Innovative Electrical and Computer Engineering $4^{th}$ year student at **Ben Gu
     
 - **Relevant Coursework:** Generative Models in AI (95), Introduction to Signal Processing (90), Introduction to Machine Learning (83), Introduction to Computer Networks (83). 
 
+
+**Technion Certified Web Developer** | Technion Azrieli Division of Continuing Education | *2021 – 2022*
+* Completed a rigorous 320-hour professional certification program specializing in full-stack web development foundations.
+
 **Alliance High School, Tel Aviv** | Full Matriculation, Majors: Physics (5 Units) & Mathematics (5 Units) | _2013-2017_
+
+
 ## Technical Skills
 
 - **Programming Languages:** Python (pandas, NumPy), C, Rust, JavaScript, HTML/CSS
