@@ -4,43 +4,7 @@
 ![[Pasted image 20260507184131.png]]
 
 First we examine the statistical model of the observation model : ^81944c
-
-```desmos-graph
-left = -2.5
-right = 2.5
-top = 1
-bottom = -0.2
----
-a = -1 
-b = 0 
-c = 1
-
-n = 0.7
-
-x = a \{0 < y < 0.25\} | black
-x = b \{0 < y < 0.5\} | black
-x = c \{0 < y < 0.25\} | black
-
-0 < y < \frac{1}{3*2*n} \{a-n < x < a+n\} | blue
-
-0 < y < \frac{1}{3*2*n} \{b-n < x < b+n\} | red
-
-0 < y < \frac{1}{3*2*n} \{c-n < x < c+n\} | blue
-
-x = a + n | magenta | dashed
-(a+n,0) | label: -0.3 | magenta
-
-x = b - n | magenta | dashed
-(-n,0) | label: -0.7 | magenta
-
-x = b + n | magenta | dashed
-(n,0) | label: 0.7 | magenta
-
-x = c - n | magenta | dashed
-(c-n,0) | label: 0.3 | magenta
-
-```
-
+![[Pasted image 20260521235449.png]]
 Based on the statistical model we can see that :  ^3fed49
 $$
 X = \theta + n \implies X \ | \ \theta \sim U[\theta-0.7,\theta+0.7]
@@ -105,9 +69,10 @@ $$
 We will now derive the explicit expression for this estimator.
 
 - If we expand the definition of the MMSE estimator we get :$$\mathbb{E}[\theta|x] = \sum_{\theta_i}{\theta_i \cdot \mathbb{P}(\theta = \theta_i | x)}$$
-- Therefore we need to explicitly derive the term for the conditional probability of $\theta$ based on the **law of total probability** :$$
-	\mathbb{P}(\theta | x) = \sum_{\theta \in \{-1,0,1\}}\mathbb{P}(\theta | x)\cdot\mathbb{P(\theta)} 
-	$$
+- Therefore we need to explicitly derive the term for the conditional probability of $\theta$ based on the **law of total probability** :
+$$
+\mathbb{P}(\theta | x) = \sum_{\theta \in \{-1,0,1\}}\mathbb{P}(\theta | x)\cdot\mathbb{P(\theta)} 
+$$
 
 We can use **Bayes Theorem** to rearrange the expression of the expected value in question :
 $$
@@ -125,34 +90,39 @@ Now we calculate each term separately based on the statistical model we evaluate
 	$$
 - $f(x|\theta)$ - derived earlier in [[#^3fed49| Distribution of X]]  
 
-- $f(x)$ - We will derive the explicit formula using the **Law of total probability** :$$
-	f(x) = \sum_{\theta \in \{-1,0,1\}}f(x | \theta)\cdot\mathbb{P(\theta)} 
-	$$
+- $f(x)$ - We will derive the explicit formula using the **Law of total probability** :
+$$f(x) = \sum_{\theta \in \{-1,0,1\}}f(x | \theta)\cdot\mathbb{P(\theta)} $$
 	Since we already know the distribution of $x | \theta$  , the full expression comes out to be:
-	$$
-	f(x) = 
-	0.25\cdot f(x|\theta=-1) + 
-	0.5\cdot f(x|\theta=0) + 
-	0.25\cdot f(x|\theta=1)
-	$$
+$$
+f(x) = 
+0.25\cdot f(x|\theta=-1) + 
+0.5\cdot f(x|\theta=0) + 
+0.25\cdot f(x|\theta=1)
+$$
 	
 	We will examine each case separately :
 	
-	1. $-1.7<x<-0.7$ - only possible values of $\theta$ is -1 : $$	f(x) = 0.25\cdot f(x|\theta=-1) + 0 + 0  = \frac{0.25}{1.4} \approx 0.179$$
-	2. $0.7<x<1.7$ - only possible values of $\theta$ is 1 : $$	f(x) = 0.25\cdot f(x|\theta=1) + 0 + 0  = \frac{0.25}{1.4} \approx 0.179$$
-	3. $-0.7<x<-0.3$ - only possible values of $\theta$ is -1,0 : $$	f(x) = 0.25\cdot f(x|\theta=-1) + 0.5\cdot f(x|\theta=0) + 0  = \frac{0.25 + 0.5}{1.4} \approx 0.536$$
-	4. $0.3<x<0.7$ - only possible values of $\theta$ are 0,1 : $$	f(x) = 0.25\cdot f(x|\theta=1) + 0.5\cdot f(x|\theta=0) + 0  = \frac{0.25 + 0.5}{1.4} \approx 0.536$$
-	5. $-0.3<x<0.3$ - only possible values of $\theta$ is 0 : $$	f(x) = 0.5\cdot f(x|\theta=0) + 0 + 0  = \frac{0.5}{1.4} \approx 0.357$$
-	Overall we get the explicit expression for the conditional probability density :$$
-	f(x) = \frac{1}{1.4} \cdot
-	\begin{cases}
-	0 \quad : |x| \ge 1.7 \\
-	0.25 \quad : 0.7 \le |x| < 1.7 \\
-	0.75 \quad : 0.3 \le |x| < 0.7 \\
-	0.5 \quad :  |x| \le 0.3 \\
-	\end{cases}
-	$$ ^7f5859
-- Now we have all terms of the conditional probability in question. We will cacluate the required expected value term : 
+	1. $-1.7<x<-0.7$ - only possible values of $\theta$ is -1 : 
+$$f(x) = 0.25\cdot f(x|\theta=-1) + 0 + 0  = \frac{0.25}{1.4} \approx 0.179$$
+	2. $0.7<x<1.7$ - only possible values of $\theta$ is 1 : 
+$$	f(x) = 0.25\cdot f(x|\theta=1) + 0 + 0  = \frac{0.25}{1.4} \approx 0.179$$
+	3. $-0.7<x<-0.3$ - only possible values of $\theta$ is -1,0 : 
+$$	f(x) = 0.25\cdot f(x|\theta=-1) + 0.5\cdot f(x|\theta=0) + 0  = \frac{0.25 + 0.5}{1.4} \approx 0.536$$
+	4. $0.3<x<0.7$ - only possible values of $\theta$ are 0,1 : 
+$$	f(x) = 0.25\cdot f(x|\theta=1) + 0.5\cdot f(x|\theta=0) + 0  = \frac{0.25 + 0.5}{1.4} \approx 0.536$$
+	5. $-0.3<x<0.3$ - only possible values of $\theta$ is 0 : 
+$$	f(x) = 0.5\cdot f(x|\theta=0) + 0 + 0  = \frac{0.5}{1.4} \approx 0.357$$
+	Overall we get the explicit expression for the conditional probability density 
+$$
+f(x) = \frac{1}{1.4} \cdot
+\begin{cases}
+0 \quad : |x| \ge 1.7 \\
+0.25 \quad : 0.7 \le |x| < 1.7 \\
+0.75 \quad : 0.3 \le |x| < 0.7 \\
+0.5 \quad :  |x| \le 0.3 \\
+\end{cases}
+$$ ^7f5859
+- Now we have all terms of the conditional probability in question. We will calcuate the required expected value term : 
 	$$
 	\hat{\theta}_{MMSE}(x) = 
 	\mathbb{E}[\theta|x] = 
@@ -292,43 +262,7 @@ $$
 ### c) - perform a)+b) again for different distribution
 
 In contrast to the initial distribution of $X$ we get a new distribution :
-
-```desmos-graph
-left = -2.5
-right = 2.5
-top = 1
-bottom = -0.2
----
-a = -1 
-b = 0 
-c = 1
-
-n = 0.5
-
-x = a \{0 < y < 0.25\} | black
-x = b \{0 < y < 0.5\} | black
-x = c \{0 < y < 0.25\} | black
-
-0 < y < \frac{1}{3*1.4} \{a-n < x < a+n\} | blue
-
-0 < y < \frac{1}{3*1.4} \{b-n < x < b+n\} | red
-
-0 < y < \frac{1}{3*1.4} \{c-n < x < c+n\} | blue
-
-x = a + n | magenta | dashed
-(-0.3,0) | label: -0.3 | magenta
-
-x = b - n | magenta | dashed
-(-n,0) | label: -0.7 | magenta
-
-x = b + n | magenta | dashed
-(n,0) | label: 0.7 | magenta
-
-x = c - n | magenta | dashed
-(0.3,0) | label: 0.3 | magenta
-
-```
-
+![[Pasted image 20260521235524.png]]
 Now we can clearly see that there is no overlap between the intervals.
 We will re-examine the estimators :
 
@@ -538,28 +472,7 @@ $$
 > We get the final derivation of the MAP estimator
 > $$\hat\theta_{MAP}(N) = \underset{\alpha \in \mathbb{R}}{argmax}\{f_{\theta|N}(\alpha)\} = \frac{k}{\lambda +1}$$
 
-^40fce9
-
-```desmos-graph
-top = 2
-bottom = -0.2
-left = -0.2
-right = 3
----
-l = 5
-k = 5
-
-y = (l+1)^{k+1}  x^k  e^{ -x*(l+1) } / k! \{ 0 < x \}
-
-x = (k+1)/(l+1) | black | dashed
-( (k+1)/(l+1) , 0 ) | Label: MMSE
-
-x = k/(l+1) | red | dashed
-( (k)/(l+1) , 0 ) | red | Label: MAP
-
-x = 0 | blue | dashed
-```
-
+![[Pasted image 20260521235606.png]]
 > [!Warning] Notice...
 > The two estimators are not identical!
 >That is because the MAP estimator is showing the **Mode** of the posterior distribution  
@@ -844,28 +757,7 @@ $$
 \mathbb{E}[\underline{\varepsilon}_{\theta}] = 0 , \ : \ Cov(\underline{\varepsilon}_{\theta}) = Cov(\underline\theta) = C
 $$
 - We build the following equation based on the definition of $\underline{\varepsilon}_\theta$ and the prior statistical model of the data samples $\underline x$  to get :
-$$
-\underbrace{
-	\begin{pmatrix}
-	\underline x \\
-	\underline \mu \\
-	\end{pmatrix}
-}_{\underline{\tilde{x}}\in \mathbb{R}^{N+M}}
-=
-\underbrace{
-	\begin{pmatrix}
-	H \\
-	\mathbb{I}_M \\
-	\end{pmatrix}
-}_{\tilde{H} \in \mathbb{R}^{(N+M)\times M} } \cdot \underline \theta 
-+
-\underbrace{
-	\begin{pmatrix}
-	\underline v \\
-	\underline{\varepsilon_\theta} \\
-	\end{pmatrix}
-}_{\underline{\tilde{v}} \in \mathbb{R}^{N+M}}
-$$
+$$\underbrace{\begin{pmatrix}\underline x \\\underline \mu \\ \end{pmatrix}}_{\underline{\tilde{x}}\in \mathbb{R}^{N+M}}=\underbrace{\begin{pmatrix} H \\ \mathbb{I}_M \\ \end{pmatrix} }_{\tilde{H} \in \mathbb{R}^{(N+M)\times M} } \cdot \underline \theta +\underbrace{ \begin{pmatrix} \underline v \\ \underline{\varepsilon_\theta} \\ \end{pmatrix}}_{\underline{\tilde{v}} \ \mathbb{R}^{N+M}}$$
 - We get a new statistical model for the data samples vector :
 $$
 \implies 
@@ -982,13 +874,11 @@ h_0^T \cdot \underbrace{\hat\theta_{MMSE}(x)}_{\text{previously calculated...}}
 $$$$\implies \mathbb{E}[\varphi|x]^2 = 
 (h_0^T \cdot (H^T \frac{1}{\sigma_v^2} H  + C^{-1})^{-1} \cdot 
 (\frac{1}{\sigma_v^2} \cdot H^T \cdot \underline x + C^{-1}\underline\mu))^2$$
-  
 $$
 Var(\varphi^2 | x )  = 
 \mathbb{E}[h_0^T \cdot \theta \cdot \theta^T \cdot h_0 |x] =
 h_0^T \cdot \mathbb{E}[ \theta \cdot \theta^T  |x] \cdot h_0 = 
-h_0^T \cdot \mathbb{E}[ \hat\theta(x) \cdot \hat\theta^T(x) ] \cdot h_0 = \dots
-$$
+h_0^T \cdot \mathbb{E}[ \hat\theta(x) \cdot \hat\theta^T(x) ] \cdot h_0 = \dots$$
 
 - For the second term we notice that the term $\mathbb{E}[ \hat\theta(x) \cdot \hat\theta^T(x)]$  is the Covariance matrix of the estimator we found previously $C_{\theta| x}$. So all that is left to do is calculate this matrix:
 $$
@@ -1011,6 +901,7 @@ $$
 > $$\hat(\varphi^2) = \left(h_0^T \cdot (H^T \frac{1}{\sigma_v^2} H  + C^{-1})^{-1} \cdot 
 (\frac{1}{\sigma_v^2} \cdot H^T \cdot \underline x + C^{-1}\underline\mu)\right)^2 + h_0^T \cdot (\frac{1}{\sigma_v^2} H^T H + C^{-1})^{-1} \cdot h_0 $$
 
+
 ## Question 5
 
 ![[Pasted image 20260520164810.png]]
@@ -1026,20 +917,7 @@ $$
 \hat\theta_{2,c}(\mathbf{y}) = \hat\theta_1(\mathbf{y}) + c \cdot g(\mathbf{y}) :c\in \mathbb{R}
 $$
 - We derive the expression for the MSE of said estimator :
-$$
-MSE(\hat\theta_{2,c}(\mathbf{y})) = 
-\mathbb{E}\left[(
-	\hat\theta_{2,c}(\mathbf{y}) - \theta
-)^2\right] = 
-\mathbb{E}\left[(
-	\hat\theta_{1}(\mathbf{y}) + c\cdot g(\mathbf{y}) - \theta
-)^2\right] = 
-$$$$
- = \mathbb{E}[(\hat\theta_{1}(\mathbf{y}) - \theta)^2] + 
-2 \cdot c \cdot \mathbb{E}[(\hat\theta_{1}(\mathbf{y}) - \theta) \cdot g(\mathbf{y})] + 
-c^2 \cdot \mathbb{E}[g(\mathbf{y})^2] =
-MSE(\hat\theta_1) + 2 c \rho + c^2 \sigma^2
-$$
+$$MSE(\hat\theta_{2,c}(\mathbf{y})) = \mathbb{E}\left[(\hat\theta_{2,c}(\mathbf{y}) - \theta)^2\right] = \mathbb{E}\left[(\hat\theta_{1}(\mathbf{y}) + c\cdot g(\mathbf{y}) - \theta)^2\right] = $$$$= \mathbb{E}[(\hat\theta_{1}(\mathbf{y}) - \theta)^2] + 2 \cdot c \cdot \mathbb{E}[(\hat\theta_{1}(\mathbf{y}) - \theta) \cdot g(\mathbf{y})] + c^2 \cdot \mathbb{E}[g(\mathbf{y})^2] =MSE(\hat\theta_1) + 2 c \rho + c^2 \sigma^2$$
 - We get  an expression for the MSE  of the new estimator as a function of the free parameter $c$.
 - To find the global minimum of the function (parabolic function is convex...) we take the derivative with respect to the parameter $c$ , equate to 0 and observe the new MSE of the argmin of the function :
 $$
@@ -1181,19 +1059,14 @@ MSE(\hat y_{_N+k}) =
 \sum_{n,m}^{k} {a^{k-m + (k-n)} \cdot 
 \mathbb{E}\left[
 	u_{_{N+m}} \cdot u_{_{N+m}} 
-\right]} = 
-$$$$
-\dots = \left\{
-u_m \perp \! \perp u_n : \forall n\ne m
-\right\} = 
-\sum_{m = 1}^k (a^2)^{k-m} \sigma^2 =
-\sigma^2 \cdot \frac{a^{2k} - 1}{a-1}
-$$
+\right]} = $$
+$$\dots = \left\{u_m \perp \! \perp u_n : \forall n\ne m\right\} = \sum_{m = 1}^k (a^2)^{k-m} \sigma^2 =\sigma^2 \cdot \frac{a^{2k} - 1}{a-1}$$
 
 > [!success] Result
 > We get the final expression for the MSE of the estimator :
 > $$ MSE(\hat y_{_N+k}) =  \sigma^2 \cdot \frac{a^{2k} - 1}{a-1} = \mathcal{O}(a^k)$$
 > Meaning that the MSE grow exponentially with respect to how far to the future we are trying to estimate.
+
 
 ## Question 7
 
@@ -1247,8 +1120,8 @@ $$
 \alpha \cdot e^{\alpha \hat\theta} \cdot \mathbb{E}[e^{-\alpha\theta}| \underline x] - \alpha = 0
 \implies 
 e^{\alpha \hat\theta} = \frac{1}{\mathbb{E}[e^{-\alpha\theta}| \underline x]}
-$$$$
-\implies 
+$$
+$$\implies 
 \hat\theta \cdot \alpha  = \ln
 \left(
 \frac{1}{\mathbb{E}[e^{-\alpha\theta}| \underline x]}
@@ -1256,8 +1129,7 @@ $$$$
 = -\ln
 \left(
 \mathbb{E}[e^{-\alpha\theta}| \underline x]
-\right) 
-$$
+\right)$$
 
 > [!success] Result
 > We get the final expression for the optimal estimator
@@ -1431,23 +1303,19 @@ a^2 \cdot \sigma_b^2 + \sigma^2_n
 $$
 $$\implies x|a \sim \mathcal{N}(0, a^2\sigma_b^2 + \sigma_n^2)$$
 - We will can  use bayes theorem to justify the following relationship :
-$$
-f(a|x) \propto f_{x | a} (x | a) \cdot f_{a} (a) = \left[ 
+$$f(a|x) \propto f_{x | a} (x | a) \cdot f_{a} (a) = \left[ 
 \frac{1}{\sqrt{2\pi(a^2\sigma_b^2 + \sigma_n^2)}} 
 \exp\left(-\frac{x^2}{2(a^2\sigma_b^2 + \sigma_n^2)}\right) 
 \right] 
 \left[ 
 \frac{1}{\sqrt{2\pi\sigma_a^2}} 
 \exp\left(-\frac{a^2}{2\sigma_a^2}\right) 
-\right]
-$$$$
-\implies f(a|x) \propto \left[ 
+\right]$$$$\implies f(a|x) \propto \left[ 
 \exp\left(-\frac{x^2}{2(a^2\sigma_b^2 + \sigma_n^2)}\right) 
 \right] 
 \left[ 
 \exp\left(-\frac{a^2}{2\sigma_a^2}\right) 
-\right]
-$$
+\right]$$
 - We take the minus of the logarithm to find the argument that minimizes both sides :
 $$
 \overset{-\ln(\cdot)}{\longrightarrow} \quad \frac{1}{2}\ln(a^2\sigma_b^2 + \sigma_n^2) + \frac{x^2}{2(a^2\sigma_b^2 + \sigma_n^2)} + \frac{a^2}{2\sigma_a^2}$$
@@ -1456,8 +1324,8 @@ $$
 \overset{\frac{d}{da}}{\longrightarrow} \quad 
 \frac{a\sigma_b^2}{a^2\sigma_b^2 + 
 \sigma_n^2} - \frac{x^2 a\sigma_b^2}{(a^2\sigma_b^2 + \sigma_n^2)^2} + \frac{a}{\sigma_a^2} = 0
-$$$$
-\implies 
+$$
+$$\implies 
 a \left[
 \frac{\sigma_b^2}{a^2\sigma_b^2 + 
 \sigma_n^2} - \frac{x^2 \sigma_b^2}{(a^2\sigma_b^2 + \sigma_n^2)^2} + \frac{1}{\sigma_a^2} 
@@ -1466,5 +1334,5 @@ a \left[
 \begin{cases}
 a = 0 \\
 a = \pm \sqrt{ \frac{\sigma_a^2}{2} \left[ -1 + \sqrt{1 + \frac{4x^2}{\sigma_a^2\sigma_b^2}} \right] - \frac{\sigma_n^2}{\sigma_b^2} } \\
-\end{cases}
-$$
+\end{cases}$$
+

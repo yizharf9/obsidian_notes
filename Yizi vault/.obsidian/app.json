@@ -1,8 +1,8 @@
 {
   "alwaysUpdateLinks": true,
   "pdfExportSettings": {
-    "includeName": true,
-    "pageSize": "A4",
+    "includeName": false,
+    "pageSize": "Letter",
     "landscape": false,
     "margin": "0",
     "downscalePercent": 100

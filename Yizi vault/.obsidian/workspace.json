@@ -4,39 +4,25 @@
     "type": "split",
     "children": [
       {
-        "id": "560919921b0f9f22",
+        "id": "40c4668a8aaaf845",
         "type": "tabs",
         "children": [
           {
-            "id": "779158553b729854",
+            "id": "466d0e4da3adc33f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "school/Estimation Theory/Assignments/Assignment 2.md",
+                "file": "school/Estimation Theory/Assignments/Assignment 3.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Assignment 2"
+              "title": "Assignment 3"
             }
           },
           {
-            "id": "2a784e0b2a896e45",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "school/Estimation Theory/Lectures/Lecture 4.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Lecture 4"
-            }
-          },
-          {
-            "id": "1e7b61e9f4d1180f",
+            "id": "b0afd373146216db",
             "type": "leaf",
             "state": {
               "type": "pdf",
@@ -45,6 +31,16 @@
               },
               "icon": "lucide-file-text",
               "title": "latexsheet"
+            }
+          },
+          {
+            "id": "f12bf78cf427aa94",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ]
@@ -211,36 +207,42 @@
       "obsidian-importer:Open Importer": false
     }
   },
-  "active": "779158553b729854",
+  "active": "466d0e4da3adc33f",
   "lastOpenFiles": [
-    "Pasted image 20260521220634.png",
     "school/Estimation Theory/Lectures/Lecture 4.md",
-    "school/Estimation Theory/Assignments/Assignment 2.md",
-    "graph example.md",
+    "school/Estimation Theory/Assignments/Assignment 3.md",
     "latexsheet.pdf",
-    "Pasted image 20260521195754.png",
+    "Untitled.md",
+    "Pasted image 20260529192232.png",
+    "Pasted image 20260529171139.png",
+    "Pasted image 20260529171128.png",
+    "Pasted image 20260529171042.png",
+    "school/Graph Theory & Algorithms/Recitations/Recitation 6.md",
+    "school/Estimation Theory/Assignments/Assignment 2 - submission.md",
+    "Assignment 2 -part 1.md",
     "Pasted image 20260521195742.png",
-    "Pasted image 20260521150527.png",
-    "Pasted image 20260521150521.png",
-    "Pasted image 20260520164810.png",
+    "Pasted image 20260521195754.png",
+    "Pasted image 20260521220634.png",
+    "Pasted image 20260521235449.png",
+    "Pasted image 20260521235524.png",
+    "Pasted image 20260521235606.png",
+    "Yizhar_Fahima_CV.md",
+    "school/Estimation Theory/Assignments/Assignment 2.md",
+    "Song.md",
+    "Assignment 2 -part 4.md",
+    "Assignment 2 -part 3.md",
+    "Assignment 2 -part 2.md",
+    "graph example.md",
     "Lecture 5.md",
-    "Pasted image 20260517173408.png",
-    "Pasted image 20260517161523.png",
-    "Recitation 6.md",
-    "Pasted image 20260517103729.png",
     "school/Estimation Theory/Lectures/Lecture 1.md",
-    "Pasted image 20260513203630.png",
-    "Pasted image 20260513203611.png",
     "school/Estimation Theory/Lectures/Lecture 3.md",
     "school/Estimation Theory/Lectures/Lecture 2.md",
-    "Yizhar_Fahima_CV.md",
     "school/Estimation Theory/Lectures/Desmos example.md",
     "rwservlet.pdf",
     "Unconfirmed 204520.crdownload",
     "school/CPU Architecture/Lecture 4.md",
     "Lecture 2.md",
     "school/Graph Theory & Algorithms/Recitations/Recitation 5.md",
-    "Song.md",
     "Working Tree.base",
     "Equations.base",
     "school/Graph Theory & Algorithms/Recitations/Recitation 4.md",
@@ -252,8 +254,6 @@
     "school/Control",
     "school/CPU Architecture",
     "Working Tree.base",
-    "school/Project/Literature Comparison.md",
-    "school/Estimation Theory/Lectures/example file.md",
-    "Welcome.md"
+    "school/Project/Literature Comparison.md"
   ]
 }
