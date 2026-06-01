@@ -34,13 +34,17 @@
             }
           },
           {
-            "id": "f12bf78cf427aa94",
+            "id": "d2a98411426ea1bf",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "school/Estimation Theory/Lectures/Lecture 3.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Lecture 3"
             }
           }
         ]
@@ -209,23 +213,28 @@
   },
   "active": "466d0e4da3adc33f",
   "lastOpenFiles": [
-    "school/Estimation Theory/Lectures/Lecture 4.md",
-    "school/Estimation Theory/Assignments/Assignment 3.md",
+    "Pasted image 20260601200631.png",
+    "Pasted image 20260601200534.png",
+    "Pasted image 20260601200407.png",
+    "Pasted image 20260601195839.png",
+    "Pasted image 20260601195727.png",
+    "Pasted image 20260601195400.png",
+    "Pasted image 20260601195115.png",
+    "Pasted image 20260601192954.png",
+    "Pasted image 20260601192740.png",
     "latexsheet.pdf",
+    "school/Estimation Theory/Lectures/Lecture 3.md",
+    "school/Estimation Theory/Assignments/Assignment 3.md",
+    "school/Estimation Theory/Lectures/Lecture 2.md",
+    "school/Estimation Theory/Lectures/TDE system.canvas",
+    "school/Estimation Theory/Lectures/Lecture 5.md",
+    "school/Estimation Theory/Lectures/Lecture 4.md",
+    "Pasted image 20260531110313.png",
+    "Pasted image 20260531110249.png",
     "Untitled.md",
-    "Pasted image 20260529192232.png",
-    "Pasted image 20260529171139.png",
-    "Pasted image 20260529171128.png",
-    "Pasted image 20260529171042.png",
     "school/Graph Theory & Algorithms/Recitations/Recitation 6.md",
     "school/Estimation Theory/Assignments/Assignment 2 - submission.md",
     "Assignment 2 -part 1.md",
-    "Pasted image 20260521195742.png",
-    "Pasted image 20260521195754.png",
-    "Pasted image 20260521220634.png",
-    "Pasted image 20260521235449.png",
-    "Pasted image 20260521235524.png",
-    "Pasted image 20260521235606.png",
     "Yizhar_Fahima_CV.md",
     "school/Estimation Theory/Assignments/Assignment 2.md",
     "Song.md",
@@ -235,8 +244,6 @@
     "graph example.md",
     "Lecture 5.md",
     "school/Estimation Theory/Lectures/Lecture 1.md",
-    "school/Estimation Theory/Lectures/Lecture 3.md",
-    "school/Estimation Theory/Lectures/Lecture 2.md",
     "school/Estimation Theory/Lectures/Desmos example.md",
     "rwservlet.pdf",
     "Unconfirmed 204520.crdownload",
@@ -253,7 +260,6 @@
     "school/Control/Lectures",
     "school/Control",
     "school/CPU Architecture",
-    "Working Tree.base",
-    "school/Project/Literature Comparison.md"
+    "Working Tree.base"
   ]
 }
