@@ -126,7 +126,7 @@ We are given the statistical model of the data samples :
 $$\underline x := \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} : \ \forall i \ne j \in \{1,...,n\} x_i \perp \! \perp x_j $$$$\implies \underline x \sim \mathcal{N}(\mathbb{1} \cdot\mu \ , \ \sigma^2 \cdot \mathbb{I}_n)$$
 ## a) Find CRB
 
-![[Pasted image 20260531110313.png]]
+![[Pasted image 20260602151542.png]]
 
 We want to find the CRLB for the case of a GWN vector.
 
@@ -151,4 +151,68 @@ $$\mathcal{I}(\underline\theta) = \begin{bmatrix} \frac n{\sigma^2} \quad 0 \\ 0
 > [!success] Result
 > We get the final expression for the CRB matrix :
 >$$\mathcal{I}(\underline\theta)^{-1} = \begin{bmatrix} \frac {\sigma^2}{n} \quad 0\\ 0 \quad \frac {2\sigma^4}{n} \end{bmatrix}$$ 
+>We can see that the off-diagonal terms are 0, then there is no coupling between the 2 which makes sense since the first and second moments of a distribution are independent of each other.
+
+### c) Variance Estimators bias :
+![[Pasted image 20260602154241.png]]
+
+- We will calculate the bias of the estimator :
+$$\mathbb{E}[\hat \sigma^2] = \mathbb{E}\left[ \sum_{i=1}^N (x_i-\bar x)^2 \right] =  \sum_{i=1}^N \mathbb{E}\left[(x_i-\bar x)^2 \right] $$
+$$\implies \mathbb{E}\left[ (x_i - \bar x)^2\right] = \mathbb{E}\left[ x_i^2 \right] - 2 \cdot \mathbb{E}[x_i \cdot \bar x] + \mathbb{E}[\bar x^2] $$
+- We take advantage of the fact that : $\mathbb{E}[x^2] = Var(x) + \mathbb{E}[x]^2$ 
+$$  \forall k \ne i : \mathbb{E}[x_k \cdot x_i] = \begin{cases} \mu^2 \quad\quad\quad : i\ne k \\ \sigma^2 +\mu^2 \quad :i=k \end{cases} $$
+$$\mathbb{E}[x_i^2] = \sigma^2 + \mu^2$$
+$$\mathbb{E}[x_i \cdot \bar x] = \frac1N \sum_{k=1}^N \mathbb{E}[x_i x_k] = \frac1N (\sigma^2 + \mu^2 + (N-1)\cdot \mu^2) = \frac1N \sigma^2 + \mu^2 $$
+$$\mathbb{E}[\bar x ^2] = \frac1{N^2} \sum_{k=1}^N \sum_{m=1}^N \mathbb{E}[x_k x_m]  = \frac{1}{N^2} \cdot \left[ N\cdot (\sigma^2 + \mu^2) + N(N-1)\cdot\mu^2 \right] = \frac1N \cdot \sigma^2 + \mu^2 $$
+$$\implies \mathbb{E}[(x_i-\bar x)^2] = \sigma^2 + \mu^2 - 2(\frac1N \cdot \sigma^2 + \mu^2) + \frac1N \cdot \sigma^2 + \mu^2 = \sigma^2 (1- \frac1N)$$
+$$\implies \mathbb{E}[\hat\sigma^2] = \frac1N \sum_{i=1}^N\sigma^2 (1- \frac1N) = \frac1N \cdot N \cdot \sigma^2 (1- \frac1N) = \sigma^2 (1- \frac1N)$$
+
+> [!success] Result
+> We see that the bias of the estimator is 0 only asymptotically, meaning that it is not unbiased:
+>$$Bias(\hat\sigma^2,\sigma^2) = \mathbb{E}[\hat\sigma^2 - \sigma^2] = \sigma^2(1-\frac1N) - \sigma^2 = \frac{\sigma^2}{N} \overset{N \to \infty}{\longrightarrow} 0$$ 
+
+We want to find the correction term make the estimator unbiased. We notice that we can multiply the original estimator by a function of the number of samples and remove the bias :
+
+- We propose the following estimator $\tilde\sigma^2$ :
+$$\tilde\sigma^2 : = \frac{1}{1-\frac1N} \hat\sigma^2 = \frac{1}{1-\frac1N} \frac1N \sum_{i=1}^N(x_i - \bar x)^2 = \frac{1}{N-1}\sum_{i=1}^N(x_i - \bar x)^2$$
+- We notice that the expected value of the estimator comes out to be the target parameter :
+$$\implies \mathbb{E}[\tilde\sigma^2] = \frac{1}{1-\frac1N}\mathbb{E}[\hat\sigma^2] = \cancel{\frac{1}{1-\frac1N}} \cdot \sigma^2\cancel{(1 - \frac1N)} = \sigma^2$$
+
+> [!success] Result
+> We see that the new estimator we propose is unbiased :
+> $$\tilde\sigma^2 = \frac{1}{N-1}\sum_{i=1}^N(x_i - \bar x)^2 \implies \mathbb{E}[\tilde\sigma^2] = \sigma^2$$
+
+### d) Variance of Proposed Estimator
+![[Pasted image 20260602162006.png]]
+
+We will calculate the variance of the estimator and check if it achieves the CRB.
+$$Var(\tilde\sigma^2) = \mathbb{E}[(\tilde \sigma^2)^2] - \mathbb{E}[\tilde \sigma^2]^2$$
+$$\mathbb{E}[(\tilde\sigma^2)^2] = \mathbb{E}\left[ \frac1{(N-1)^2}\sum_{i=1}^N \sum_{k=1}^N (x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right] = \frac1{(N-1)^2}\sum_{i=1}^N \sum_{k=1}^N \mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right]$$
+- We would like to evaluate the expected value $\mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right]$ inside the sum. For that we will use the fact that the R.V.s $\left\{x_i - \bar x\right\}_{i=1}^N$ are jointly Gaussian with zero mean. Therefore, we can denote $z_k := x_k - \bar x$  and expand the expected value term as follows :
+$$\mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right] = \mathbb{E}[z_i\cdot z_i\cdot z_k\cdot z_k] = $$$$ = \mathbb{E}[z_i\cdot z_i]\cdot\mathbb{E}[z_k\cdot z_k] + \mathbb{E}[z_i\cdot z_k]\cdot\mathbb{E}[z_k\cdot z_i] + \mathbb{E}[z_i\cdot z_k]\cdot\mathbb{E}[z_k\cdot z_i] = \mathbb{E}[z_i^2]^2 + 2\cdot\mathbb{E}[z_i\cdot z_k]^2$$$$ =  \dots $$
+- We want to find $\mathbb{E}[z_i\cdot z_k])$ to evaluate the quantity above.
+$$\mathbb{E}[z_i \cdot z_k] = \underbrace{\mathbb{E}[x_i \cdot x_k]}_{\dots=\mu^2 + \delta(i-k) \cdot \sigma^2} - \mathbb{E}[x_i \cdot \bar x] - \mathbb{E}[x_k \cdot \bar x] + \mathbb{E}[\bar x^2] = $$$$ = \mu^2 + \delta(i-k)\cdot\sigma^2 - 2 \cdot (\frac1N\sigma^2 + \mu^2) + (\frac1N\sigma^2 + \mu^2) = \sigma^2 \cdot \delta(i-k)-\frac{\sigma^2}{N}$$
+- We plug it back in the previous term :
+$$= (\sigma^2 \cdot \delta(i-k)-\frac{\sigma^2}{N})^2 + (\sigma^2 \cdot 0-\frac{\sigma^2}{N})^2 + (\sigma^2 \cdot 0 -\frac{\sigma^2}{N})^2 =$$$$ = \sigma^4 \left[  (\delta(i-k)-\frac1N)^2 + (-\frac1N)^2 + (-\frac1N)^2  \right] = $$$$ =\sigma^4 \left[ \delta(i-k) -\frac2N\cdot \delta(i-k) + \frac1{N^2} + \frac2{N^2}  \right] = \sigma^4 \left[ \delta(i-k) -\frac2N \cdot \delta(i-k) + \frac3{N^2}  \right]$$
+- We count the amount of time that $i=k$ and the rest of the times and substitute accordingly :
+$$\frac1{(N-1)^2}\sum_{i=1}^N \sum_{k=1}^N \mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right] = \frac1{(N-1)^2}\sum_{i=1}^N \sum_{k=1}^N \sigma^4 \left[ \delta(i-k) -\frac2N \cdot \delta(i-k) + \frac3{N^2}  \right] = $$
+$$=\frac{\sigma^4}{(N-1)^2} \cdot \left[N\cdot(1-\frac2N + \frac3{N^2}) + N(N-1) \cdot \frac3{N^2}\right] = \frac{\sigma^4}{(N-1)^2} \cdot \left[ N-2 + \frac3N \right] $$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$$\mathbb{E}[\tilde\sigma^2]^2 = (\sigma^2 )^2 = \sigma^4$$
+$$\implies Var(\tilde\sigma^2) = \frac{\sigma^2}{N-1} + \frac{\sigma^2}{(N-1)^2} -\sigma^4$$
 
