@@ -124,9 +124,9 @@ It is visible from our plots that this projection holds since the bias always ex
 
 We are given the statistical model of the data samples :
 $$\underline x := \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} : \ \forall i \ne j \in \{1,...,n\} x_i \perp \! \perp x_j $$$$\implies \underline x \sim \mathcal{N}(\mathbb{1} \cdot\mu \ , \ \sigma^2 \cdot \mathbb{I}_n)$$
-## a) Find CRB
+### a) + b) Find CRB and 
 
-![[Pasted image 20260602151542.png]]
+![[Pasted image 20260602194129.png]]
 
 We want to find the CRLB for the case of a GWN vector.
 

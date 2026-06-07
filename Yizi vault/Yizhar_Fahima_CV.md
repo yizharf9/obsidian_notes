@@ -1,6 +1,6 @@
 # Yizhar Fahima
 
-**Phone:** 050-886-9990 | **Email:** yizharf9@gmail.com | **GitHub:** [github.com/yizharf9/coding](https://github.com/yizharf9/coding) | **Linkedin**: https://www.linkedin.com/in/yizhar-fahima/
+**Phone:** 050-886-9990 | **Email:** yizharf9@gmail.com | **GitHub:** [github.com/yizharf9/coding](https://github.com/yizharf9/coding) 
 
 Innovative Electrical and Computer Engineering $4^{th}$ year student at **Ben Gurion University**, specializing in Algorithmics, Digital Signal Processing and Machine Learning. Proven experience bridging low-level hardware architecture with high-level data pipelines, demonstrated through applied DSP deployments and state-of-the-art Generative AI research. Actively seeking opportunities to apply strong analytical and programming skills to complex engineering challenges.
 
@@ -10,7 +10,7 @@ Innovative Electrical and Computer Engineering $4^{th}$ year student at **Ben Gu
 Planned and adapted weekly training schedules according to instructional goals and trainee progress. Gained practical experience in leadership, teamwork, hands-on instruction and working under pressure.
 ## Education
 
-**B.Sc. Electrical and Computer Engineering** | Ben Gurion University _Expected Graduation: February 2027_
+**B.Sc. Electrical and Computer Engineering** | Ben Gurion University
 
 - **Specialization:** Computer Engineering (Algorithmics) & Signal Processing and Machine Learning
     
