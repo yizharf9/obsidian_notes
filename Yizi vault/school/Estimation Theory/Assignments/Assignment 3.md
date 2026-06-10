@@ -225,7 +225,7 @@ $$\lim_{N\to \infty}Var(\tilde\sigma^2) = \lim_{N\to \infty}\frac{2\sigma^4}{N-1
 $$\lim_{N\to \infty}\frac{Var(\tilde\sigma^2)}{CRLB} = \lim_{N\to \infty}\frac{\frac{2\sigma^4}{N-1}}{\frac{2\sigma^4}{N}} = \lim_{N\to \infty}\frac{N}{N-1} = 1$$
 - Therefore, the proposed estimator is **Asymptotically Efficient !** 
 ## Question 3
-
+![[Pasted image 20260610182824.png]]
 ### a) Bhattacharyya Bound
 ![[Pasted image 20260610140457.png]]
 
@@ -246,6 +246,7 @@ $$ \dots= \frac{\partial^i}{\partial \theta^i}(\theta) - \underbrace{\frac{\part
 > $$\mathbb{E}\left[ (\hat\theta - \theta)\frac{1}{f(\mathbf x ; \theta)} \cdot \frac{\partial^if(\mathbf x ; \theta)}{\partial\theta^i} \right] = \begin{cases} 1 \quad\quad : i = 1 \\ 0 \quad\quad : i \ge 2 \end{cases}$$
 
 ### b) Finding Lower bound
+![[Pasted image 20260610182807.png]]
 
 We will use the Cauchy-Schwarz inequality to find the lower bound of $\mathbb{E}\left[(\hat\theta-\theta)^2\right]$.
 
@@ -269,7 +270,7 @@ $$\mathbb{E}[(\hat{\theta}-\theta)^2] - \mathbf{v}^T \mathbf{Q}^{-1} \mathbf{v} 
 > We get the final inequality of the target expected value that defines the Bhattacharyya bound: $$\mathbb{E}[(\hat{\theta}-\theta)^2] \ge [\mathbf{Q}^{-1}]_{11}$$
 
 ### c) Comparison to the CRLB
-
+![[Pasted image 20260610182838.png]]
 We will prove by induction that : $\text{Bhattacharyya Bound} \ge \text{Cramer-Rao Bound}$
 
 1. Base : $n=1$
@@ -294,3 +295,206 @@ We will prove by induction that : $\text{Bhattacharyya Bound} \ge \text{Cramer-R
 > We have shown that for any $n\in\mathbb{N}$ the inequality between the bounds holds :
 > $$ \implies [\mathbf{Q}_n^{-1}]_{11} \ge Q_{11}^{-1}$$
 > $$ \implies \text{Bhattacharyya Bound} \ge \text{Cramer-Rao Bound} $$
+
+## Question 4
+![[Pasted image 20260610182925.png]]
+![[Pasted image 20260610182947.png]]
+
+### a) Verify Claim
+![[Pasted image 20260610183011.png]]
+
+We will take the expectation of the random vector.
+- We plug in the terms :
+$$\mathbb{E}[\mathbf z] = \begin{pmatrix}\mathbb{E}[\hat\theta - \theta] \\ \mathbb{E}[\frac{\partial \log f(\mathbf x ; \theta)}{\partial\theta}] \\ \end{pmatrix}$$
+- We are given that said estimator is unbiased, therefore :
+$$\mathbb{E}[\hat\theta-\theta] = 0$$
+- We expand the second entry by definition and we expand the differentiation of the logarithm :
+$$\mathbb{E}\left[\frac{\partial \log f(\mathbf x ; \theta)}{\partial\theta}\right] = \int_{\mathbb{R}^N}\frac{1}{\cancel{f(\mathbf x ; \theta)}}\frac{\partial f(\mathbf x ; \theta)}{\partial\theta} \cdot \cancel{f(\mathbf x ; \theta)} d\mathbf x = \frac{\partial}{\partial\theta} \int_{\mathbb R ^{N}} f(\mathbf x ; \theta) d\mathbf x = \frac{\partial}{\partial\theta}(1) = 0$$
+
+> [!Success] Result
+> We have shown the target identity :
+> $$\mathbb{E}[\mathbf z] = \begin{pmatrix}\mathbb{E}[\hat\theta - \theta] \\ \mathbb{E}[\frac{\partial \log f(\mathbf x ; \theta)}{\partial\theta}] \\ \end{pmatrix} = \mathbf 0$$
+
+### b) Covariance
+![[Pasted image 20260610184110.png]]
+
+We will derive the expression by definition :
+$$\Lambda = \mathbb{E}[\mathbf z \mathbf z ^T] = \begin{bmatrix} \mathbb{E}[(\hat\theta - \theta)^2] \quad\quad\quad\quad\quad \mathbb{E}\left[(\hat\theta-\theta)\cdot\frac{\partial\log f(\mathbf x ; \theta)}{\partial\theta}\right] \\ \mathbb{E}\left[(\hat\theta-\theta)\cdot\frac{\partial\log f(\mathbf x ; \theta)}{\partial\theta}\right] \quad\quad \mathbb{E}\left[(\frac{\partial\log f(\mathbf x ; \theta)}{\partial\theta})^2\right] \end{bmatrix}$$
+1. $\Lambda_{11}$ : 
+	Since the estimator is unbiased we can safely claim that 
+	$$\mathbb{E}[(\hat\theta - \theta)^2] = Var(\hat\theta) + \cancel{Bias(\hat\theta)} = Var(\hat\theta)$$
+2. $\Lambda_{22}$ : 
+	It is quite clear that the target expected value is by definition the fisher information of the estimation of $\theta$ from the samples $\mathbf x$ :
+	$$\mathbb{E}\left[(\frac{\partial\log f(\mathbf x ; \theta)}{\partial\theta})^2\right] = I(\theta)$$
+3. $\Lambda_{12},\Lambda_{21}$ : 
+	In [[#a) Bhattacharyya Bound | 2.a)]] , we have proven that for the first order derivative is 1 :
+	$$\left.\mathbb{E}\left[(\hat\theta-\theta)\cdot\frac{\partial^i\log f(\mathbf x ; \theta)}{\partial^i\theta}\right]\right|_{i=1} = 1$$
+
+
+> [!Success] Result
+> We get the final derivation of the covariance matrix of $\mathbf z$ :
+> $$\Lambda = \begin{bmatrix} Var(\hat\theta) \quad\quad 1 \\ 1 \quad\quad\quad I(\theta) \end{bmatrix}$$
+
+### c) Proving the CRLB
+![[Pasted image 20260610190700.png]]
+
+Since $\Lambda \succeq 0$  can apply its **Schur Complement** to get the following inequality :
+$$\Lambda = \begin{bmatrix} Var(\hat\theta) \quad\quad 1 \\ 1 \quad\quad\quad I(\theta) \end{bmatrix} \succeq 0 \implies Var(\hat\theta) - (1)^T \cdot I(\theta)^{-1}\cdot (1) \ge 0 $$
+
+> [!Success] Result
+> We get the original CRLB of the Variance for estimating $\theta$ :
+> $$\implies Var(\hat\theta) \ge \frac{1}{I(\theta)}$$
+
+
+## Question 5
+![[Pasted image 20260610191440.png]]
+
+
+
+### a) Confirm Regularity
+![[Pasted image 20260610191526.png]]
+
+We want to show the following :
+
+$$\mathbb{E}\left[\frac{\partial\log f(\mathbf x ; \theta)}{\partial\theta}\right] = 0$$
+- First of all, we want to find the conditional distribution of $\mathbf x | \theta$. We will first find the CDF of $\mathbf x | \theta$. Since $w_n \overset{i.i.d.}{\sim} \mathcal P (w_n)$ (double-exponential...) and we are given that $w_n = x_n - \theta$ we can extract the target distribution as follows :
+$$f(x_n ; \theta) = f_{W}(x_n - \theta) = \frac12\exp(-|x_n - \theta|)$$
+- We take the $\log$ from both side :
+$$\log f(x_n ; \theta) = -\log2 -|x_n - \theta|$$
+- We take the derivative with respect to $\theta$ :
+$$\overset{\frac{\partial}{\partial\theta}}{\longrightarrow} \frac{\partial \log f(x_n ; \theta)}{\partial\theta} = \begin{cases}\quad 1 \quad :\theta \le x_n \\  -1 \quad :\theta \le x_n \end{cases}$$
+$$\frac{\partial \log f(x_n ; \theta)}{\partial\theta} = \text{sgn}(x_n - \theta)$$
+- Since the sign function is asymmetric around $\theta$ and the conditional PDF is symmetric around $\theta$, the multiplication of the two is asymmetric around $\theta$ so the integral over the real numbers is :
+$$\implies \mathbb E \left[\frac{\partial \log f(x_n ; \theta)}{\partial\theta}\right] = \int_{\mathbb R } \text{sgn}(x_n - \theta) \cdot f(x_n;\theta) dx_n = 0 : \forall x_n \ne \theta$$
+
+> [!Success] Result
+> We have shown that the regularity condition regarding the Cramer-Rao bound is satisfied for our case :
+> $$\mathbb{E}\left[\frac{\partial\log f(\mathbf x ; \theta)}{\partial\theta}\right] = 0$$
+
+### b) Computing the CRB
+![[Pasted image 20260610200759.png]]
+
+We will compute the CRB by definition :
+
+- When we plug in the score we have calculated before we notice that the square of the score is 1 everywhere except for at $\theta = x_n$ which is a 0 probability event that can be ignored while integrating :
+
+$$I_1(\theta) = \mathbb E \left[ \left(\frac{\partial\log f(x_n ; \theta)}{\partial \theta}\right)^2\right] = \mathbb E [\text{sgn}^2(x_n - \theta)] = \mathbb E [1] = 1$$
+- The previous derivation applies to a single observation. Since our estimation relies on $N$ i.i.d. samples we can use FIM arithmetic to get the final FIM :
+$$\implies I(\theta) = N \cdot I_1(\theta) = N$$
+
+> [!Success] Result
+> We have successfully calculated the CRB for our case :
+> $$CRB = I(\theta)^{-1} = \frac1N$$
+
+
+### c) Existence of Efficient Estimator
+![[Pasted image 20260610203846.png]]
+
+From a theorem we proved in class we know that the bound is attained 
+$\iff$ 
+the score function is of the form :
+$$\frac{\partial \log f(\mathbf x ; \theta)}{\partial\theta} = c(\theta) \cdot (f(\mathbf x) - \theta)$$
+Such that :
+- $S(\theta,\mathbf x) = \frac{\partial \log f(\mathbf x ; \theta)}{\partial \theta}$ - is the score function of the parameters and the data samples.
+- $c(\theta)$ - is a function of the parameters only.
+- $f(\mathbf x)$ - is a function of the data samples only.
+
+If all is satisfied then we can conclude that :
+- The CRB is attainable for some unbiased estimator.
+- $c(\theta) = I(\theta)$ - the coefficient that is constant with respect to the parameters is the Fisher information and is the inverse of the CRB.
+- $f(\mathbf x) = \hat\theta(\mathbf x)$ - the function of the data samples is the unbiased estimator that attains the **CRLB**.
+
+We will see if said form is possible :
+
+- From earlier subsection, plus using the property of i.i.d. distributions, we get :
+$$\log f(x_n ; \theta) = -|x_n -\theta| \implies \log f(\mathbf x  ; \theta) = \sum_{i=1}^N \log f(x_i;\theta) = -\sum_{i=1}^N |x_i - \theta|$$
+- We differentiate and get :
+$$\frac{\partial \log f(\mathbf x ; \theta)}{\partial\theta} = \sum_{i=1}^N\text{sgn}(x_i -\theta)$$
+- To see if the attainability condition is satisfied we need to see if the following equation can hold :
+$$\sum_{i=1}^N\text{sgn}(x_i -\theta) = I(\theta)(\hat\theta-\theta) = N (\hat\theta - \theta)$$
+- We notice that the LHS is a sum of sign functions that can only take discrete values with respect to $\theta$ . Meanwhile the LHS is a continuous function of the data samples that is linear with respect to $\theta$.
+
+> [!fail] Result
+> We see that the CRLB is not attainable for an unbiased estimator since there is no way that the following equality holds for any estimator $\hat\theta$ :
+> $$\frac{\partial \log f(\mathbf x ; \theta)}{\partial\theta} \ne I(\theta) \cdot (\hat\theta(\mathbf x) - \theta) \ : \ \forall \hat\theta : \mathbb R^N \to \mathbb R$$
+
+## Question 6
+![[Pasted image 20260610212947.png]]
+
+### a) Find the Efficient estimator
+![[Pasted image 20260610213007.png]]
+
+Using the same theorem we used in [[#c) Existence of Efficient Estimator |5.c)]] , we can find the score function of the estimation of $\sigma^2$ from the data samples $\mathbf x$.
+
+- First we will derive the joint-PDF of the random vector $\mathbf x$, and we know that for a zero-mean gaussian random vector the PDF is given by :
+$$\mathbf x \sim \mathcal N (\mathbf 0 , \sigma^2 \cdot I_N) \implies f(\mathbf x ; \sigma^2 ) = \frac{1}{(2\pi\sigma^2)^{\frac N2}} \cdot \exp\left( -\frac{1}{2}\mathbf x^T \mathbf x\right)$$
+- We take the $\log$ of the PDF and get :
+$$\log f(\mathbf{x};\sigma^2) = -\frac{N}{2} \log(2\pi) - \frac{N}{2} \log(\sigma^2) - \frac{1}{2\sigma^2} \mathbf{x}^T \mathbf{x}$$
+- We differentiate with respect to $\theta$ and get the score function : 
+$$\overset{\frac{\partial}{\partial\sigma^2}}{\longrightarrow}\frac{\partial \ln f(\mathbf{x};\sigma^2)}{\partial \sigma^2} = -\frac{N}{2\sigma^2} + \frac{1}{2(\sigma^2)^2} \mathbf{x}^T \mathbf{x}$$
+- We can take the common factor of $\frac{N}{2\sigma^2}$ and get :
+$$\frac{\partial \ln f(\mathbf{x};\sigma^2)}{\partial \sigma^2} = \frac{N}{2(\sigma^2)^2} \left( \frac{1}{N} \mathbf{x}^T \mathbf{x} - \sigma^2 \right)$$
+- We have shown in [[#a) + b) Find CRB and|2.a)]] that the Fisher-information of the estimation of the variance of a zero-mean gaussian random vector is :
+$$I(\sigma^2) = \frac{N}{2\sigma^4}$$
+- We then see that we can define $\hat\theta(\mathbf x) = \frac1N \mathbf x ^T \mathbf x$ to satisfy the condition of attainability and get :
+$$\frac{\partial \ln f(\mathbf{x};\sigma^2)}{\partial \sigma^2} = I(\theta) \left( \hat\sigma^2(\mathbf x) - \sigma^2 \right)$$
+
+
+> [!Success] Result
+> We have found the estimator that attains the CRB, and therefore, is an unbiased and efficient estimator :
+> $$\implies \hat\sigma^2_{eff}(\mathbf x) = \frac1N \mathbf x ^T \mathbf x$$
+
+### b) Find Bias and MSE of Estimator
+![[Pasted image 20260610215755.png]]
+
+#### Bias :
+Since the estimator we found is unbiased :  $$\mathbb{E} [\hat\sigma^2_{eff}] = \sigma^2$$
+We plug that in the Bias of the new proposed estimator : 
+
+> [!Success] Bias
+> $$Bias(\hat\sigma^2_a,\sigma^2) =\mathbb E [\hat\sigma^2_a -\sigma^2] = \sigma^2 (a-1)$$
+#### Variance :
+Since the estimator we found is efficient :
+$$Var(\hat\sigma^2_{eff}) = I(\sigma^2)^{-1} = \frac{2\sigma^4}{N}$$
+We plug that in the Variance of the new proposed estimator :
+
+> [!Success] Var
+> $$Var(\hat\sigma^2_{a}) = Var(a\cdot \hat\sigma^2_{eff}) = a^2 \cdot Var( \hat\sigma^2_{eff}) = a^2 \cdot \frac{2\sigma^4}{N}$$
+#### MSE :
+The relationship between the Bias, Variance and MSE is as follows :
+$$MSE(\hat\sigma^2_a) = Var(\hat\sigma^2_a) + Bias(\hat\sigma^2_a)^2$$
+We plug the terms we found back in and get the expression for the MSE :
+$$MSE(\hat\sigma^2_a) = 2a^2 \cdot \frac{\sigma^4}{N} + (\sigma^2(a-1))^2$$
+
+> [!Success] MSE
+> $$\implies MSE(\hat\sigma^2_a) = \sigma^4 \left( \frac{2a^2}{N} + (a-1)^2 \right)$$
+
+### c) Optimal Value of a
+![[Pasted image 20260610221815.png]]
+
+Since the cost function of the estimation is MSE, we will differentiate the MSE that we found with respect to the factor $a$  and compare to zero :
+$$\frac{\partial \text{MSE}}{\partial a} = \sigma^4 \left[ \frac{4a}{N} + 2(a - 1) \right] = 0$$
+$$\implies \frac{2a}{N} + a - 1 = 0 \implies a = \frac{N}{N+2} = 1 - \frac{2}{N}$$
+
+> [!Success] Optimal value
+> $$a_{opt} = \frac{N}{N+2}$$
+> 
+> $\implies$ We can see that $a_{opt}$ does not depend on $\sigma^2$!
+> For the optimal value we get :
+> $$\hat\sigma^2_{a_{opt}} = a_{opt} \cdot \hat\sigma^2_{eff} = \frac{\cancel{N}}{N+2} \cdot \frac1{\cancel{N}} \mathbf x^T \mathbf x = \frac1{N+2} \cdot \mathbf x^T \mathbf x $$
+> 
+>> [!NOTE] Notice
+> >We gave up the constraint of efficiency and got better performance for the estimator! 
+
+
+### d) + e) Simulating Estimator
+![[Pasted image 20260610223948.png]]
+
+![[Assignment3_6_d_e.png]]
+![[Pasted image 20260610224631.png]]
+
+> [!Note] conclusions
+> As we rightfully claimed in [[#c) Optimal Value of a |6.c)]] we intentionally render the optimal estimator inefficient (not asymptotically...) to get a higher convergence rate (as visible in the first MSE plot) and a lower variance than the efficient estimator (as visible in the second MSE plot). Lower variance is attainable since the CRB applies to **unbiased estimators only!**
+
+## Question 7
+

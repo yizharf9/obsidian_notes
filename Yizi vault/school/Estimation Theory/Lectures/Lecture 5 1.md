@@ -1,5 +1,5 @@
 
-## Cramer - () Bound
+## Cramer - Rao Bound
 
 We want to prove two properties of the theorem :
 1. Inequality :
