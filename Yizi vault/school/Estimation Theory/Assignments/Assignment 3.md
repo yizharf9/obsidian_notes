@@ -154,11 +154,13 @@ $$\mathcal{I}(\underline\theta) = \begin{bmatrix} \frac n{\sigma^2} \quad 0 \\ 0
 >We can see that the off-diagonal terms are 0, then there is no coupling between the 2 which makes sense since the first and second moments of a distribution are independent of each other.
 
 ### c) Variance Estimators bias :
+
 ![[Pasted image 20260602154241.png]]
 
 - We will calculate the bias of the estimator :
 $$\mathbb{E}[\hat \sigma^2] = \mathbb{E}\left[ \sum_{i=1}^N (x_i-\bar x)^2 \right] =  \sum_{i=1}^N \mathbb{E}\left[(x_i-\bar x)^2 \right] $$
 $$\implies \mathbb{E}\left[ (x_i - \bar x)^2\right] = \mathbb{E}\left[ x_i^2 \right] - 2 \cdot \mathbb{E}[x_i \cdot \bar x] + \mathbb{E}[\bar x^2] $$
+
 - We take advantage of the fact that : $\mathbb{E}[x^2] = Var(x) + \mathbb{E}[x]^2$ 
 $$  \forall k \ne i : \mathbb{E}[x_k \cdot x_i] = \begin{cases} \mu^2 \quad\quad\quad : i\ne k \\ \sigma^2 +\mu^2 \quad :i=k \end{cases} $$
 $$\mathbb{E}[x_i^2] = \sigma^2 + \mu^2$$
@@ -189,30 +191,34 @@ We will calculate the variance of the estimator and check if it achieves the CRB
 $$Var(\tilde\sigma^2) = \mathbb{E}[(\tilde \sigma^2)^2] - \mathbb{E}[\tilde \sigma^2]^2$$
 $$\mathbb{E}[(\tilde\sigma^2)^2] = \mathbb{E}\left[ \frac1{(N-1)^2}\sum_{i=1}^N \sum_{k=1}^N (x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right] = \frac1{(N-1)^2}\sum_{i=1}^N \sum_{k=1}^N \mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right]$$
 - We would like to evaluate the expected value $\mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right]$ inside the sum. For that we will use the fact that the R.V.s $\left\{x_i - \bar x\right\}_{i=1}^N$ are jointly Gaussian with zero mean. Therefore, we can denote $z_k := x_k - \bar x$  and expand the expected value term as follows :
-$$\mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right] = \mathbb{E}[z_i\cdot z_i\cdot z_k\cdot z_k] = $$$$ = \mathbb{E}[z_i\cdot z_i]\cdot\mathbb{E}[z_k\cdot z_k] + \mathbb{E}[z_i\cdot z_k]\cdot\mathbb{E}[z_k\cdot z_i] + \mathbb{E}[z_i\cdot z_k]\cdot\mathbb{E}[z_k\cdot z_i] = \mathbb{E}[z_i^2]^2 + 2\cdot\mathbb{E}[z_i\cdot z_k]^2$$$$ =  \dots $$
+$$\mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right] = \mathbb{E}[z_i\cdot z_i\cdot z_k\cdot z_k] = $$$$ = \mathbb{E}[z_i\cdot z_i]\cdot\mathbb{E}[z_k\cdot z_k] + \mathbb{E}[z_i\cdot z_k]\cdot\mathbb{E}[z_k\cdot z_i] + \mathbb{E}[z_i\cdot z_k]\cdot\mathbb{E}[z_k\cdot z_i] = \mathbb{E}[z_i^2]^2 + 2\cdot\mathbb{E}[z_i\cdot z_k]^2$$
+$$ \implies \mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right] = \mathbb{E}[z_i^2]^2 + 2\cdot\mathbb{E}[z_i\cdot z_k]^2$$
+- We have calculated the first term in subsection c) :
+$$\mathbb{E}[z_i^2] = \mathbb{E}[(x_i - \bar x)^2] = \sigma^2 (1- \frac1N)$$
+$$\implies \mathbb{E}[z_i^2]^2 = \sigma^4 (1- \frac1N)^2$$
 - We want to find $\mathbb{E}[z_i\cdot z_k])$ to evaluate the quantity above.
 $$\mathbb{E}[z_i \cdot z_k] = \underbrace{\mathbb{E}[x_i \cdot x_k]}_{\dots=\mu^2 + \delta(i-k) \cdot \sigma^2} - \mathbb{E}[x_i \cdot \bar x] - \mathbb{E}[x_k \cdot \bar x] + \mathbb{E}[\bar x^2] = $$$$ = \mu^2 + \delta(i-k)\cdot\sigma^2 - 2 \cdot (\frac1N\sigma^2 + \mu^2) + (\frac1N\sigma^2 + \mu^2) = \sigma^2 \cdot \delta(i-k)-\frac{\sigma^2}{N}$$
 - We plug it back in the previous term :
-$$= (\sigma^2 \cdot \delta(i-k)-\frac{\sigma^2}{N})^2 + (\sigma^2 \cdot 0-\frac{\sigma^2}{N})^2 + (\sigma^2 \cdot 0 -\frac{\sigma^2}{N})^2 =$$$$ = \sigma^4 \left[  (\delta(i-k)-\frac1N)^2 + (-\frac1N)^2 + (-\frac1N)^2  \right] = $$$$ =\sigma^4 \left[ \delta(i-k) -\frac2N\cdot \delta(i-k) + \frac1{N^2} + \frac2{N^2}  \right] = \sigma^4 \left[ \delta(i-k) -\frac2N \cdot \delta(i-k) + \frac3{N^2}  \right]$$
+$$\dots = \sigma^4 (1-\frac{1}{N})^2 + 2 \cdot (\sigma^2 \cdot \delta(i-k)-\frac{\sigma^2}{N})^2 =$$$$ = \sigma^4 \left[  (1-\frac1N)^2 + 2\cdot (\delta(i-k)-\frac1N)^2\right] = \sigma^4 \left[  1-\frac2N + \frac1{N^2} + 2\cdot (\delta(i-k)-\delta(i-k)\frac2N + \frac1{N^2})^2\right] = $$
+$$\implies \mathbb{E}[(x_i - \bar x)^2(x_k - \bar x)^2]= \sigma^4\left[1 + 2\delta(i-k) - (2\delta(i-k)+1)\cdot \frac2N + \frac3{N^2}\right]$$
 - We count the amount of time that $i=k$ and the rest of the times and substitute accordingly :
-$$\frac1{(N-1)^2}\sum_{i=1}^N \sum_{k=1}^N \mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right] = \frac1{(N-1)^2}\sum_{i=1}^N \sum_{k=1}^N \sigma^4 \left[ \delta(i-k) -\frac2N \cdot \delta(i-k) + \frac3{N^2}  \right] = $$
-$$=\frac{\sigma^4}{(N-1)^2} \cdot \left[N\cdot(1-\frac2N + \frac3{N^2}) + N(N-1) \cdot \frac3{N^2}\right] = \frac{\sigma^4}{(N-1)^2} \cdot \left[ N-2 + \frac3N \right] $$
+$$\frac1{(N-1)^2}\sum_{i=1}^N \sum_{k=1}^N \mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right] =$$$$ = \frac1{(N-1)^2}\sum_{i=1}^N \sum_{k=1}^N \sigma^4\left[1 + 2\delta(i-k) - (2\delta(i-k)+1)\cdot \frac2N + \frac3{N^2}\right] = $$
+$$=\frac{\sigma^4}{(N-1)^2} \cdot \left[ N \cdot \left(3-\frac6N + \frac3{N^2}\right) \right] = \frac{\sigma^4}{(N-1)^2} \cdot \left[ 3N \cdot \left(1-\frac2N + \frac1{N^2}\right) \right] =$$$$ = \frac{3N\sigma^4}{(N-1)^2}\left(1-\frac1{N}\right)^2 = \frac{3N\sigma^4}{\cancel{(N-1)^2}} \cdot \frac{\cancel{(N-1)^2}}{N^2} = \frac{3N\sigma^4}{N^2} = \frac{3\sigma^4}{N}$$
 
 
+> [!Success] Result
+> We have get the expression for the variance of the estimator :
+> $$Var(\tilde\sigma^2) = \mathbb{E}[(\tilde\sigma^2)^2] - \mathbb{E}[\tilde\sigma^2]^2 = \frac{3\sigma^4}{N} - \sigma^4\cdot (1-\frac1N)^2 = \sigma^4[1-] $$
 
 
+### e) 
 
+## Question 3
 
+### a) Bhattacharyya Bound
+![[Pasted image 20260610140457.png]]
 
+We separate to both cases :
 
-
-
-
-
-
-
-
-
-$$\mathbb{E}[\tilde\sigma^2]^2 = (\sigma^2 )^2 = \sigma^4$$
-$$\implies Var(\tilde\sigma^2) = \frac{\sigma^2}{N-1} + \frac{\sigma^2}{(N-1)^2} -\sigma^4$$
-
+1. $i=1$ : 
+$$\dots = \mathbb{E}\left[(\hat\theta - \theta)\frac{\partial\ln(f(\mathbf x ; \theta))}{\partial\theta}\right] = $$
