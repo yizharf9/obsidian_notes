@@ -427,7 +427,7 @@ $$\sum_{i=1}^N\text{sgn}(x_i -\theta) = I(\theta)(\hat\theta-\theta) = N (\hat\t
 Using the same theorem we used in [[#c) Existence of Efficient Estimator |5.c)]] , we can find the score function of the estimation of $\sigma^2$ from the data samples $\mathbf x$.
 
 - First we will derive the joint-PDF of the random vector $\mathbf x$, and we know that for a zero-mean gaussian random vector the PDF is given by :
-$$\mathbf x \sim \mathcal N (\mathbf 0 , \sigma^2 \cdot I_N) \implies f(\mathbf x ; \sigma^2 ) = \frac{1}{(2\pi\sigma^2)^{\frac N2}} \cdot \exp\left( -\frac{1}{2}\mathbf x^T \mathbf x\right)$$
+$$\mathbf x \sim \mathcal N (\mathbf 0 , \sigma^2 \cdot I_N) \implies f(\mathbf x ; \sigma^2 ) = \frac{1}{(2\pi\sigma^2)^{\frac N2}} \cdot \exp\left( -\frac{1}{2\sigma^2}\mathbf x^T \mathbf x\right)$$
 - We take the $\log$ of the PDF and get :
 $$\log f(\mathbf{x};\sigma^2) = -\frac{N}{2} \log(2\pi) - \frac{N}{2} \log(\sigma^2) - \frac{1}{2\sigma^2} \mathbf{x}^T \mathbf{x}$$
 - We differentiate with respect to $\theta$ and get the score function : 
@@ -497,4 +497,63 @@ $$\implies \frac{2a}{N} + a - 1 = 0 \implies a = \frac{N}{N+2} = 1 - \frac{2}{N}
 > As we rightfully claimed in [[#c) Optimal Value of a |6.c)]] we intentionally render the optimal estimator inefficient (not asymptotically...) to get a higher convergence rate (as visible in the first MSE plot) and a lower variance than the efficient estimator (as visible in the second MSE plot). Lower variance is attainable since the CRB applies to **unbiased estimators only!**
 
 ## Question 7
+![[Pasted image 20260610225139.png]]
+
+### a) Conditional FIM
+![[Pasted image 20260610225235.png]]
+
+- As we derived in [[#a) Find the Efficient estimator|6.a)]] we know that the conditional distribution $\mathbf x | \theta$ is given by :
+$$f(\mathbf x ; \theta) = (2\pi\theta)^{-\frac N2}\cdot \exp\left(\frac{1}{2\theta} \cdot \mathbf x ^T \mathbf x\right)$$
+- And the score function is given by :
+$$\frac{\partial \ln f(\mathbf{x};\theta)}{\partial \theta} =  \frac{1}{2\theta^2} \mathbf{x}^T \mathbf{x} -\frac{N}{2\theta}$$
+- We take the second order derivative to get :
+$$\frac{\partial^2 \ln f(\mathbf{x};\theta)}{\partial \theta^2} = \frac{N}{2\theta^2} - \frac{1}{\theta^3} \mathbf{x}^T \mathbf{x}$$
+- We substitute the terms for the Fisher-Information and get :
+$$I(\theta) = -\mathbb E_{\mathbf x | \theta} \left[\frac{\partial^2 \ln f(\mathbf{x};\theta)}{\partial \theta^2}\right] = \mathbb E \left[ \frac{1}{\theta^3} \mathbf{x}^T \mathbf{x}- \frac{N}{2\theta^2}\right] = \frac{1}{\theta^3} \mathbb E \left[ \mathbf{x}^T \mathbf{x}\right] - \frac{N}{2\theta^2} = \frac{N\theta}{\theta^3} - \frac{N}{2\theta^2} = \frac{N}{2\theta^2}$$
+- To get the conditional FIM we need to derive the following expression :
+$$J_D = \mathbb{E}_\theta[I(\theta)]$$
+- We substitute the Fisher-Information given the parameter $\theta$ back in and get :
+$$J_D = \mathbb{E}_\theta[I(\theta)] = \frac N2 \mathbb E [\theta^{-2}]$$
+- We now want to evaluate the expected value $\mathbb E [\theta^{-2}]$, for that we will use the definition supplied in the question as a given of the Beta distribution :
+$$\mathbb{E}_\theta[\theta^{-2}] = \int_0^1 \theta^{-2} \frac{\theta^{a-1}(1-\theta)^{b-1}}{\beta(a,b)} d\theta = \frac{1}{\beta(a,b)} \int_0^1 \theta^{(a-2)-1}(1-\theta)^{b-1} d\theta = \frac{\beta(a-2, b)}{\beta(a,b)}$$
+- Using the definition of $\beta$ :
+$$\frac{\beta(a-2, b)}{\beta(a,b)} = \frac{\Gamma(a-2)\Gamma(b)}{\Gamma(a+b-2)} \cdot \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} = \frac{\Gamma(a-2)}{\Gamma(a)} \cdot \frac{\Gamma(a+b)}{\Gamma(a+b-2)}$$
+- Using the property of the Gamma function $\Gamma(z) = (z-1)(z-2)\Gamma(z-2)$ (as an extension for the factorial function... ), we can expand :
+
+$$\Gamma(a) = (a-1)(a-2)\Gamma(a-2)$$
+- Same way for the denominator :
+$$\Gamma(a+b) = (a+b-1)(a+b-2)\Gamma(a+b-2)$$
+- Substituting these back gives:
+
+$$\implies \mathbb{E}_\theta[\theta^{-2}] = \frac{(a+b-1)(a+b-2)}{(a-1)(a-2)}$$
+
+> [!Success] Result
+> We get the final expression for the conditional FIM :
+> $$J_D = \frac{N(a+b-1)(a+b-2)}{2(a-1)(a-2)}$$
+
+### b) Prior FIM
+![[Pasted image 20260610233901.png]]
+
+We want to find the Fisher-Information of the Prior $\theta$ :
+$$J_P = -\mathbb E \left[ \frac{\partial^2 f_\theta(\theta)}{\partial\theta^2} \right]$$
+- First we find the log of the PDF :
+$$\log f_\theta(\theta) =\log\left[ \frac{\theta^{a-1}(1-\theta)^{b-1}}{\beta(a,b)}\right] = (a-1)\log(\theta) + (b-1)\log(1-\theta) - \log\beta(a,b)$$
+- We take the first and second order derivative with respect to $\theta$ :
+$$\implies \frac{\partial \ln f_\theta(\theta)}{\partial \theta} = \frac{a-1}{\theta} - \frac{b-1}{1-\theta}$$
+$$\implies \frac{\partial^2 \ln f_\theta(\theta)}{\partial \theta^2} = -\frac{a-1}{\theta^2} - \frac{b-1}{(1-\theta)^2}$$
+- The prior FIM is the negative expectation over $\theta$:
+$$\implies J_P = \mathbb{E}_\theta\left[ -\frac{\partial^2 \ln f_\theta(\theta)}{\partial \theta^2} \right] = (a-1)\mathbb{E}_\theta[\theta^{-2}] + (b-1)\mathbb{E}_\theta[(1-\theta)^{-2}]$$
+
+- We already found $\mathbb{E}_\theta[\theta^{-2}]$ in part a. We also notice that the PDF is symmetric with respect to the interval $[0,1]$ :
+$$f_{\theta|a,b}(1-\theta) = \frac{(1-\theta)^{a-1}(1-(1-\theta))^{b-1}}{\beta(a,b)} = \frac{\theta^{b-1}(1-\theta)^{a-1}}{\beta(a,b)} = f_{\theta|b,a}(\theta) $$
+- We can use this property to get :
+$$\mathbb{E}_{\theta|a,b}[(1-\theta)^{-2}] = \mathbb{E}_{\theta|b,a}[\theta^{-2}] = \frac{(a+b-1)(a+b-2)}{(b-1)(b-2)}$$
+- We plug it back in to the previous expression for the $J_p$ and get :
+$$J_P = (a-1)\frac{(a+b-1)(a+b-2)}{(a-1)(a-2)} + (b-1)\frac{(a+b-1)(a+b-2)}{(b-1)(b-2)}$$
+$$ = \frac{(a+b-1)(a+b-2)}{a-2} + \frac{(a+b-1)(a+b-2)}{b-2}$$
+$$= (a+b-1)(a+b-2) \left( \frac{1}{a-2} + \frac{1}{b-2} \right)$$
+
+> [!Success] Result
+> We get the final expression for the Prior FIM :
+> $$J_P = \frac{(a+b-1)(a+b-2)(a+b-4)}{(a-2)(b-2)}$$
 
