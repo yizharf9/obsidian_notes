@@ -199,26 +199,98 @@ $$\implies \mathbb{E}[z_i^2]^2 = \sigma^4 (1- \frac1N)^2$$
 - We want to find $\mathbb{E}[z_i\cdot z_k])$ to evaluate the quantity above.
 $$\mathbb{E}[z_i \cdot z_k] = \underbrace{\mathbb{E}[x_i \cdot x_k]}_{\dots=\mu^2 + \delta(i-k) \cdot \sigma^2} - \mathbb{E}[x_i \cdot \bar x] - \mathbb{E}[x_k \cdot \bar x] + \mathbb{E}[\bar x^2] = $$$$ = \mu^2 + \delta(i-k)\cdot\sigma^2 - 2 \cdot (\frac1N\sigma^2 + \mu^2) + (\frac1N\sigma^2 + \mu^2) = \sigma^2 \cdot \delta(i-k)-\frac{\sigma^2}{N}$$
 - We plug it back in the previous term :
-$$\dots = \sigma^4 (1-\frac{1}{N})^2 + 2 \cdot (\sigma^2 \cdot \delta(i-k)-\frac{\sigma^2}{N})^2 =$$$$ = \sigma^4 \left[  (1-\frac1N)^2 + 2\cdot (\delta(i-k)-\frac1N)^2\right] = \sigma^4 \left[  1-\frac2N + \frac1{N^2} + 2\cdot (\delta(i-k)-\delta(i-k)\frac2N + \frac1{N^2})^2\right] = $$
+$$\implies \mathbb{E}[z_i^2]^2 + 2\cdot\mathbb{E}[z_i\cdot z_k]^2 = \sigma^4 (1-\frac{1}{N})^2 + 2 \cdot (\sigma^2 \cdot \delta(i-k)-\frac{\sigma^2}{N})^2 =$$$$ = \sigma^4 \left[  (1-\frac1N)^2 + 2\cdot (\delta(i-k)-\frac1N)^2\right] = \sigma^4 \left[  1-\frac2N + \frac1{N^2} + 2\cdot (\delta(i-k)-\delta(i-k)\frac2N + \frac1{N^2})^2\right] = $$
 $$\implies \mathbb{E}[(x_i - \bar x)^2(x_k - \bar x)^2]= \sigma^4\left[1 + 2\delta(i-k) - (2\delta(i-k)+1)\cdot \frac2N + \frac3{N^2}\right]$$
 - We count the amount of time that $i=k$ and the rest of the times and substitute accordingly :
 $$\frac1{(N-1)^2}\sum_{i=1}^N \sum_{k=1}^N \mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right] =$$$$ = \frac1{(N-1)^2}\sum_{i=1}^N \sum_{k=1}^N \sigma^4\left[1 + 2\delta(i-k) - (2\delta(i-k)+1)\cdot \frac2N + \frac3{N^2}\right] = $$
-$$=\frac{\sigma^4}{(N-1)^2} \cdot \left[ N \cdot \left(3-\frac6N + \frac3{N^2}\right) \right] = \frac{\sigma^4}{(N-1)^2} \cdot \left[ 3N \cdot \left(1-\frac2N + \frac1{N^2}\right) \right] =$$$$ = \frac{3N\sigma^4}{(N-1)^2}\left(1-\frac1{N}\right)^2 = \frac{3N\sigma^4}{\cancel{(N-1)^2}} \cdot \frac{\cancel{(N-1)^2}}{N^2} = \frac{3N\sigma^4}{N^2} = \frac{3\sigma^4}{N}$$
-
-
+$$=\frac{\sigma^4}{(N-1)^2} \cdot \left[ N \cdot \left(3-\frac6N + \frac3{N^2}\right) + N(N-1)\left( 1 -\frac2N + \frac3{N^2} \right) \right] = $$$$ \frac{\sigma^4}{(N-1)^2} \cdot \left[ 3N - 6 + \frac3N +N(N-1) - 2(N-1) + \frac{3(N-1)}{N} \right] =$$$$\implies \mathbb{E}[(\tilde \sigma^2)^2] = \frac{\sigma^4}{(N-1)^2}(N^2 - 1) = \sigma^4\frac{N + 1}{N-1}$$
 > [!Success] Result
-> We have get the expression for the variance of the estimator :
-> $$Var(\tilde\sigma^2) = \mathbb{E}[(\tilde\sigma^2)^2] - \mathbb{E}[\tilde\sigma^2]^2 = \frac{3\sigma^4}{N} - \sigma^4\cdot (1-\frac1N)^2 = \sigma^4[1-] $$
+> Since the estimator we proposed is unbiased we know that : $\mathbb{E}[\tilde\sigma^2] = \sigma^2$
+> And therefore, we get the expression for the variance of the estimator :
+> $$Var(\tilde\sigma^2) = \mathbb{E}[(\tilde\sigma^2)^2] - \mathbb{E}[\tilde\sigma^2]^2 = \frac{\sigma^4}{(N-1)^2}(N^2 - 1) = \sigma^4\frac{N + 1}{N-1} - (\sigma^2)^2$$
+> $$\implies Var(\tilde\sigma^2) = \frac{2\sigma^4}{N-1} \ne \frac{2\sigma^4}{N} = CRLB $$
+> >[!fail] Not Efficient 
+> >We can see that for any finite number of samples the CRLB is not attained!
 
+### e) $N\to \infty$ :
 
-### e) 
+We repeat d) for the limit as N goes to infinity.
 
+- Consistency :
+
+$$\lim_{N\to \infty}Var(\tilde\sigma^2) = \lim_{N\to \infty}\frac{2\sigma^4}{N-1} = 0$$
+- We can see that the estimator is consistent
+
+- Efficiency :
+$$\lim_{N\to \infty}\frac{Var(\tilde\sigma^2)}{CRLB} = \lim_{N\to \infty}\frac{\frac{2\sigma^4}{N-1}}{\frac{2\sigma^4}{N}} = \lim_{N\to \infty}\frac{N}{N-1} = 1$$
+- Therefore, the proposed estimator is **Asymptotically Efficient !** 
 ## Question 3
 
 ### a) Bhattacharyya Bound
 ![[Pasted image 20260610140457.png]]
 
-We separate to both cases :
+We expand the terms by definition :
+$$\mathbb{E}\left[ (\hat\theta - \theta)\frac{1}{f(\mathbf x ; \theta)} \cdot \frac{\partial^if(\mathbf x ; \theta)}{\partial\theta^i} \right] = \int_{\mathbb{R}^N} \left[(\hat\theta - \theta)\frac{1}{\cancel{f(\mathbf x ; \theta)}} \cdot \frac{\partial^if(\mathbf x ; \theta)}{\partial\theta^i}\right] \cancel{f(\mathbf x ; \theta)} d\mathbf x = $$
+$$ = \int_{\mathbb{R}^N} (\hat\theta - \theta)\cdot \frac{\partial^if(\mathbf x ; \theta)}{\partial\theta^i}  d\mathbf x = \int_{\mathbb{R}^N} \hat\theta\cdot \frac{\partial^if(\mathbf x ; \theta)}{\partial\theta^i}  d\mathbf x - \int_{\mathbb{R}^N} \theta \cdot \frac{\partial^if(\mathbf x ; \theta)}{\partial\theta^i}  d\mathbf x = $$
+- Under regularity condition we can switch between integration and differentiation and since $\theta$ isn't a function of $\mathbf x$ and $\hat\theta$ is, we can take it out the integral :
+$$= \frac{\partial^i}{\partial\theta^i}\int_{\mathbb{R}^N} \hat\theta\cdot   f(\mathbf x ; \theta) d\mathbf x - \theta\cdot\frac{\partial^i}{\partial\theta^i} \int_{\mathbb{R}^N} f(\mathbf x ; \theta) d\mathbf x  = $$
+- We notice the following :
+	1. Since the estimator is given to be unbiased we get :$$\int_{\mathbb{R}^N} \hat\theta\cdot   f(\mathbf x ; \theta) d\mathbf x = \mathbb{E}[\hat\theta] = \theta$$
+	2. Since the PDF $f(\mathbf x ; \theta)$ is a valid PDF, the integral over all of its domain is $1$ : $$\int_{\mathbb{R}^N} f(\mathbf x ; \theta) d\mathbf x = 1$$
+- So basically the expression we are evaluating is :
+$$ \dots= \frac{\partial^i}{\partial \theta^i}(\theta) - \underbrace{\frac{\partial^i}{\partial \theta^i}(1)}_{=0 \ : \ \forall i \ge 1} = \frac{\partial^i}{\partial \theta^i}(\theta) = \begin{cases} 1 \quad\quad : i = 1 \\ 0 \quad\quad : i \ge 2 \end{cases}$$
 
-1. $i=1$ : 
-$$\dots = \mathbb{E}\left[(\hat\theta - \theta)\frac{\partial\ln(f(\mathbf x ; \theta))}{\partial\theta}\right] = $$
+
+> [!Success] Result
+> We have proven the identity :
+> $$\mathbb{E}\left[ (\hat\theta - \theta)\frac{1}{f(\mathbf x ; \theta)} \cdot \frac{\partial^if(\mathbf x ; \theta)}{\partial\theta^i} \right] = \begin{cases} 1 \quad\quad : i = 1 \\ 0 \quad\quad : i \ge 2 \end{cases}$$
+
+### b) Finding Lower bound
+
+We will use the Cauchy-Schwarz inequality to find the lower bound of $\mathbb{E}\left[(\hat\theta-\theta)^2\right]$.
+
+- We are asked to define the bound using the matrix $Q \in \mathbb{R}^n$ while :
+$$Q_{ij} = \mathbb{E}\left[ \frac{1}{f^2(\mathbf x ; \theta)}\cdot \frac{\partial^if(\mathbf x ; \theta)}{\partial\theta^i} \cdot \frac{\partial^jf(\mathbf x ; \theta)}{\partial\theta^j} \right] \ : \ i,j \in \{1,2,...n\}$$
+- We will define $\mathbf z = [z_1,z_2,...,z_n]^T$ to be a random vector of the form : 
+$$z_i = \frac{1}{f(\mathbf{x};\theta)} \frac{\partial^i f(\mathbf{x};\theta)}{\partial \theta^i}$$
+- From the definition of the matrix $Q$ we notice that :
+$$\mathbf{Q} = \mathbb{E}[\mathbf{z}\mathbf{z}^T]$$
+- We will calculate the following cross-covariance:
+$$\mathbf{v} = \mathbb{E}[(\hat{\theta} - \theta)\mathbf{z}]$$
+- If we plug in the full term we get the result from a) :
+$$\mathbf v_i = \begin{cases} 1 \quad\quad : i = 1 \\ 0 \quad\quad : i \ge 2 \end{cases} \implies \mathbf v = [1,0,...,0]^T$$
+- We can take the covariance matrix of the random vector $\begin{bmatrix}\hat\theta-\theta \\ \mathbf z \end{bmatrix}$ and notice that, by definition, it must be a semi-positive matrix :
+$$\mathbb{E} \left[ \begin{bmatrix} \hat{\theta} - \theta \\ \mathbf{z} \end{bmatrix} \begin{bmatrix} \hat{\theta} - \theta & \mathbf{z}^T \end{bmatrix} \right] = \begin{bmatrix} \mathbb{E}[(\hat{\theta}-\theta)^2] & \mathbf{v}^T \\ \mathbf{v} & \mathbf{Q} \end{bmatrix} \succeq 0$$
+- We can apply the **Schur complement** of the covariance matrix and get the following inequality :
+$$\mathbb{E}[(\hat{\theta}-\theta)^2] - \mathbf{v}^T \mathbf{Q}^{-1} \mathbf{v} \ge 0 \implies \mathbb{E}[(\hat{\theta}-\theta)^2] \ge \mathbf{v}^T \mathbf{Q}^{-1} \mathbf{v}$$
+- Since the vector $v = [1,0,...,0]^T$ when multiplying the terms we actually extract the top left entry of the matrix $Q^{-1}$  
+
+> [!Success] Result
+> We get the final inequality of the target expected value that defines the Bhattacharyya bound: $$\mathbb{E}[(\hat{\theta}-\theta)^2] \ge [\mathbf{Q}^{-1}]_{11}$$
+
+### c) Comparison to the CRLB
+
+We will prove by induction that : $\text{Bhattacharyya Bound} \ge \text{Cramer-Rao Bound}$
+
+1. Base : $n=1$
+	For the base case, $Q$ and $I(\theta)$ are scalar matrices : $$Q_{11} = \mathbb{E}\left[ \left( \frac{1}{f(\mathbf{x};\theta)} \frac{\partial f(\mathbf{x};\theta)}{\partial \theta} \right)^2 \right] = \mathbb{E}\left[ \left( \frac{\partial \ln f(\mathbf{x};\theta)}{\partial \theta} \right)^2 \right] = I(\theta)$$
+	We can see that the 2 matrices are equal by definition and therefore, so are their inverses :
+	$$\mathbb{E}[(\hat{\theta}-\theta)^2] \ge Q_{11}^{-1} = \frac{1}{I(\theta)} = \text{CRB}$$
+	$\implies$ proven for the case of $n=1$!
+
+2. Step : $n > 1$ 
+	We can decompose the matrix $Q$ of dimension $n$ as follows :
+	$$\mathbf{Q}_n = \begin{bmatrix} Q_{11} & \mathbf{R}^T \\ \mathbf{R} & \mathbf{S} \end{bmatrix}$$
+	Where $Q_{11}$ was previously evaluated, $R,R^T \in \mathbb{R}^n$  is some vector (covariance is symmetric...) and $S\in \mathbb{R}^{(N-1)\times (N-1)}$ is some symmetric matrix.
+	
+	From a formula we derived in Assignment 1 for the inverse of a matrix of such structure we get: $$[\mathbf{Q}_n^{-1}]_{11} = (Q_{11} - \mathbf{R}^T \mathbf{S}^{-1} \mathbf{R})^{-1}$$
+	We have already established that $S$ is positive-definite so we can safely claim that :
+	$$\mathbf{R}^T \mathbf{S}^{-1} \mathbf{R} \ge 0 \ : \ \forall\mathbf R \in \mathbb R^N$$
+	Therefore the following inequality must hold for every number, specifically for $Q_{11}$ :
+	$$Q_{11} - \mathbf{R}^T \mathbf{S}^{-1} \mathbf{R} \ge Q_{11} $$
+	We take the reciprocal of both sides, and compare with what we got before : $$ \implies \mathbb{E}[(\hat{\theta}-\theta)^2] \ge [\mathbf{Q}_n^{-1}]_{11} = (Q_{11} - \mathbf{R}^T \mathbf{S}^{-1} \mathbf{R})^{-1} \le Q_{11}^{-1} = I(\theta)^{-1}$$
+
+> [!Success] Result
+> We have shown that for any $n\in\mathbb{N}$ the inequality between the bounds holds :
+> $$ \implies [\mathbf{Q}_n^{-1}]_{11} \ge Q_{11}^{-1}$$
+> $$ \implies \text{Bhattacharyya Bound} \ge \text{Cramer-Rao Bound} $$
