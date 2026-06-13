@@ -118,7 +118,7 @@ digraph G {
 
 ## Question 4 - Byzantine Agreement In The k-Connected Graph:
 **Given:**
-- A network with $n$ processes, each with a unique `ID`.
+- A network with $n$ processes.
 - We have at most $f$ failing processes where $f$ satisfies : $f \lt \frac n3$ 
 - The connectivity of the network is given by : $C(G) \ge 2f + 1$
 - We assume the correctness of the solution to the Byzantine Agreement problem in a complete network (proven in class...)
@@ -184,4 +184,22 @@ $\implies$ Therefore, using the **Sending** and **Receiving** functions guarante
 - **Computational Complexity:**    
 	Finding the $2f + 1$ disjoint paths requires solving a maximum flow problem between every pair of communicating nodes, which operates in polynomial time. If we want to think of the very worst case for this problem we can assume that $f = \lfloor\frac n3 - 1 \rfloor = O(n)$ meaning that the faulty processes are at there maximum and we can assume that the graph is near complete so $|E| = {|V|\choose 2} = O(n^2)$. For this worst case we can assume that a max-flow solution like the **Ford-Fulkerson Algorithm** will take $O(f \cdot |E|) = O(n^3)$ time complexity to calculate the paths between each pair of processes. Since There are $O(n^2)$ edges in the network, the total worst case runtime is  $O(n^2)\cdot O(n^3) = O(n^5)$. More assumptions on the networks structure might give us a tighter bound...
  
-### Part b) - 
+### Part b) - Encrypted Byzantine Algorithm
+**Given:**
+- A network with $n$ processes
+- We have at most $f$ failing processes where $f$ satisfies : $f \lt \frac n4$
+- We are given Some algorithm that terminates in $O(D)$ rounds where $D$ is the diameter of the network. The algorithm requires $n-f$ non-faulty processes for later use.
+### Solution :
+
+Since the faulty processes cannot access the content of the messages that are being forwarded and alter them, they don't have the capability of a **Byzantine failure** but only an **Omission failure**. 
+
+This means that every process that receives a message has a guarantee that the message is correct.
+This is because only one of the following can happen :
+1. The path that the message took to get to the receiving process did not contain any faulty processes $\implies$ the message is correct!
+2. The path that the message took to get to the receiving process contain faulty processes but they all forwarded the correct message. Otherwise they could have only chose to not send the message at all and the receiving process would not have seen it $\implies$ the message is correct!
+
+This means that we only need **one non-faulty path** between every pair of processes to guarantee a connection between them.
+
+Since the algorithm requires a sub-network of the original one, containing only $n-f$ non-faulty processes for later use, each process can determine that the connectivity condition is satisfied after receiving one valid path from at least $n-f$ different processes 
+
+$\implies$ $n-f$ paths!

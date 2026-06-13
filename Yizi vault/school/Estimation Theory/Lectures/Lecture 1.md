@@ -83,7 +83,7 @@ x = b \{0 < y < 0.5\}
 There is a visual trade-off between Un-Biased and distance from **true value**.
 
 
-![[Pasted image 20260509154435.png]]
+![[school/Estimation Theory/Assignments/images/Pasted image 20260509154435.png]]
 
 - $f_{\hat{\theta_4}}$ - It is  an Un-Biased estimator, yet it has a larger probability of error.
 $\implies$We get a PDF with much larger variance.

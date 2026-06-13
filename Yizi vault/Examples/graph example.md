@@ -79,6 +79,36 @@ block-beta
     n3 <--> n1
 
 ```
+```mermaid
+flowchart TD
+    classDef default fill:#1e1e1e,stroke:#555,stroke-width:2px,color:#ddd;
+    classDef highlight fill:#1a4d2e,stroke:#4caf50,stroke-width:2px,color:#fff;
+
+    S0["<b>S0: Fetch</b><br/>AdrSrc = 0<br/>IRWrite<br/>ALUSrcA = 00<br/>ALUSrcB = 10<br/>ALUOp = 00<br/>ResultSrc = 10<br/>PCUpdate"]
+    S1["<b>S1: Decode</b><br/>ALUSrcA = 01<br/>ALUSrcB = 01<br/>ALUOp = 00"]
+    
+    %% The newly added LUI state
+    S11["<b>S11: LUI Writeback</b><br/>ResultSrc = 11<br/>RegWrite = 1"]:::highlight
+
+    %% The path for addi discussed in 1.a
+    S8["<b>S8: ExecuteI</b><br/>ALUSrcA = 10<br/>ALUSrcB = 01<br/>ALUOp = 10"]
+    S7["<b>S7: ALUWB</b><br/>ResultSrc = 00<br/>RegWrite = 1"]
+
+    %% Transitions
+    S0 --> S1
+    
+    %% LUI Branch
+    S1 -- "op = 0110111 (lui)" --> S11
+    S11 --> S0
+    
+    %% Addi Branch
+    S1 -- "op = 0010011 (addi)" --> S8
+    S8 --> S7
+    S7 --> S0
+    
+    %% Placeholder for the rest of the FSM
+    S1 -. "Other opcodes" .-> OtherStates["..."]
+```
 
 #### code block in c
 

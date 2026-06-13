@@ -123,7 +123,7 @@ It is visible from our plots that this projection holds since the bias always ex
 ![[Pasted image 20260531110249.png]]
 
 We are given the statistical model of the data samples :
-$$\underline x := \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} : \ \forall i \ne j \in \{1,...,n\} x_i \perp \! \perp x_j $$$$\implies \underline x \sim \mathcal{N}(\mathbb{1} \cdot\mu \ , \ \sigma^2 \cdot \mathbb{I}_n)$$
+$$\underline x := \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} : \ \forall i \ne j \in \{1,...,n\}  : x_i \perp \! \perp x_j $$$$\implies \underline x \sim \mathcal{N}(\mathbb{1} \cdot\mu \ , \ \sigma^2 \cdot \mathbb{I}_n)$$
 ### a) + b) Find CRB and 
 
 ![[Pasted image 20260602194129.png]]
@@ -131,14 +131,14 @@ $$\underline x := \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} : \ \forall
 We want to find the CRLB for the case of a GWN vector.
 
 - We will find it based on the definition :
-$$\underline \theta := [\mu,\sigma]^T \implies\left[ \underline {\underline{\mathcal{I}}}(\underline \theta) \right]_{i,j}= \mathbb{E}\left[ \frac{\partial\log f_{\underline x|\underline \theta}(\underline x)}{\partial\theta_i} \cdot \frac{\partial\log f_{\underline x|\underline \theta}(\underline x)}{\partial\theta_j} \right]$$
+$$\underline \theta := [\mu,\sigma^2]^T \implies\left[ \underline {\underline{\mathcal{I}}}(\underline \theta) \right]_{i,j}= \mathbb{E}\left[ \frac{\partial\log f_{\underline x|\underline \theta}(\underline x)}{\partial\theta_i} \cdot \frac{\partial\log f_{\underline x|\underline \theta}(\underline x)}{\partial\theta_j} \right]$$
 $$\log f_{\underline x | \underline \theta}(\underline x) = -\frac n2 (\log(2\pi)+\log(\sigma^2)) - \sum_{i=1}^{n}\frac{(x_i-\mu)^2}{2\sigma^2}$$
 $$\overset{\frac{d}{d\mu}}{\longrightarrow} \quad \sum_{i=1}^{n}\frac{(x_i-\mu)}{\sigma^2} $$
 $$\overset{\frac{d}{d\sigma^2}}{\longrightarrow} \quad -\frac n{2\sigma^2} + \frac 1{2\sigma^4}\sum_{i=1}^n {(x_i-\mu)^2}$$
 - Calculating the off-diagonal terms :
 $$[\mathcal{I}(\underline \theta)]_{1,2} = [\mathcal{I}(\underline \theta)]_{2,1} = \mathbb{E}\left[\left[ -\frac n{2\sigma^2} + \frac 1{2\sigma^4}\sum_{i=1}^n{(x_i-\mu)^2}\right] \cdot \sum_{i=1}^n(x_i -\mu) \right] = $$$$ = \frac1{2\sigma^2}\mathbb{E}\left[n\sum_{i=1}^n\underbrace{\cancel{(x_i -\mu)}}_{x_i \sim \mathcal{N}(\mu,\sigma^2)} + \sum_{i=1}^n \frac{(x_i -\mu)^3 }{\sigma^2} \right] = \frac1{2\sigma^4}\sum_{i=1}^n {\mathbb{E}\left[(x_i -\mu)^3\right]} =  $$
 - To evaluate the expected value in question we will use the MGF of a joint-gaussian random vector :
-$$\underline z := (\underline x - \mathbb{1}\cdot \mu) \sim \mathcal{N}(\underline 0 \ , \ \sigma^2 \cdot \mathbb{I}_n) \implies \mathbb{E}[z_i^n] = \begin{cases} 0 \quad\quad\quad\quad\quad : even \\ \sigma^{n}\cdot (n-1)!! : odd \end{cases} $$
+$$\underline z := (\underline x - \mathbb{1}\cdot \mu) \sim \mathcal{N}(\underline 0 \ , \ \sigma^2 \cdot \mathbb{I}_n) \implies \mathbb{E}[z_i^n] = \begin{cases} 0 \quad\quad\quad\quad\quad : odd \\ \sigma^{n}\cdot (n-1)!! : even \end{cases} $$
 $$\implies \mathbb{E}[(x_i - \mu)^3] = 0 = [\mathcal{I}(\underline \theta)]_{1,2} = [\mathcal{I}(\underline \theta)]_{2,1} $$
 
 - Calculating the diagonal terms :
@@ -157,7 +157,7 @@ $$\mathcal{I}(\underline\theta) = \begin{bmatrix} \frac n{\sigma^2} \quad 0 \\ 0
 ![[Pasted image 20260602154241.png]]
 
 - We will calculate the bias of the estimator :
-$$\mathbb{E}[\hat \sigma^2] = \mathbb{E}\left[ \sum_{i=1}^N (x_i-\bar x)^2 \right] =  \sum_{i=1}^N \mathbb{E}\left[(x_i-\bar x)^2 \right] $$
+$$\mathbb{E}[\hat \sigma^2] = \mathbb{E}\left[ \frac1N\sum_{i=1}^N (x_i-\bar x)^2 \right] =  \sum_{i=1}^N \mathbb{E}\left[(x_i-\bar x)^2 \right] $$
 $$\implies \mathbb{E}\left[ (x_i - \bar x)^2\right] = \mathbb{E}\left[ x_i^2 \right] - 2 \cdot \mathbb{E}[x_i \cdot \bar x] + \mathbb{E}[\bar x^2] $$
 - We take advantage of the fact that : $\mathbb{E}[x^2] = Var(x) + \mathbb{E}[x]^2$ 
 $$  \forall k \ne i : \mathbb{E}[x_k \cdot x_i] = \begin{cases} \mu^2 \quad\quad\quad : i\ne k \\ \sigma^2 +\mu^2 \quad :i=k \end{cases} $$
@@ -169,7 +169,7 @@ $$\implies \mathbb{E}[\hat\sigma^2] = \frac1N \sum_{i=1}^N\sigma^2 (1- \frac1N) 
 
 > [!success] Result
 > We see that the bias of the estimator is 0 only asymptotically, meaning that it is not unbiased:
->$$Bias(\hat\sigma^2,\sigma^2) = \mathbb{E}[\hat\sigma^2 - \sigma^2] = \sigma^2(1-\frac1N) - \sigma^2 = \frac{\sigma^2}{N} \overset{N \to \infty}{\longrightarrow} 0$$ 
+>$$Bias(\hat\sigma^2,\sigma^2) = \mathbb{E}[\hat\sigma^2 - \sigma^2] = \sigma^2(1-\frac1N) - \sigma^2 = -\frac{\sigma^2}{N} \overset{N \to \infty}{\longrightarrow} 0$$ 
 
 We want to find the correction term make the estimator unbiased. We notice that we can multiply the original estimator by a function of the number of samples and remove the bias :
 
@@ -189,7 +189,7 @@ We will calculate the variance of the estimator and check if it achieves the CRB
 $$Var(\tilde\sigma^2) = \mathbb{E}[(\tilde \sigma^2)^2] - \mathbb{E}[\tilde \sigma^2]^2$$
 $$\mathbb{E}[(\tilde\sigma^2)^2] = \mathbb{E}\left[ \frac1{(N-1)^2}\sum_{i=1}^N \sum_{k=1}^N (x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right] = \frac1{(N-1)^2}\sum_{i=1}^N \sum_{k=1}^N \mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right]$$
 - We would like to evaluate the expected value $\mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right]$ inside the sum. For that we will use the fact that the R.V.s $\left\{x_i - \bar x\right\}_{i=1}^N$ are jointly Gaussian with zero mean. Therefore, we can denote $z_k := x_k - \bar x$  and expand the expected value term as follows :
-$$\mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right] = \mathbb{E}[z_i\cdot z_i\cdot z_k\cdot z_k] = $$$$ = \mathbb{E}[z_i\cdot z_i]\cdot\mathbb{E}[z_k\cdot z_k] + \mathbb{E}[z_i\cdot z_k]\cdot\mathbb{E}[z_k\cdot z_i] + \mathbb{E}[z_i\cdot z_k]\cdot\mathbb{E}[z_k\cdot z_i] = \mathbb{E}[z_i^2]^2 + 2\cdot\mathbb{E}[z_i\cdot z_k]^2$$$$ =  \dots $$
+$$\mathbb{E} \left[(x_i - \bar x)^2 \cdot (x_k - \bar x)^2 \right] = \mathbb{E}[z_i\cdot z_i\cdot z_k\cdot z_k] = $$$$ = \mathbb{E}[z_i\cdot z_i]\cdot\mathbb{E}[z_k\cdot z_k] + \mathbb{E}[z_i\cdot z_k]\cdot\mathbb{E}[z_k\cdot z_i] + \mathbb{E}[z_i\cdot z_k]\cdot\mathbb{E}[z_k\cdot z_i] = \mathbb{E}[z_i^2]^2 + 2\cdot\mathbb{E}[z_i\cdot z_k]^2=\dots$$
 - We want to find $\mathbb{E}[z_i\cdot z_k])$ to evaluate the quantity above.
 $$\mathbb{E}[z_i \cdot z_k] = \underbrace{\mathbb{E}[x_i \cdot x_k]}_{\dots=\mu^2 + \delta(i-k) \cdot \sigma^2} - \mathbb{E}[x_i \cdot \bar x] - \mathbb{E}[x_k \cdot \bar x] + \mathbb{E}[\bar x^2] = $$$$ = \mu^2 + \delta(i-k)\cdot\sigma^2 - 2 \cdot (\frac1N\sigma^2 + \mu^2) + (\frac1N\sigma^2 + \mu^2) = \sigma^2 \cdot \delta(i-k)-\frac{\sigma^2}{N}$$
 - We plug it back in the previous term :

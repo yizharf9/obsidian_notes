@@ -64,7 +64,7 @@ $G$ has negative cycles $\iff$ $\exists i \in 1\dots n \ : \ d_{i,i}^{(n)} \lt 0
 
 ### Exercise 3 : from test 2019 B
 
-![[Pasted image 20260517103729.png]]
+![[school/Estimation Theory/Assignments/images/Pasted image 20260517103729.png]]
 
 **Definition :**
 Given an undirected Graph $G = (V,E)$, a node set $D \subseteq V$ is called a **control group** if :

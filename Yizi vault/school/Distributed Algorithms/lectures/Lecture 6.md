@@ -2,7 +2,7 @@
 cover: "[[Lecture 6 cover.png]]"
 tags:
   - lecture
-Last Lecture: "[[Lecture 5]]"
+Last Lecture: "[[Lecture 5 1]]"
 ---
 ## Agreement Problem with Byzantine Falls:
 We saw the `EIG Tree` algorithm for solving the problem but it uses a lot of messages and information.
@@ -14,7 +14,7 @@ For solving the problem in a more efficient way, we can solve the problem as suc
 We will show that using a smart translation we can transform our problem to one where the inputs are $1$ and $0$, and then we will show how to efficiently solve the problem with binary inputs.
 
 >[!info] Turpin-Coan
->You can see more about that in [[Lecture 5#BBA - Binary Byzantine Agreement]]
+>You can see more about that in [[Lecture 5 1#BBA - Binary Byzantine Agreement]]
 
 >[!question]
 >How do we deal with the problem while there are binary inputs in a more efficient way?

@@ -56,7 +56,7 @@ The algorithms that we will build must be of min. time complexity meaning...
 
 	Exponential Information backing 
 
-![[Pasted image 20260423103144.png]]
+![[school/Distributed Algorithms/Assignments/images/Pasted image 20260423103144.png]]
 
 
 ```mermaid
@@ -103,7 +103,7 @@ block-beta
 	1. $\lambda$ - Denotes ID , a child node's ID has the parent node's ID as a prefix follows by another number not previously used.
 	2. Value - starts with a default value of some sort based on a known protocol.
 	
-![[Pasted image 20260423103631.png]]
+![[school/Distributed Algorithms/Assignments/images/Pasted image 20260423103631.png]]
 
 - within every stage, a node computer shares correspondence with other computers.
 	1. for example if we look at node 3 while node 2 is a liar, we can see that firstly, 3 shares that 
@@ -121,7 +121,7 @@ block-beta
 
 
 
-![[Pasted image 20260423104716.png]]
+![[school/Distributed Algorithms/Assignments/images/Pasted image 20260423104716.png]]
 
 ```mermaid
 graph TD

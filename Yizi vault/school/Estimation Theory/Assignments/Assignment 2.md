@@ -1,7 +1,7 @@
 
 ## Question 1 :
 
-![[Pasted image 20260507184131.png]]
+![[school/Estimation Theory/Assignments/images/Pasted image 20260507184131.png]]
 
 First we examine the statistical model of the observation model : ^81944c
 
@@ -390,7 +390,7 @@ We will re-examine the estimators :
 
 ## Question 2
 
-![[Pasted image 20260512203214.png]]
+![[school/Estimation Theory/Assignments/images/Pasted image 20260512203214.png]]
 
 ### a) Find MMSE Estimator
 
@@ -570,8 +570,8 @@ x = 0 | blue | dashed
 ## Question 3
 
 
-![[Pasted image 20260513203611.png]]
-![[Pasted image 20260513203630.png]]
+![[school/Estimation Theory/Assignments/images/Pasted image 20260513203611.png]]
+![[school/Estimation Theory/Assignments/images/Pasted image 20260513203630.png]]
 
 - Distribution of $\theta$ :
 $$
@@ -815,7 +815,7 @@ From derivations and proofs performed in class, we know that the optimal estimat
 
 ## Question 4
 
-![[Pasted image 20260517161523.png]]
+![[school/Estimation Theory/Assignments/images/Pasted image 20260517161523.png]]
 
 - Statistical model :
 $$
@@ -1013,7 +1013,7 @@ $$
 
 ## Question 5
 
-![[Pasted image 20260520164810.png]]
+![[school/Estimation Theory/Assignments/images/Pasted image 20260520164810.png]]
 
 We want to prove that :
 $$
@@ -1064,7 +1064,7 @@ $$
 
 ## Question 6
 
-![[Pasted image 20260521150527.png]]
+![[school/Estimation Theory/Assignments/images/Pasted image 20260521150527.png]]
 
 ### Find MMSE estimator
 
@@ -1197,8 +1197,8 @@ $$
 
 ## Question 7
 
-![[Pasted image 20260521195742.png]]
-![[Pasted image 20260521195754.png]]
+![[school/Estimation Theory/Assignments/images/Pasted image 20260521195742.png]]
+![[school/Estimation Theory/Assignments/images/Pasted image 20260521195754.png]]
 
 ### a) Find optimal estimator
 
@@ -1389,7 +1389,7 @@ For a gaussian posterior, this gives us the advantage to use a theorem we proved
 
 ## Question 9
 
-![[Pasted image 20260521220634.png]]
+![[school/Estimation Theory/Assignments/images/Pasted image 20260521220634.png]]
 
 ### a) Find MAP Estimator 
 
