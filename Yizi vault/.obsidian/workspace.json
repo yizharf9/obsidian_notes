@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "feac34d263f6f68b",
+        "id": "88b068c74890e92a",
         "type": "tabs",
         "children": [
           {
-            "id": "f3b7cca83825ec74",
+            "id": "64f9e9949ccf3f9b",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -22,15 +22,17 @@
             }
           },
           {
-            "id": "db3a40bb55f97494",
+            "id": "bac1b3452a88c770",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "school/CPU arch/Assignment3.pdf"
+                "file": "school/CPU arch/Assignment 2.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "Assignment3"
+              "icon": "lucide-file",
+              "title": "Assignment 2"
             }
           }
         ]
@@ -65,7 +67,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#distribution_of_X",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -90,8 +92,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "1013379baf342340",
@@ -197,54 +198,93 @@
       "obsidian-importer:Open Importer": false
     }
   },
-  "active": "f3b7cca83825ec74",
+  "floating": {
+    "id": "1bd33c8df434f303",
+    "type": "floating",
+    "children": [
+      {
+        "id": "298e63d2bd975d6f",
+        "type": "window",
+        "children": [
+          {
+            "id": "a0a5a4193a85718d",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "debed64da3258c73",
+                "type": "leaf",
+                "state": {
+                  "type": "pdf",
+                  "state": {
+                    "file": "school/CPU arch/Assignment3.pdf"
+                  },
+                  "icon": "lucide-file-text",
+                  "title": "Assignment3"
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": -768,
+        "y": 0,
+        "width": 768,
+        "height": 408,
+        "maximize": true,
+        "zoom": 1
+      }
+    ]
+  },
+  "active": "64f9e9949ccf3f9b",
   "lastOpenFiles": [
     "school/CPU arch/Assignment3.pdf",
     "school/CPU arch/Assignment 3.md",
-    "school/CPU arch/images/Pasted image 20260615173015.png",
-    "school/CPU arch/images/Pasted image 20260615172955.png",
-    "school/CPU arch/riscv_ref_card.pdf",
-    "school/CPU arch/course_material/Link to notebook.md",
-    "school/CPU arch/Correction_DDCA-RISC-V page.pdf",
-    "school/CPU arch/images/Pasted image 20260615160425.png",
-    "school/CPU arch/course_material/18_simd_architecture.pdf",
-    "school/CPU arch/course_material/Unconfirmed 44051.crdownload",
-    "school/CPU arch/course_material/15_Branch_Prediction_2.pdf",
-    "school/CPU arch/course_material/Branch_Prediction_2.pdf",
-    "school/CPU arch/course_material/17_out_of_order.pdf",
-    "school/CPU arch/course_material/Unconfirmed 19223.crdownload",
-    "school/CPU arch/course_material/16_exceptions.pdf",
-    "school/CPU arch/images/Pasted image 20260615134048.png",
-    "school/CPU arch/images/Pasted image 20260615132405.png",
-    "Examples/graph example.md",
+    "school/CPU arch/Assignment 2.md",
+    "school/CPU arch/images/Pasted image 20260616003955.png",
+    "school/CPU arch/images/Pasted image 20260616003447.png",
+    "school/CPU arch/images/Pasted image 20260615233626.png",
+    "school/CPU arch/images/Pasted image 20260615233510.png",
+    "school/CPU arch/images/Pasted image 20260615233435.png",
+    "school/Graph Theory & Algorithms/Recitations/Attachments/WhatsApp Image 2026-05-24 at 11.01.29.jpeg",
     "school/Graph Theory & Algorithms/Recitations/Attachments/Pasted image 20260524104451.png",
     "school/Graph Theory & Algorithms/Recitations/Attachments/Pasted image 20260524102805.png",
     "school/Graph Theory & Algorithms/Recitations/Attachments/Pasted image 20260524102102.png",
     "school/Graph Theory & Algorithms/Recitations/Attachments/Pasted image 20260524102031.png",
-    "school/Graph Theory & Algorithms/Recitations/Attachments/WhatsApp Image 2026-05-24 at 11.01.29.jpeg",
-    "school/CPU arch/Assignment 2.md",
-    "Examples/Song.md",
-    "school/Estimation Theory/Lectures/Lecture 5.md",
+    "school/Graph Theory & Algorithms/Recitations/Attachments",
+    "school/Estimation Theory/images/Untitled.canvas",
+    "school/Estimation Theory/images",
+    "school/Distributed Algorithms/lectures/Lecture 8.md",
+    "school/CPU arch/riscv_ref_card.pdf",
+    "Untitled.circuit-sketcher",
+    "school/Estimation Theory/Assignments/Assignment 2 - submission.md",
     "school/Estimation Theory/Assignments/Assignment 3.md",
-    "school/Estimation Theory/Lectures/Lecture 5 1.md",
+    "Examples/graph example.md",
+    "school/CPU arch/Untitled.canvas",
+    "school/CPU arch/Correction_DDCA-RISC-V page.pdf",
+    "latexsheet.pdf",
+    "Working Tree.base",
+    "school/CPU arch/images",
+    "school/CPU arch",
+    "school/Estimation Theory/Assignments/Assignment 2.md",
+    "school/Distributed Algorithms/Assignments/Assignment 1.md",
+    "Examples/Song.md",
+    "Yizhar_Fahima_CV.md",
     "Untitled.md",
-    "Untitled 1.md",
+    "assignment 2 - part 1.md",
+    "school/Estimation Theory/Lectures/Lecture 5 1.md",
     "school/Distributed Algorithms/lectures/Lecture 7.md",
+    "school/Distributed Algorithms/Assignments/Assignment 2.md",
+    "Untitled 1.md",
     "school/Estimation Theory/Lectures/Lecture 3.md",
     "school/Estimation Theory/Lectures/Lecture 2.md",
-    "school/Estimation Theory/Lectures/Lecture 4.md",
-    "Yizhar_Fahima_CV.md",
-    "school/Distributed Algorithms/Assignments/Assignment 2.md",
-    "school/Distributed Algorithms/Assignments/Assignment 2 (1).md",
     "school/Estimation Theory/Lectures/TDE system.canvas",
+    "school/Estimation Theory/Lectures/Lecture 5.md",
+    "school/Estimation Theory/Lectures/Lecture 4.md",
     "school/Graph Theory & Algorithms/Recitations/Recitation 6.md",
-    "school/Estimation Theory/Assignments/Assignment 2 - submission.md",
     "Assignment 2 -part 1.md",
-    "school/Estimation Theory/Assignments/Assignment 2.md",
-    "Song.md",
     "Assignment 2 -part 4.md",
     "Assignment 2 -part 3.md",
     "Assignment 2 -part 2.md",
-    "school/Estimation Theory/images/Untitled.canvas"
+    "Untitled.canvas"
   ]
 }

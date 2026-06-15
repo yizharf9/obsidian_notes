@@ -1,4 +1,3 @@
-
 ## Question 1
 ![[Pasted image 20260613190324.png]]
 
@@ -305,7 +304,8 @@ $$R_{continuous} = \frac{\text{\#correct}}{\text{\#branchings}} = \frac{6+7+1}{6
 ![[Pasted image 20260615172955.png]]
 ![[Pasted image 20260615173015.png]]
 
-### a) Fill in Table 
+### a) Fill in Table
+
 
 ```
 y = [18,13,10,11,12,20,27,30,33];
@@ -319,20 +319,148 @@ for y_i in y :
 		s++;
 ```
 
-**g = 0 :**
 
-|           | 18  | 13  | 10  | 11  | 12  | 20  | 27  | 30  | 33  |
-| --------- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| b1 pred   |     |     |     |     |     |     |     |     |     |
-| b1 actual | ✅   | ❌   | ✅   | ❌   | ✅   | ✅   | ❌   | ✅   | ❌   |
-| b2 pred   |     |     |     |     |     |     |     |     |     |
-| b2 actual | ❌   | ❌   | ✅   | ❌   | ❌   | ✅   | ❌   | ❌   | ❌   |
-**g = 1 :**
+#### g values
 
-|           | 18  | 13  | 10  | 11  | 12  | 20  | 27  | 30  | 33  |
-| --------- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| b1 pred   |     |     |     |     |     |     |     |     |     |
-| b1 actual |     |     |     |     |     |     |     |     |     |
-| b2 pred   |     |     |     |     |     |     |     |     |     |
-| b2 actual |     |     |     |     |     |     |     |     |     |
-| b2 actual |     |     |     |     |     |     |     |     |     |
+| g   | NT  | NT  | T   | NT  | NT  | T   | NT  | T   | NT  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+#### g = 0 :
+
+|                  | 18          | 13  | 10  | 11  | 12  | 20  | 27  | 30  | 33  |
+| ---------------- | ----------- | --- | --- | --- | --- | --- | --- | --- | --- |
+| b1 actual (y%2)  | T           | NT  |     | NT  | T   |     | NT  |     | NT  |
+| b1 pred          | NT(Default) | T   |     | NT  | T   |     | NT  |     | NT  |
+| b1 hit/miss      | ❌           | ❌   |     | ✅   | ✅   |     | ✅   |     | ✅   |
+|                  |             |     |     |     |     |     |     |     |     |
+| b2 actual (y%10) | NT          | NT  |     | NT  | NT  |     | NT  |     | NT  |
+| b2 pred          | NT(Default) | NT  |     | NT  | T   |     | NT  |     | NT  |
+| b2 hit/miss      | ✅           | ✅   |     | ✅   | ❌   |     | ✅   |     | ✅   |
+#### g = 1 :
+
+|                  | 18          | 13  | 10  | 11  | 12  | 20  | 27  | 30  | 33  |
+| ---------------- | ----------- | --- | --- | --- | --- | --- | --- | --- | --- |
+| b1 actual (y%2)  |             |     | T   |     |     | T   |     | T   |     |
+| b1 pred          | NT(Default) |     | NT  |     |     | T   |     | T   |     |
+| b1 hit/miss      |             |     | ❌   |     |     | ✅   |     | ✅   |     |
+|                  |             |     |     |     |     |     |     |     |     |
+| b2 actual (y%10) |             |     | T   |     |     | T   |     | T   |     |
+| b2 pred          | NT(Default) |     | NT  |     |     | NT  |     | T   |     |
+| b2 hit/miss      |             |     | ❌   |     |     | ❌   |     | ✅   |     |
+
+**A few notes on the tables :**
+
+- The values of a column in each of the tables are filled only if the last prediction in the running of the program was T/NT accordingly.
+
+- The blank spaces represent values that were not calculated since the value of g dictated the program to make predictions based on the other table. Meaning, if a column in the g=0 table was not filled it means that the value of g in that iteration was g=1.
+
+- Default NT values were filled all along for convenience and readability.
+
+#### Table As Requested In Assignment!
+
+> [!success] Final Table
+> 
+|                  | 18          | 13  | 10  | 11  | 12  | 20  | 27  | 30  | 33  |
+| ---------------- | ----------- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **g=0**          | ✅           | ✅   | ❌   | ✅   | ✅   | ❌   | ✅   | ❌   | ✅   |
+| b1 actual (y%2)  | T           | NT  |     | NT  | T   |     | NT  |     | NT  |
+| b1 pred          | NT(Default) | T   |     | NT  | T   |     | NT  |     | NT  |
+| b2 actual (y%10) | NT          | NT  |     | NT  | NT  |     | NT  |     | NT  |
+| b2 pred          | NT(Default) | NT  |     | NT  | T   |     | NT  |     | NT  |
+| **g=1**          | ❌           | ❌   | ✅   | ❌   | ❌   | ✅   | ❌   | ✅   | ❌   |
+| b1 actual (y%2)  |             |     | T   |     |     | T   |     | T   |     |
+| b1 pred          | NT(Default) |     | NT  |     |     | T   |     | T   |     |
+| b2 actual (y%10) |             |     | T   |     |     | T   |     | T   |     |
+| b2 pred          | NT(Default) |     | NT  |     |     | NT  |     | T   |     |
+
+### b) Hit Ratio
+
+Over all we get hit rates : 
+
+1. **b1** : 6/9
+
+2. **b2** : 6/9
+
+## Question 3
+
+#### Setup :
+![[Pasted image 20260615233435.png]]
+
+#### assumptions :
+![[Pasted image 20260615233510.png]]
+
+### a) Calculate CPI
+![[Pasted image 20260615233626.png]]
+
+We will calculate the CPI based on the formula given in class :
+
+$$CPI_{average} = CPI_{ideal} + \text{Data stalls} + \text{Control stalls}$$
+Data stalls :
+- **Load :** 
+	Since 25% of the instructions are load instructions and 50% of them are stalled for 6 cycles due to dependency we get : $\text{Load stalls} = 0.25 \cdot 0.5\cdot 6 = 0.75$
+
+Control stalls :
+- **Conditioned Branching :** 
+	Since 11% of the instructions are Conditioned Branching instructions and 30% of them are mis-predicted and cause a stall of 1 cycle we get : $\text{Conditioned Branching stalls} = 0.11 \cdot 0.30\cdot 1 = 0.033$
+
+- **Unconditioned Branching :** 
+	Since 2% of the instructions are Unconditioned Branching instructions and 100% of them cause a stall of 1 cycle we get :
+	$\text{Unconditioned Branching stalls} = 0.2 \cdot 1\cdot 1 = 0.02$
+	
+The rest of the instructions don't have any stalls and are calculated to have ideal CPI...
+
+Overall we get the total average CPI :
+
+$$CPI_{average} = 1 + 0.75 + (0.033 + 0.02) = 1.803_{CPI}$$
+### b) CPI for 1e11 instructions 
+![[Pasted image 20260616003447.png]]
+
+We will use the average CPI we calculated in the previous subsection and plug it in the formula of the runtime :
+$$T = IC \times CPI_{average} \times T_{c}$$
+$$\implies T = 10^{11} \times 1.803 \times 400\cdot 10^{-12} = $$
+$$\implies T = 72.12_{sec}$$
+
+## Question 4
+![[Pasted image 20260616003955.png]]
+
+
+
+Hazards are situations that happen during runtime that disrupt the flow of the pipelining and prevent the CPU from achieving the ideal CPI (...=1). They can be categorized as follows:
+
+#### Hazards
+
+1. **Data Hazards** : When the next instruction depend on the output data of previous instructions that might not be calculated yet. For example we can take the following code : 
+```
+addi R1,R2,5 <-
+add  R3,R1,7 <-
+```
+We can see that the `add` instruction depends on the computed value in `R1` but since the instructions are adjacent, they are 1 cycle away from each other in the pipeline and the first instruction might have not stored the computed value in `R1` yet.
+
+
+2. **Control Hazard** : When the next instruction depend on the output of a condition that is calculated at that moment so the next instruction that is to be performed is ambiguous.  For example we can take the following code : 
+```
+beq s2, s3, L1 <-
+or s9, t6, s8 
+
+L1: 
+and s7, s8, t2
+```
+We can see that the next instruction that is to be performed depends on the computed condition `s2 == s3` so the CPU can't tell for sure what is the next instruction, the `or` or the `and`.
+
+
+3. **Structural Hazard** : When the 2 different instructions in the pipeline want to access the same hardware resource.  For example we can take the following code : 
+```
+lw  t0, 0(a0)  <-
+add t1, t2, t3    
+sub t4, t5, t6     
+or  t7, t8, t9 <-
+```
+We can see that when the `lw` instruction is in the 4th stage of the pipeline (MEM) the `or` instruction is in the first stage of the pipeline (FETCH) and needs to be fetch from memory.
+This means that 2 instructions are trying to access the memory at the same time while the memory can only supply one of them.
+
+#### Handling Methods
+
+1. **Pipelining :**
+	
+
+
