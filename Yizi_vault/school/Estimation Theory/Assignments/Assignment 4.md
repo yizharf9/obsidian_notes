@@ -192,16 +192,48 @@ $$\hat\theta_{ML}(\mathbf x) = \begin{pmatrix}\hat\theta_{1,ML}(\mathbf x) \\ \h
 ![[Pasted image 20260629195812.png]]
 
 - We calculate the Bias of the proposed estimator :
-$$Bias(\hat\theta(\mathbf x)) = \mathbb E[\theta - \hat\theta_{ML}(\mathbf x)]$$
+$$Bias(\hat\theta(\mathbf x)) = \mathbb E[\hat\theta_{ML}(\mathbf x) - \theta]$$
 - We will calculate the Bias of each component separately :
-$$\mathbb E[\hat\theta_{1,ML}(\mathbf x)] = \mathbb E[\underset{i=1...N}{min}{\set{x_i}}]$$
-- To find the expected value we first need to find the distribution of the minimum of the random vector $\mathbf x$. We will do so by finding the joint CDF (cumulative distribution function) of the random variable $X_{min} := \underset{i=1...N}{min}{\set{x_i}}$ :
-$$F_{X_{min}}(t) = \mathbb P(X_{min} \le t) = 1 - \mathbb P(X_{min} \ge t) =  1- \mathbb P\left(\bigcap_{i=1}^N \set{x_i \ge t} \right) = \dots $$
+$$\mathbb E[\hat\theta_{1,ML}(\mathbf x)] = \mathbb E[\underset{i=1...N}{min}{\set{x_i}}] \quad , \quad \mathbb E[\hat\theta_{2,ML}(\mathbf x)] = \mathbb E[\underset{i=1...N}{max}{\set{x_i}}]$$
+- To find the expected value we first need to find the distribution of the minimum and maximum of the random vector $\mathbf x$. We will do so by finding the derivative of the marginal CDF (cumulative distribution function) of the random variables $X_{min}:= \underset{i=1...N}{min} ,{\set{x_i}},X_{max} := \underset{i=1...N}{max}{\set{x_i}}$.
+#### $X_{max}$ :
+- We will first find the first term which is the CDF of the random variable $X_{max}$ :
+$$F_{X_{max}}(t) = \mathbb P(X_{max} \le t) = \mathbb P\left(\bigcap_{i=1}^N \set{x_i \le t} \right) = \dots $$
 - We know that the measurements are statistically independent :
-$$\implies \prod_{i=1}^N \mathbb P(x_i \ge t) = \prod_{i=1}^N \left[ \int_{\theta_1}^{t}\frac{dx}{\theta_2 - \theta_1} \right] = \prod_{i=1}^N \left[ \frac{t - \theta_1}{\theta_2 - \theta_1} \cdot \mathbb 1_{[\theta_1,\infty)}(t) \right] = \left(\frac{t - \theta_1}{\theta_2 - \theta_1}\right)^N \cdot \mathbb 1_{[\theta_1,\infty)}(t) $$
+$$\implies \prod_{i=1}^N \mathbb P(x_i \le t) = \prod_{i=1}^N \left[ \int_{-\infty}^{t}\frac{\mathbb 1_{[\theta_1,\theta_2)}(t)}{\theta_2 - \theta_1}dx \right] = \prod_{i=1}^N \left[ \frac{t - \theta_1}{\theta_2 - \theta_1} \cdot \mathbb 1_{[\theta_1,\theta_2)}(t) \right] = \left(\frac{t - \theta_1}{\theta_2 - \theta_1}\right)^N \cdot \mathbb 1_{[\theta_1,\theta_2)}(t)$$
+- We get the joint CDF of the random variable $X_{max}$ :
+$$F_{X_{max}}(t) = \left(\frac{t - \theta_1}{\theta_2 - \theta_1}\right)^N \cdot \mathbb 1_{[\theta_1,\theta_2)}(t) $$
+- We take the derivative with respect to $t$ and find the PDF of $X_{max}$ :
+$$f_{X_{max}}(t) = \frac{dF_{X_{max}}(t)}{dt} = \frac{d}{dt}\left(\frac{t - \theta_1}{\theta_2 - \theta_1}\right)^N \cdot \mathbb 1_{[\theta_1,\theta_2)}(t) $$$$ \implies f_{X_{max}}(t) = \frac{N}{\theta_2 - \theta_1}\left(\frac{t - \theta_1}{\theta_2 - \theta_1}\right)^{N-1} \cdot \mathbb 1_{[\theta_1,\theta_2)}(t)$$
+#### $X_{min}$ :
+- We will do the same for the second term which is the CDF of the random variable $X_{min}$ :
+$$F_{X_{min}}(t) = \mathbb P(X_{min} \le t) = 1 - \mathbb P(X_{min} \ge t) = \mathbb P\left(\bigcap_{i=1}^N \set{x_i \ge t} \right) = \dots $$
+- We know that the measurements are statistically independent :
+$$\implies \prod_{i=1}^N \mathbb P(x_i \ge t) = \prod_{i=1}^N \left[ \int_{t}^{\infty}\frac{\mathbb 1_{[\theta_1,\theta_2)}(t)}{\theta_2 - \theta_1}dx \right] = \prod_{i=1}^N \left[ \frac{\theta_2 - t}{\theta_2 - \theta_1} \cdot \mathbb 1_{[\theta_1,\theta_2)}(t) \right] = \left(\frac{\theta_2 - t}{\theta_2 - \theta_1}\right)^N \cdot \mathbb 1_{[\theta_1,\theta_2)}(t)$$
 - We get the joint CDF of the random variable $X_{min}$ :
-$$F_{X_{min}}(t) = 1 - \left(\frac{t - \theta_1}{\theta_2 - \theta_1}\right)^N \cdot \mathbb 1_{[\theta_1,\infty)}(t) $$
-- To calculate the expected value of the random value we need the PDF. We will extract it by differentiating the CDF with respect to $t$ :
-$$f_{X_{min}}(t) = \frac{d}{dt}F_{X_{min}}(t) = \frac{d}{dt}\left( 1 - \left(\frac{t - \theta_1}{\theta_2 - \theta_1}\right)^N \cdot \mathbb 1_{[\theta_1,\infty)}(t)  \right) = -\frac{d}{dt}\left(\left(\frac{t - \theta_1}{\theta_2 - \theta_1}\right)^N \cdot \mathbb 1_{[\theta_1,\infty)}(t)  \right)$$
-- We differentiate the expression as a multiplication of functions :
-$$\dots = $$
+$$F_{X_{min}}(t) = 1- \left(\frac{\theta_2 - t}{\theta_2 - \theta_1}\right)^N \cdot \mathbb 1_{[\theta_1,\theta_2)}(t) $$
+- We will take the derivative with respect to $t$ :
+$$f_{X_{min}}(t) = \frac{dF_{X_{min}}(t)}{dt} = \frac{d}{dt}\left( 1 - \left(\frac{\theta_2 - t}{\theta_2 - \theta_1}\right)^N \cdot \mathbb 1_{[\theta_1,\theta_2)}(t) \right)$$
+$$\implies f_{X_{min}}(t) = \frac{N}{\theta_2 - \theta_1}\left(\frac{\theta_2 - t}{\theta_2 - \theta_1}\right)^{N-1} \cdot \mathbb 1_{[\theta_1,\theta_2)}(t)$$
+- Now we will evaluate the expected values of each of the random variables :
+#### $\mathbb E[X_{max}]$ :
+$$\mathbb E[X_{max}] = \int_{\mathbb R} t\cdot f_{X_{max}}(t)dt = \int_{\mathbb R}t \cdot \frac{N}{\theta_2 - \theta_1}\left(\frac{t - \theta_1}{\theta_2 - \theta_1}\right)^{N-1} \cdot \mathbb 1_{[\theta_1,\theta_2)}(t)dt $$$$= \int_{\theta_1}^{\theta_2} \frac{Nt - N\theta_1 + N\theta_1}{\theta_2 - \theta_1}\left(\frac{t - \theta_1}{\theta_2 - \theta_1}\right)^{N-1} dt = \int_{\theta_1}^{\theta_2} N\left(\frac{t - \theta_1}{\theta_2 - \theta_1}\right)^{N} dt + \int_{\theta_1}^{\theta_2} \frac{N\theta_1}{\theta_2 - \theta_1}\left(\frac{t - \theta_1}{\theta_2 - \theta_1}\right)^{N-1} dt $$
+- We perform a substitution in the integrals  $u = \frac{t-\theta_1}{\theta_2-\theta_1} , du = \frac1{\theta_2 - \theta_1}dt , 0 \le u \lt 1$ :
+$$= (\theta_2 - \theta_1)\int_0^1Nu^Ndu + (\theta_2 - \theta_1)\int_0^1\frac{N\theta_1}{\theta_2 - \theta_1}u^{N-1}du = (\theta_2 - \theta_1) \left[ \left. \frac{N}{N+1}u^{N+1} + \frac{\theta_1}{\theta_2-\theta_1}u^N \right|_0^1 \right] $$$$ \dots = \frac{N}{N+1}(\theta_2 - \theta_1) + \theta_1 \implies \mathbb E[X_{max}] = \frac{N}{N+1}\theta_2 + \frac{1}{N+1}\theta_1 $$
+#### $\mathbb E[X_{min}]$ :
+$$\mathbb E[X_{min}] = \int_{\mathbb R} t\cdot f_{X_{min}}(t)dt = \int_{\mathbb R}t \cdot \frac{N}{\theta_2 - \theta_1}\left(\frac{\theta_2 - t}{\theta_2 - \theta_1}\right)^{N-1} \cdot \mathbb 1_{[\theta_1,\theta_2)}(t)dt $$$$= \int_{\theta_1}^{\theta_2} -\frac{ - N\theta_2 + N\theta_2 - Nt}{\theta_2 - \theta_1}\left(\frac{\theta_2 - t}{\theta_2 - \theta_1}\right)^{N-1} dt = $$$$ = -\int_{\theta_1}^{\theta_2} N\left(\frac{\theta_2-t}{\theta_2 - \theta_1}\right)^{N} dt + \int_{\theta_1}^{\theta_2} \frac{N\theta_2}{\theta_2 - \theta_1}\left(\frac{\theta_2-t}{\theta_2 - \theta_1}\right)^{N-1} dt $$
+- We perform a substitution in the integrals  $u = \frac{\theta_2-t}{\theta_2-\theta_1} , du = -\frac1{\theta_2 - \theta_1}dt , 0 \le u \lt 1$ :
+$$= -(\theta_2 - \theta_1)\int_0^1Nu^Ndu + {(\theta_2 - \theta_1)}\int_0^1\frac{N\theta_2}{\theta_2 - \theta_1}u^{N-1}du = (\theta_2 - \theta_1) \left[ \left. -\frac{N}{N+1}u^{N+1} + \frac{\theta_2}{\theta_2-\theta_1}u^N \right|_0^1 \right] $$$$ \dots = -\frac{N}{N+1}(\theta_2 - \theta_1) + \theta_2 \implies \mathbb E[X_{min}] = \frac{N}{N+1}\theta_1  + \frac{1}{N+1}\theta_2$$
+#### $Bias(\hat\theta_1)$ :
+- We substitute the term of the expected value that we calculated :
+$$Bias(\hat\theta_1) = \mathbb E[X_{min}] - \theta_1 = \frac{N}{N+1}\theta_1  - \frac{1}{N+1}\theta_2 - \theta_1$$
+$$\implies Bias(\hat\theta_1) = -\frac{1}{N+1}\theta_1 - \frac{1}{N+1}\theta_2 \underset{N \to \infty}{\longrightarrow} 0 $$
+- We see that $\hat\theta_1$ is unbiased only asymptotically.
+
+#### $Bias(\hat\theta_2)$ :
+- We substitute the term of the expected value that we calculated :
+$$Bias(\hat\theta_2) = \mathbb E[X_{max}] - \theta_2 = \frac{N}{N+1}\theta_2  + \frac{1}{N+1}\theta_1 - \theta_2$$
+$$\implies Bias(\hat\theta_2) = \frac{1}{N+1}\theta_1 - \frac{1}{N+1}\theta_2 \underset{N \to \infty}{\longrightarrow} 0 $$
+- We see that $\hat\theta_2$ is unbiased only asymptotically as well.
+
+- We can add a correction to turn the estimator unbiased :
