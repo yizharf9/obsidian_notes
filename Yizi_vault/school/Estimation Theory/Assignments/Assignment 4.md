@@ -40,6 +40,7 @@ $$ e^{-n\lambda} \cdot \sum_{t =0}^{\infty} \left(\frac{g(t)\cdot n^t}{t!} \righ
 - We notice that we get a power series with the argument $\lambda$. A power series can be the equivalent of the zero function $\iff$ all coefficients of the series must be equal to 0. This means that  $\frac{g(t)\cdot n^t}{t!} = 0$ which forces the function $g(t) \equiv 0$. 
 
 - Therefore there exists a single function that sets the expected value to be 0 for every value of $\lambda$ which means that $t(\mathbf x)$ is a complete sufficient statistics for the estimation of $\lambda$ from the measurements $\mathbf x$. 
+
 ### b) Find ML estimator
 ![[Pasted image 20260625133047.png]]
 
@@ -57,7 +58,9 @@ $$\frac{\partial^2 \log L(\lambda;\mathbf x)}{\partial \lambda^2} =  -\frac1{\la
 - We have found the ML estimator of the and as expected we see that it is a function of the sufficient statistics we have found in previous subsection.
 $$\hat\lambda_{ML}(\mathbf x) = \frac1N\sum_{i=1}^Nx_i$$
 
-## Question 2
+
+
+## Question 2 
 
 ![[Pasted image 20260627001708.png]]
 
@@ -95,6 +98,7 @@ $$\log L(\mathbf x ; \mu) =  -N\cdot \log(2\sigma) - \frac1\sigma\sum_{i=1}^N|x_
 $$\implies -N\sigma + \sum_{i=1}^N|x_i - \mu| = 0 \implies \sigma = \frac1N\sum_{i=1}^N|x_i - \mu|$$
 - We find that the ML estimator of $\sigma$ is a function of the sufficient statistics that we found :
 $$\hat\sigma_{ML}(\mathbf x ) = \frac1N\sum_{i=1}^N|x_i - \mu| = \frac1N \cdot t(x)$$
+
 ## Question 3 
 
 ![[Pasted image 20260627230435.png]]
@@ -136,6 +140,7 @@ $$\implies \mathcal I(\theta) = \frac{NL}{\theta(1-\theta)}$$
 - We see that the CRB matches the variance of the ML estimator :
 $$\implies CRB = \frac{\theta(1-\theta)}{NL} = Var(\hat\theta_{ML}(\mathbf x))$$
 
+
 ## Question 4 
 
 ![[Pasted image 20260628011738.png]]
@@ -173,6 +178,7 @@ $$\forall \theta\in [0,1] : \mathbb E[g(t)|\theta] = 0  \iff g(t)\equiv 0 $$
 ![[Pasted image 20260628020142.png]]
 See subsection b).
 
+
 ## Question 5
 
 ![[Pasted image 20260628132353.png]]
@@ -197,6 +203,7 @@ $$L(\rho ; \mathbf X) = \frac{1}{(2\pi\sqrt{1-\rho^2})^N} \exp\left[ -\frac{1}{2
 $$= (2\sigma)^{-N} \cdot \exp\left(-\frac1\sigma\sum_{i=1}^N[(x_i - \mu)\cdot \mathbb 1_{x_i \gt \mu} - (x_i - \mu)\cdot \mathbb 1_{x_i \gt \mu}] \right)$$
 
 
+
 ## Question 5
 
 ### a)
@@ -206,33 +213,14 @@ $$= (2\sigma)^{-N} \cdot \exp\left(-\frac1\sigma\sum_{i=1}^N[(x_i - \mu)\cdot \m
 ![[Pasted image 20260629153845.png]]
 
 
+
 ## Question 6
 
 ![[Pasted image 20260629154025.png]]
 - We are given the conditional distribution of a single measurement $x_n$
 $$f(x_n; \mu,\kappa) = \begin{cases} \frac1{2\pi I_0(\kappa)\exp \cos(x_n - \mu)} \quad:\quad -\pi \le x_n \le \pi \\  \quad\quad\quad\quad0\quad\quad\quad\quad :\quad else \quad \end{cases}$$
 $$I_0(\kappa) := \int_{-\pi}^\pi e^{\kappa \cos(x)}dx$$
-```desmos-graph
-bottom = -0.2
-top = 1
-left = -pi - 0.2
-right = pi + 0.2
----
-x = -\pi | dashed | red
-x = \pi  | dashed | red
-
-m=0
-k= 10^{-1}
-B=\sum_{n=0}^{15}\frac{\left(\frac{k^2}{4}\right)^n}{\left(n!\right)^2}
-
-y=\frac{1}{2\pi B}e^{k\cos\left(x-m\right)}  \left\{-\pi\le x\le\pi\right\}
-
-
-l=3
-A=\sum_{n=0}^{15}\frac{\left(\frac{l^2}{4}\right)^n}{\left(n!\right)^2}
-
-y=\frac{1}{2\pi A}e^{l\cos\left(x-m\right)}  \left\{-\pi\le x\le\pi\right\}
-```
+![[Pasted image 20260701151747.png]]
 
 ### a) von Mises distributed Random Vector
 
@@ -285,6 +273,7 @@ $$\frac{\partial\log L(\kappa ; \mathbf x)}{\partial\kappa} = -N \frac1{I_0(\kap
 $$I_0(\kappa) := \int_{-\pi}^\pi e^{\kappa \cos(x)}dx \implies \frac{\partial I_0(\kappa)}{\partial\kappa} = \int_{-\pi}^\pi \frac{\partial}{\partial\kappa}e^{\kappa \cos(x)}dx = \int_{-\pi}^\pi \cos(x)e^{\kappa \cos(x)}dx $$
 - We have no analytic solution for the equation but we know that the estimator of $\kappa$ must satisfy the following equation :
 $$\frac1{I_0(\kappa)}\cdot \frac{\partial I_0(\kappa)}{\partial\kappa} = \frac1N [\cos(\mu)\cdot T_1(\mathbf x) + \sin(\mu)\cdot T_2(\mathbf x)]$$
+
 
 ## Question 7
 
@@ -351,10 +340,10 @@ $$= (\theta_2 - \theta_1)\int_0^1Nu^Ndu + (\theta_2 - \theta_1)\int_0^1\frac{N\t
 #### $\mathbb E[X_{min}]$ :
 $$\mathbb E[X_{min}] = \int_{\mathbb R} t\cdot f_{X_{min}}(t)dt = \int_{\mathbb R}t \cdot \frac{N}{\theta_2 - \theta_1}\left(\frac{\theta_2 - t}{\theta_2 - \theta_1}\right)^{N-1} \cdot \mathbb 1_{[\theta_1,\theta_2)}(t)dt $$$$= \int_{\theta_1}^{\theta_2} -\frac{ - N\theta_2 + N\theta_2 - Nt}{\theta_2 - \theta_1}\left(\frac{\theta_2 - t}{\theta_2 - \theta_1}\right)^{N-1} dt = $$$$ = -\int_{\theta_1}^{\theta_2} N\left(\frac{\theta_2-t}{\theta_2 - \theta_1}\right)^{N} dt + \int_{\theta_1}^{\theta_2} \frac{N\theta_2}{\theta_2 - \theta_1}\left(\frac{\theta_2-t}{\theta_2 - \theta_1}\right)^{N-1} dt $$
 - We perform a substitution in the integrals  $u = \frac{\theta_2-t}{\theta_2-\theta_1} , du = -\frac1{\theta_2 - \theta_1}dt , 0 \le u \lt 1$ :
-$$= -(\theta_2 - \theta_1)\int_0^1Nu^Ndu + {(\theta_2 - \theta_1)}\int_0^1\frac{N\theta_2}{\theta_2 - \theta_1}u^{N-1}du = (\theta_2 - \theta_1) \left[ \left. -\frac{N}{N+1}u^{N+1} + \frac{\theta_2}{\theta_2-\theta_1}u^N \right|_0^1 \right] $$$$ \dots = -\frac{N}{N+1}(\theta_2 - \theta_1) + \theta_2 \implies \mathbb E[X_{min}] = \frac{N}{N+1}\theta_1  + \frac{1}{N+1}\theta_2$$
+$$= -(\theta_2 - \theta_1)\int_0^1Nu^Ndu + {(\theta_2 - \theta_1)}\int_0^1\frac{N\theta_2}{\theta_2 - \theta_1}u^{N-1}du = (\theta_2 - \theta_1) \left[ \left. -\frac{N}{N+1}u^{N+1} + \frac{\theta_2}{\theta_2-\theta_1}u^N \right|_0^1 \right] $$$$ \dots = -\frac{N}{N+1}(\theta_2 - \theta_1) + \theta_2 \implies \mathbb E[X_{min}] = \frac{N}{N+1}\theta_1  - \frac{1}{N+1}\theta_2$$
 #### $Bias(\hat\theta_1)$ :
 - We substitute the term of the expected value that we calculated :
-$$Bias(\hat\theta_1) = \mathbb E[X_{min}] - \theta_1 = \frac{N}{N+1}\theta_1  - \frac{1}{N+1}\theta_2 - \theta_1$$
+$$Bias(\hat\theta_1) = \mathbb E[X_{min}] - \theta_1 = \frac{N}{N+1}\theta_1  + \frac{1}{N+1}\theta_2 + \theta_1$$
 $$\implies Bias(\hat\theta_1) = -\frac{1}{N+1}\theta_1 - \frac{1}{N+1}\theta_2 \underset{N \to \infty}{\longrightarrow} 0 $$
 - We see that $\hat\theta_1$ is unbiased only asymptotically.
 
@@ -363,5 +352,48 @@ $$\implies Bias(\hat\theta_1) = -\frac{1}{N+1}\theta_1 - \frac{1}{N+1}\theta_2 \
 $$Bias(\hat\theta_2) = \mathbb E[X_{max}] - \theta_2 = \frac{N}{N+1}\theta_2  + \frac{1}{N+1}\theta_1 - \theta_2$$
 $$\implies Bias(\hat\theta_2) = \frac{1}{N+1}\theta_1 - \frac{1}{N+1}\theta_2 \underset{N \to \infty}{\longrightarrow} 0 $$
 - We see that $\hat\theta_2$ is unbiased only asymptotically as well.
+#### Bias Correction :
+- We want to add a correction term for the original estimator that is a function of the sufficient statistic that we have found earlier. For that we want to estimate the distance between the parameters :
+$$Bias(\hat\theta_1) = \frac{1}{N+1}(\theta_2 - \theta_1) \quad ; \quad Bias(\hat\theta_2) = -\frac{1}{N+1}(\theta_1 - \theta_2) $$
+- We want to express the distance between the parameters as the expected value of a function of the sufficient statistics :
+$$\mathbb E[T_2 - T_1] = \mathbb E[X_{max}] - \mathbb E[X_{min}] = \frac{N}{N+1}\theta_2 + \frac{1}{N+1}\theta_1 - \left[ \frac{N}{N+1}\theta_1  - \frac{1}{N+1}\theta_2\right]$$
+$$\mathbb E[T_2 - T_1] = \frac{N-1}{N+1}(\theta_2 - \theta_1) \implies \frac{1}{N-1}\mathbb E[T_2-T_1] = \frac1{N+1}(\theta_2 - \theta_1)  $$
+- We can see that by adding the following terms to the original ML estimators we correct their bias, we denote the new unbiased estimators $\tilde\theta_1, \tilde\theta_2$ respectively: 
+$$\tilde\theta_1 = \hat\theta_{1,ML} - \frac1{N-1}[T_2 - T1] \implies \mathbb E [\tilde\theta_1] = \theta_1  $$
+$$\tilde\theta_2 = \hat\theta_{2,ML} - \frac1{N-1}[T_2 - T1] \implies \mathbb E [\tilde\theta_2] = \theta_2 $$
+- We get that our new corrected estimator is unbiased :
+$$\tilde\theta(\mathbf x) = \begin{pmatrix}\tilde\theta_{1,ML}(\mathbf x) \\ \tilde\theta_{2,ML}(\mathbf x)\end{pmatrix} = \begin{pmatrix} T_1(\mathbf x) \\ T_2(\mathbf x) \end{pmatrix} +\begin{pmatrix} -1 \\ 1 \end{pmatrix} \cdot  \frac{1}{N-1}(T_2(\mathbf x)-T_1(\mathbf x)) $$
+### d) Find MVU estimator :
 
-- We can add a correction to turn the estimator unbiased :
+![[Pasted image 20260701135919.png]]
+
+ We will use the **Lehmann - Scheffe Theorem** that states that : "if $T$ is a sufficient statistics for the estimation of the parameters $\theta$ out of the measurements $\mathbf x$ and it is **complete** then any unbiased estimator that is solely a function of $T$ is uniquely the MVU estimator".
+
+- We have already shown that $\tilde \theta(\mathbf x)$ is an unbiased estimator and we built it strictly as solely a function of the sufficient statistics $\mathbf T = (T_1,T_2)^T$.
+
+- What is left to do is show that the sufficient statistics is **complete**. For that we will use the definition of completeness by showing that there exist only one function $g(T_1,T_2)$ such that :
+$$\mathbb E[g(T_1,T_2)] = 0 : \forall \theta \in \mathbb R^2 : \theta_1 \le \theta_2$$
+- We will expand the term for the expected value of $g$ as follows :
+$$\mathbb E[g(T_1,T_2)] = \int_{\theta_1}^{\theta_2}\int_{t1}^{\theta_2} g(t_1,t_2)\cdot f_{T_1,T_2}(t_1,t_2)dt_2dt_1$$
+- We want to find the joint PDF of the sufficient statistics that we found. For that we use the hint given in the question to find the joint CDF and take the partial derivatives :
+![[Pasted image 20260701143806.png]]
+
+- We can write out the expression for the joint CDF :
+$$F_{T_1,T_2}(t_1,t_2) = \dots = \mathbb P(X_{max}\le t_2) - P(t_1 \le X_{min} ,X_{max} \le t_2) $$
+- The first term has already been calculated before :
+$$\mathbb P(X_{max}\le t_2) = F_{X_{max}}(t_2) = \left(\frac{t_2 - \theta_1}{\theta_2 - \theta_1}\right)^N$$
+- The second term can be expressed as follows :
+$$\mathbb P(t_1 \le X_{min} ,X_{max} \le t_2) = \mathbb P \left( \bigcap_{i=1}^N\set{t_1 \le x_i \le t_2} \right) = \prod_{i=1}^N(F_{x_i}(t_2) - F_{x_i}(t_1)) = (F_{x_i}(t_2) - F_{x_i}(t_1))^N$$
+$$\implies \mathbb P(t_1 \le X_{min} ,X_{max} \le t_2)  = \left(\frac{t_2 - t1}{\theta_2 - \theta_1}\right)^N$$
+- We get the joint CDF of the sufficient statistics to be :
+$$F_{T_1,T_2}(t_1,t_2) = \left(\frac{t_2 - \theta_1}{\theta_2 - \theta_1}\right)^N -  \left(\frac{t_2 - t1}{\theta_2 - \theta_1}\right)^N$$
+- To find the joint PDF we take partial derivatives with respect to each of the parameters $t_1,t_2$ : 
+$$f_{T_1,T_2}(t_1,t_2) = \frac{\partial^2}{\partial t_1 \partial t_2}F_{T_1,T_2}(t_1,t_2)$$
+$$\implies \frac{\partial}{\partial t_1}F_{T_1,T_2}(t_1,t_2) = \frac{\partial}{\partial t_1}\cancel{\left(\frac{t_2 - \theta_1}{\theta_2 - \theta_1}\right)^N} -  \frac{\partial}{\partial t_1}\left(\frac{t_2 - t1}{\theta_2 - \theta_1}\right)^N = \cancel{-}\left( \frac{\cancel{-}N}{\theta_2-\theta_1}\left(\frac{t_2 - t1}{\theta_2 - \theta_1}\right)^{N-1} \right) $$
+$$\implies \frac{\partial^2}{\partial t_1\partial t_2}F_{T_1,T_2}(t_1,t_2) = \frac{\partial}{\partial t_2}\left( \frac{N}{\theta_2-\theta_1}\left(\frac{t_2 - t1}{\theta_2 - \theta_1}\right)^{N-1} \right) = \frac{N(N-1)}{(\theta_2-\theta_1)^2}\left(\frac{t_2 - t1}{\theta_2 - \theta_1}\right)^{N-2}  $$
+$$f_{T_1,T_2}(t_1,t_2) = \frac{N(N-1)}{(\theta_2-\theta_1)^2}\left(\frac{t_2 - t1}{\theta_2 - \theta_1}\right)^{N-2}$$
+- We plug that back into the expected value :
+$$\mathbb E[g(T_1,T_2)] = \int_{\theta_1}^{\theta_2}\int_{t_1}^{\theta_2} g(t_1,t_2)\cdot \frac{N(N-1)}{(\theta_2-\theta_1)^2}\left(\frac{t_2 - t1}{\theta_2 - \theta_1}\right)^{N-2}dt_2dt_1$$
+- We see that the integrand is always positive since $t_2 \ge t_1$ within all the domain of the integration when equality is satisfied at the lower bound of integration of $t_2$. Therefore the integral itself can be 0 if and only if the the integrand is equinely 0. These solely happens for the case where $g(t_1,t_2) \equiv 0$.
+- $\implies$ This means that the third condition for completeness is satisfied and the sufficient statistics we found are complete sufficient statistics
+- $\implies$ Finally, This means that our unbiased estimator $\tilde\theta(\mathbf x)$ is uniquely the MVU!

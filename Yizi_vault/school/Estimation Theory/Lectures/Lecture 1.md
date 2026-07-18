@@ -1,33 +1,34 @@
 
-#### Notation :
+> [!NOTE] Notation :
+> $\mathbf{\theta}, \underline{\theta}$  - vector of estimation parameters.
+> 
+> $\{x_n\}_{n=1}^N$ - series of sampled data.
+> 
+> $\underline{x} = \begin{bmatrix} x_1 \\ ... \\ x_n \end{bmatrix}$ - vector of sampled data.
+> 
+> $\hat{\mathbb{\theta}}(\underline{x}),\underline{\hat{\mathbb{\theta}}}(\underline{x})$ -  estimator of parameters based on sampled data.
 
-- $\mathbf{\theta}, \underline{\theta}$  - vector of estimation parameters.
+### There are 2 main methods of estimation discussed in this course :
 
-- $\{x_n\}_{n=1}^N$ - series of sampled data.
-
-- $\underline{x} = \begin{bmatrix} x_1 \\ ... \\ x_n \end{bmatrix}$ - vector of sampled data
-
-- $\hat{\mathbb{\theta}}(\underline{x}),\underline{\hat{\mathbb{\theta}}}(\underline{x})$ -  estimator of parameters based on sampled data.
-
-#### There are 2 main methods of estimation discussed in this course :
-
-##### Bayesian estimation 
+#### Bayesian estimation 
 
 - $\underline{\theta} \sim \mathcal{P(\underline{\theta})}$ - Random Vector (denoted as R.V.)
+
 - $C(\hat{\underline{\theta}},\underline{\theta})$ - Cost function of estimation
 
 In this method our goal is to find $\hat{\theta}$  which yields : $$risk(\hat{\underline{\theta}},\underline{\theta}) = \mathbb{E}[C(\hat{\underline{\theta}},\underline{\theta})] \ , \ risk(\hat{\underline{\theta}},\underline{\theta}) \to min$$
 For example, the $MMSE$ estimator is as follows :
 
 $C(\hat{\theta}, \theta) = (\hat{\theta} - \theta)^2 \ \implies \ risk = \mathbb{E} [(\hat{\theta}-\theta)^2] \underset{\hat{\theta(\underline{x})}}{\longrightarrow}  min$  
-Usually, for this method we will need the common PDF of the random variables : $x \sim \mathcal{P(x)},\theta \sim \mathcal{P(\theta)} \implies f_{\underline{x},\underline{\theta}}(\underline{\alpha},\ \underline{\varphi})$ 
+Usually, for this method we will need the common PDF of the random variables : 
+$$x \sim \mathcal{P(x)},\theta \sim \mathcal{P(\theta)} \implies f_{\underline{x},\underline{\theta}}(\underline{\alpha},\ \underline{\varphi})$$
 That is what ties us to what we want to estimate.
 That is in fact the statistical description of how the samples affect the estimation parameter.
 
-##### Non-Bayesian estimation
+### Non-Bayesian estimation
 
 
-- $\underline{\theta}$ - Can be deterministic  (not a Necessary condition...). 
+- $\underline{\theta}$ - is deterministic  (not usually a necessary condition...). 
 	If $\theta$ is random, we will treat it as if it was deterministic
 
 - $C(\hat{\underline{\theta}},\underline{\theta})$ - Cost Function of the estimation
@@ -37,11 +38,6 @@ That is in fact the statistical description of how the samples affect the estima
 The problem with this approach is that the expected value is being performed on $\hat{\underline{\theta}}(\underline{x})$ , which is dependent on the data samples only and not random and the risk is a function of $\underline{\theta}$ .
 For that we need the PDF of the samples $\underline{x}$ : $f_{\underline{x}}(\underline{\alpha} ; \underline{\theta})$ , meaning that $\underline{\theta}$ is a **parameter** of the PDF and not a variable.
 for each different set of values of $\underline{\theta}$ we will get a different PDF...
-
-
-
-
-## Non-Bayesian estimation
 
 In Non-Bayesian estimation we will want to estimate $\theta$ out of the data samples $X$.
 The estimator is denoted as $\hat{\theta}$
@@ -54,28 +50,41 @@ we will plot the desired PDF of $\hat{\theta}$ :
 left = -0.2; right = 6
 top = 2 ; bottom = -0.2
 ---
-a = 2
-b = 3.5
-f_{1}(x) = \frac{1}{0.5\sqrt{2\pi}}e^{-0.5\left(\frac{x-a}{0.5}\right)^{2}}
-f_{2}(x) = \frac{1}{0.25\sqrt{2\pi}}e^{-0.5\left(\frac{x-a}{0.25}\right)^{2}}
-f_{3}(x) = \frac{1}{0.8\sqrt{2\pi}}e^{-0.5\left(\frac{x-b}{0.8}\right)^{2}}
-x = a \{0 < y < 2.1\}
-x = b \{0 < y < 0.5\}
-0 < y < f_{1}(x) \{x < 1.1\} 
-0 < y < f_{1}(x) \{x > 2.9\}
-(a, -0.1)
-(b, -0.1)
+m_{1} = 2
+m_{2} = 3
+s_{1} = 0.5
+s_{2} = 0.25
+s_3 = 0.3
+
+f_{1}(x) = \frac{1}{s_{1}\sqrt{2\pi}} e^{-0.5\left(\frac{x-m_1}{s_{1}}\right)^{2}}
+f_{2}(x) = \frac{1}{0.25\sqrt{2\pi}}e^{-0.5\left(\frac{x-m_1}{s_2}\right)^{2}}
+f_{3}(x) = \frac{1}{s_3\sqrt{2\pi}}e^{-0.5\left(\frac{x-m_2}{s_3}\right)^{2}}
+
+p_1 = f_{1}(m_1)
+p_2 = f_{2}(m_1)
+p_3 = f_{3}(m_2)
+
+x = m_1 \{0 < y < p_1\} | blue | dashed 
+x = m_2 \{0 < y < p_3\} | purple | dashed 
+0 < y < f_{1}(x) \{x < 1.1\} | green
+0 < y < f_{1}(x) \{x > 2.9\} | green
+
+(m_1, p_1) | blue | label:`\theta_1`
+(m_1, p_2) | green | label:`\theta_2`
+(m_2, p_3) | purple | label:`\theta_3`
+(m_1, 0) | black | label:`\theta`
+
 ```
 
-| **Object**          | **Math Symbol**      | **Color** | **Brief Description**                         |
-| ------------------- | -------------------- | --------- | --------------------------------------------- |
-| **True Parameter**  | $\theta$             | **Black** | The target value (The center-line).           |
-| **Best Option**     | $f_{\hat{\theta}_2}$ | **Blue**  | Most efficient; hits the target consistently. |
-| **Standard Option** | $f_{\hat{\theta}_1}$ | **Black** | Correct on average, but wider spread.         |
-| **Poor Option**     | $f_{\hat{\theta}_3}$ | **Red**   | Systematically wrong (Biased) and unreliable. |
-| **Expected Value**  | $E[\hat{\theta}_3]$  | **Red**   | The center of the biased distribution.        |
+| **Object**          | **Math Symbol**      | **Color**           | **Brief Description**                         |
+| ------------------- | -------------------- | ------------------- | --------------------------------------------- |
+| **True Parameter**  | $\theta$             | **Black**           | The target value (The center dot).            |
+| **Best Option**     | $f_{\hat{\theta}_2}$ | **green**           | Most efficient; hits the target consistently. |
+| **Standard Option** | $f_{\hat{\theta}_1}$ | **blue**            | Correct on average, but wider spread.         |
+| **Poor Option**     | $f_{\hat{\theta}_3}$ | **purple**          | Systematically wrong (Biased) and unreliable. |
+| **Expected Value**  | $E[\hat{\theta}_3]$  | **purple - dashed** | The center of the biased distribution.        |
 
->[!info] [[Lecture 1#Biased and Un-Biased estimation]]
+>[!info] [[Lecture 1#Biased and Un-Biased estimation | observations ]] 
 >We would like the center of mass of the PDF to be around the **true value** of the estimation target $\theta$.
 >In the tails of the PDF - these are probabilities that we didn't estimate correctly.
 
@@ -118,30 +127,31 @@ x = a | dashed | black
 
 A consistent estimator is an estimator that, the more samples are taken in consideration during the estimation, the smaller the filled tails of the plot (representing the estimation error) will grow smaller.
 
-#### Example
 
-- $\{x_n\}_{n=1}^N$ - i.i.d with distribution : $x_n \sim \mathcal{N}(0,1) : \forall n \in \mathbb{N}$ 
-- $\underline{x} = \begin{bmatrix} x_1 \\ ... \\ x_n \end{bmatrix}$ - data sample vector 
-- $f_{\underline{x}}(\underline{x} ; \theta) = \frac{1}{(2\pi)^{\frac{N}{2}}}exp(-\frac{1}{2}\sum_{n=1}^{N}{(x_n-\theta)^2})$  -  common PDF of data samples
-We would like to estimate the parameter $\theta$ from the samples $\underline{x}$ :
-
-The estimators examined :
-1. $\hat{\theta_1}(\underline{x}) = \frac{1}{N}\sum_{n=1}^{N}{x_n}$ - accumulated average
-2. $\hat{\theta_2}(\underline{x}) = x_1$ - first sample
-3. $\hat{\theta_2}(\underline{x}) = \frac{1}{N}\sum_{n=1}^{N}{x_n} + \frac{1}{N}$
-
-##### We check bias of estimators 
-
-1. $\underline{b_1} \ = \ \mathbb{E}[\hat{\theta_1}(\underline{x}) - \theta] = \frac{1}{N}\sum_{n=1}^{N}{\mathbb{E}[x_n - \theta]} = 0 \implies$ **Unbiased** 
-2. $\underline{b_2} \ = \ \mathbb{E}[\hat{\theta_2}(\underline{x}) - \theta] = \mathbb{E}[x_1] = 0 \implies$ **Unbiased** 
-3. $\underline{b_3} \ = \ \mathbb{E}[\hat{\theta_3}(\underline{x}) - \theta] = \frac{1}{N}\sum_{n=1}^{N}{\mathbb{E}[x_n - \theta]} + \frac{1}{N} \underset{N \to \infty}{\longrightarrow} 0 \implies \dots \overset{a}{\approx}$   **Unbiased**
-
-##### We check consistence of estimators
-
-1. $Var(\hat{\theta}_1) = \frac{1}{N^2} \sum_{n=1}^{N}{Var(x_n) = \frac{1}{N}}$ - grows smaller and approaches 0, N grows $\implies$ **Consistent**
-2. $Var(\hat{\theta}_2) = 1$ $\implies$ **Not Consistent!**
-3. $Var(\hat{\theta}_3) = \frac{1}{N}$ - **Consistent**
-
+> [!example] 
+>$\{x_n\}_{n=1}^N$ - i.i.d with distribution : $x_n \sim \mathcal{N}(0,1) : \forall n \in \mathbb{N}$ 
+>
+>$\underline{x} = \begin{bmatrix} x_1 \\ ... \\ x_n \end{bmatrix}$ - data sample vector 
+>
+>$f_{\underline{x}}(\underline{x} ; \theta) = \frac{1}{(2\pi)^{\frac{N}{2}}}exp(-\frac{1}{2}\sum_{n=1}^{N}{(x_n-\theta)^2})$  -  common PDF of data samples
+>
+>We would like to estimate the parameter $\theta$ from the samples $\underline{x}$ :
+>
+>The proposed estimators :
+>1. $\hat{\theta_1}(\underline{x}) = \frac{1}{N}\sum_{n=1}^{N}{x_n}$ - accumulated average
+>2. $\hat{\theta_2}(\underline{x}) = x_1$ - first sample
+>3. $\hat{\theta_2}(\underline{x}) = \frac{1}{N}\sum_{n=1}^{N}{x_n} + \frac{1}{N}$
+>
+>We check bias of estimators :
+>1. $\underline{b_1} \ = \ \mathbb{E}[\hat{\theta_1}(\underline{x}) - \theta] = \frac{1}{N}\sum_{n=1}^{N}{\mathbb{E}[x_n - \theta]} = 0 \implies$ **Unbiased** 
+>2. $\underline{b_2} \ = \ \mathbb{E}[\hat{\theta_2}(\underline{x}) - \theta] = \mathbb{E}[x_1] = 0 \implies$ **Unbiased** 
+>3. $\underline{b_3} \ = \ \mathbb{E}[\hat{\theta_3}(\underline{x}) - \theta] = \frac{1}{N}\sum_{n=1}^{N}{\mathbb{E}[x_n - \theta]} + \frac{1}{N} \underset{N \to \infty}{\longrightarrow} 0 \implies \dots \overset{a}{\approx}$   **Unbiased
+>
+>We check consistence of estimators :
+>1. $Var(\hat{\theta}_1) = \frac{1}{N^2} \sum_{n=1}^{N}{Var(x_n) = \frac{1}{N}}$ - grows smaller and approaches 0, N grows $\implies$ **Consistent**
+>2. $Var(\hat{\theta}_2) = 1$ $\implies$ **Not Consistent!**
+>3. $Var(\hat{\theta}_3) = \frac{1}{N}$ - **Consistent**
+>
 ```desmos-graph
 left = -4.2 ; right = 13;
 top = 10 ; bottom = -0.2;
@@ -154,9 +164,8 @@ y = 8\exp\left(-\frac{\left(x-c\right)^{2}}{0.2}\right) | dashed | black
 y = 8\exp\left(-\frac{\left(x-\left(c+1\right)\right)^{2}}{0.2}\right) | black
 ```
 
+#### #Lemma 
 
-
-#### Lemma 
 If $\hat{\theta}$ is an Unbiased estimator with asymptotically 0 variance $\implies$ The estimator is **Consistent!**
 
 **Proof:**
@@ -165,8 +174,9 @@ We will take the limit on both sides of the inequality : $$\lim_{n \to \infty}\m
 - $\lim_{n \to \infty}{var(\hat{\theta})} = 0$  - since $\hat{\theta}$ is defined as Unbiased and therefore, RHS is 0.
 - We get that $\hat{\theta} is a **Consistent** estimator by definition.
 
->[!warning] [[Lecture 1#Lemma]]
->This is a sufficient condition but not a necessary one! 
+>[!warning] [[Lecture 1#Lemma | not iff]]
+>This is a sufficient condition ($\implies$) but not a necessary one ($\cancel{\iff}$)! 
+
 
 ## Least-Squares (LS) estimator
 

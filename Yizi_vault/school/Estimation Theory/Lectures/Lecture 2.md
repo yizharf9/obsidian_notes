@@ -1,8 +1,7 @@
-
-## Continuing - WLS estimator
 [[Lecture 1#Weighted Least Squares (WLS) estimator| link to previous lecture]]
+## Continuing - WLS estimator
 
-We will now calculate the estimation : $$\underline{\varepsilon}_{WLS} = \mathbb{E}[\hat{\theta}_{WLS} - \theta] = (H^TWH)^{-1}H^TW \cdot \mathbb{E}[\underline{x}]  - \underline{\theta}$$
+We will now calculate the estimation error : $$\underline{\varepsilon}_{WLS} = \mathbb{E}[\hat{\theta}_{WLS} - \theta] = (H^TWH)^{-1}H^TW \cdot \mathbb{E}[\underline{x}]  - \underline{\theta}$$
 $$\dots = (H^TWH)^{-1}H^TW \cdot (H\theta + \underbrace{\mathbb{E}[\underline{v}}_{\dots = 0}]) - \underline{\theta} = \mathbb{I} \cdot \underline{\theta} - \underline{\theta} = \underline{0} $$
 
 > [!info] Notice
@@ -27,8 +26,8 @@ Q(\hat{\theta}_{WLS}) =
 $$
 $$
 \dots = \sum_{i=1}^N{w_{i,i} \cdot \Gamma_i^2} + 
-\sum_{i=i+1}^N \sum_{j=1}^N{w_{i,j} \cdot \Gamma_i \cdot \Gamma_j} + 
-\sum_{j=j+1}^N \sum_{i=1}^N{w_{j,i} \cdot \Gamma_i \cdot \Gamma_j} = \dots
+\sum_{i=j+1}^N \sum_{j=1}^N{w_{i,j} \cdot \Gamma_i \cdot \Gamma_j} + 
+\sum_{j=i+1}^N \sum_{i=1}^N{w_{j,i} \cdot \Gamma_i \cdot \Gamma_j} = \dots
 $$
 $$
 \dots = 
@@ -53,8 +52,7 @@ $$
 
 We would like to find $W$ that minimizes $Cov(\underline{\theta}_{WLS})$ .
 
-#### Lemma
-#Lemma 
+#### #Lemma 
 
 - The $\hat{\theta}_{WLS}$ estimator has lower covariance than the $\hat{\theta}_{LS}$ estimator if : $$Cov(\hat{\underline{\theta^*}}) \le Cov(\hat{\underline{\theta}})$$
 - Or in other words : $$ \iff Cov(\hat{\underline{\theta^*}}) -   Cov(\hat{\underline{\theta}}) \succeq 0 $$
@@ -89,8 +87,7 @@ $$
 \forall W \succ 0 \ : \ Cov(\hat{\underline{\theta}^*}) \le Cov(\hat{\underline{\theta}}(W))
 $$
 
-#### Lemma
-#Lemma
+#### #Lemma
 
 The WLS estimator with weight matrix $W = R^{-1}$ minimizes the covariance matrix of the estimation error, Meaning : 
 $$
@@ -154,7 +151,7 @@ Cov(\hat{\underline{\theta}}_{WLS}(W)) \ : \ \forall W
 $$
 
 > [!info] Meaning...
-> If we choose $W = R^{-1}$ we get that the Cov. is smaller or equal always, for every choice of $W$ (notice that we didn't put any requirements on the matrix...).
+> If we choose $W = R^{-1}$ we get that the Cov. is smaller or eqwual always, for every choice of $W$ (notice that we didn't put any requirements on the matrix $W$).
 > Therefore, the minimum is achieved with this choice of $W$.
 
 > [!warning] Notice... 
@@ -173,7 +170,7 @@ $$
 (\mathbb{1}^T \cdot R^{-1} \cdot \mathbb{1})^{-1} = 
 \frac{1}{\sum_{n=1}^{N}{\frac{1}{\sigma_n^2}}}$$
 >For the case in which the variance of all samples is equal $\sigma_1^2 = \dots = \sigma_n^2 = \sigma^2$  we get : $$
-Var(\hat{\underline{\theta}}_{LS}) = \frac{1}{N} \cdot N \cdot \sigma^2 = \frac{\sigma^2}{N}$$
+Var(\hat{\underline{\theta}}_{LS}) = \frac{1}{N^2} \cdot N \cdot \sigma^2 = \frac{\sigma^2}{N}$$
 >$$ Var(\hat{\underline{\theta}}_{WLS}) = \frac{1}{N \cdot \frac{1}{\sigma^2} } = \frac{\sigma^2}{N}$$
 >
 >> [!info] Meaning...
@@ -218,26 +215,26 @@ $$
 >$$
 >$$
 >\underline{s}(\underline{\theta})^T \underline{x} =  
->\frac{1}{T_s}\sum_{n=1}^{N}s(t_n,\underline{\theta})x_nT_s \
+>\frac{1}{T}\sum_{n=1}^{N}s(t_n,\underline{\theta})x_nT_s \
 >\underset{T_s \to 0 }{\longrightarrow} \
->\frac{1}{T_s} \int_{0}^{T}{s(t,\underline{\theta})x_ndt}
+>\frac{1}{T} \int_{0}^{T}{s(t,\underline{\theta})x_ndt}
 >$$
 >$$
 >\underline{s}(\underline{\theta})^T \underline{s}(\underline{\theta}) 
 >\underset{T_s \to 0 }{=} \
->\frac{1}{T_s} \int_{0}^{T}{s(t,\underline{\theta})^2dt}
+>\frac{1}{T} \int_{0}^{T}{s(t,\underline{\theta})^2dt}
 >$$
 >And therefore, the LS estimator will be derived :
 >$$
 >\hat{\theta}_{LS} = \underset{\underline{\theta'}\in \mathbb{R}^{M}}{argmax}
->\frac{1}{T_s} 
+>\frac{1}{T} 
 >\{
 > 2\int_{0}^{T}{s(t,\underline{\theta})dt} - 
 > \int_{0}^{T}{s(t,\underline{\theta})^2dt}
 >\}
 >$$
 >> [!info]
->> $T_s$ is independent of $\underline{\theta}$, and therefore in this maximization problem with respect to $\underline{\theta}$ this parameter can be omitted.
+>> $T$ is independent of $\underline{\theta}$, and therefore in this maximization problem with respect to $\underline{\theta}$ this parameter can be omitted.
 >> $\implies$ the performance of the estimator does not depend on the sample rate!
 > >
 
@@ -255,26 +252,9 @@ $$
 \hat{\theta}_{LS} = \underset{\tau\in \mathbb{R}}{argmax}
 	\int_{0}^{T}{s(t- \tau)x(t)dt}
 $$
-![[TDE system.canvas | visual TDE system]]
+![[Pasted image 20260719003524.png]]
 - In this case it is easy to derive the maximization problem - we will find a maximum to the system as a function of $\tau$.
 - this is a specific case in which, despite the non-linearity of the system we may still estimate under the assumption of a specific model of the system.
-
-- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 [[school/Estimation Theory/Lectures/Lecture 3| link to next lecture...]]
